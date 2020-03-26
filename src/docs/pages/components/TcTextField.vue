@@ -1,0 +1,46 @@
+<template>
+  <TcDocsPage
+    v-model="props"
+    center-example
+    :components="components"
+    description="TODO :: Separate the form logic into a generic TcFormField component"
+    :events="events"
+  >
+    <TcTextField v-bind="props" @input="updateValue($event)" />
+  </TcDocsPage>
+</template>
+
+<script>
+import TcTextField from '../../../components/TcTextField';
+import TcDocsPage from '../../components/TcDocsPage';
+
+export default {
+  name: 'TcDocsPageTextField',
+
+  components: {
+    TcDocsPage,
+    TcTextField,
+  },
+
+  data() {
+    return {
+      components: TcTextField,
+      events: {
+        blur: 'Emitted when component is blurred',
+        focus: 'Emitted when component is focused',
+        input: 'The updated bound model',
+      },
+      props: {
+        hint: 'Need help?',
+        label: 'Label',
+      },
+    };
+  },
+
+  methods: {
+    updateValue(value) {
+      this.$set(this.props, 'value', value);
+    },
+  },
+};
+</script>

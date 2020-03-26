@@ -1,0 +1,156 @@
+// # Variables
+// ## Colors
+// ### Grayscales
+$tc-color--black: #000;
+$tc-color--grey-dark: #222;
+$tc-color--grey: #888;
+$tc-color--grey-light-1: #ccc;
+$tc-color--grey-light-2: #ddd;
+$tc-color--grey-light-3: #eee;
+$tc-color--grey-extralight-1: #f5f5f5;
+$tc-color--grey-extralight-2: #fafafa;
+$tc-color--white: #fff;
+
+// ### Brands
+$tc-color--studio: #2a66a1;
+$tc-color--toucan: #a0d1c5;
+
+// ## Sizes
+// ### Sizes
+$tc-size--checkbox: 24px;
+$tc-size--separator: 1px;
+$tc-size--switch-thumb: 18px;
+
+// ### Heights
+$tc-height--app-bar: 60px;
+$tc-height--button-small: 36px;
+$tc-height--button-medium: 42px;
+$tc-height--button-large: 44px;
+$tc-height--input: 40px;
+$tc-height--switch-track: 10px;
+$tc-height--tab: 38px;
+$tc-height--toolbar: 36px;
+
+// ### Widths
+$tc-width--dialog: 600px;
+$tc-width--dialog-action: 235px;
+$tc-width--navigation-drawer: 400px;
+$tc-width--switch-track: 40px;
+
+// ### Spacings
+$tc-spacing--actions: 10px;
+$tc-spacing--button: 15px;
+$tc-spacing--container: 25px;
+$tc-spacing--container-small: 20px;
+$tc-spacing--container-large: 50px;
+$tc-spacing--form: 25px;
+$tc-spacing--input: 15px;
+$tc-spacing--input-narrow: 10px;
+$tc-spacing--label: 8px;
+$tc-spacing--message: 4px;
+$tc-spacing--tabs: 40px;
+
+// ## Properties
+// ### Border radii
+$tc-border-radius--circle: 50%;
+$tc-border-radius--medium: 10px;
+$tc-border-radius--large: 20px;
+
+// ### Border widths
+$tc-border-width--button: 3px;
+$tc-border-width--checkbox: 2px;
+$tc-border-width--input: 1px;
+$tc-border-width--tabs: 2px;
+
+// ### Box shadows
+$tc-box-shadow--switch: 0 2px 3px 0 rgba($tc-color--black, 0.3);
+$tc-box-shadow--dialog: 0 0 50px 0 rgba($tc-color--black, 0.15);
+$tc-box-shadow--overflow: 0 0 10px 0 rgba($tc-color--black, 0.3);
+
+// ### Font families
+$tc-font-family--default: Montserrat, sans-serif;
+$tc-font-family--monospace: monospace;
+$tc-font-family--serif: 'Roboto Slab', serif;
+$tc-font-families: (
+  default: $tc-font-family--default,
+  monospace: $tc-font-family--monospace,
+  serif: $tc-font-family--serif,
+);
+
+// ### Font sizes
+$tc-font-size--xx-small: 10px;
+$tc-font-size--x-small: 11px;
+$tc-font-size--small: 12px;
+$tc-font-size--medium: 14px;
+$tc-font-size--large: 20px;
+$tc-font-size--x-large: 24px;
+$tc-font-size--xx-large: 45px;
+$tc-font-sizes: (
+  xxSmall: $tc-font-size--xx-small,
+  xSmall: $tc-font-size--x-small,
+  small: $tc-font-size--small,
+  medium: $tc-font-size--medium,
+  large: $tc-font-size--large,
+  xLarge: $tc-font-size--x-large,
+  xxLarge: $tc-font-size--xx-large,
+);
+
+// ### Font weights
+$tc-font-weight--thin: 100;
+$tc-font-weight--regular: 400;
+$tc-font-weight--medium: 500;
+$tc-font-weight--bold: 700;
+$tc-font-weights: (
+  thin: $tc-font-weight--thin,
+  regular: $tc-font-weight--regular,
+  medium: $tc-font-weight--medium,
+  bold: $tc-font-weight--bold,
+);
+
+// ### Letter spacings
+$tc-letter-spacing--xx-small: 0.5px;
+$tc-letter-spacing--x-small: 1px;
+$tc-letter-spacing--small: 1.5px;
+$tc-letter-spacing--medium: 1.5px;
+$tc-letter-spacing--large: 1.5px;
+$tc-letter-spacing--x-large: 1.5px;
+$tc-letter-spacings: (
+  xxSmall: $tc-letter-spacing--xx-small,
+  xSmall: $tc-letter-spacing--x-small,
+  small: $tc-letter-spacing--small,
+  medium: $tc-letter-spacing--medium,
+  large: $tc-letter-spacing--large,
+  xLarge: $tc-letter-spacing--x-large,
+);
+
+// ### Line heights
+$tc-line-height--default: 1.5;
+
+// ### Opacities
+$tc-opacity--overlay: 0.25;
+
+// ### Text aligns
+$tc-text-align--start: start;
+$tc-text-align--center: center;
+$tc-text-align--end: end;
+$tc-text-aligns: (
+  start: $tc-text-align--start,
+  center: $tc-text-align--center,
+  end: $tc-text-align--end,
+);
+
+// ### Transforms
+$tc-transform--slash: rotate(30deg);
+
+// ### Transition durations
+$tc-transition-duration--check: 0.125s;
+$tc-transition-duration--drawer: 0.5s;
+$tc-transition-duration--raise: 0.125s;
+$tc-transition-duration--switch: 0.25s;
+$tc-transition-duration--tabs: 0.25s;
+
+// ### Z indexes
+$tc-z-index--toolbar: 1;
+$tc-z-index--app-bar: 2;
+$tc-z-index--navigation-drawer: 3;
+$tc-z-index--dialog: 4;
