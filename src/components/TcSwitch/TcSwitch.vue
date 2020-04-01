@@ -1,6 +1,11 @@
 <template>
   <div class="tc-switch" :class="elementClass">
-    <label v-if="hasLabel" class="tc-switch__label tc-switch__label--position-left" :for="id">
+    <label
+      v-if="hasLabel"
+      class="tc-switch__label tc-switch__label--position-left"
+      :class="leftLabelClass"
+      :for="id"
+    >
       <TcText>{{ leftLabel }}</TcText>
     </label>
     <div class="tc-switch__switch">
@@ -71,6 +76,9 @@ export default {
     leftLabel() {
       return this.hasOffLabel ? this.offLabel : this.label;
     },
+    leftLabelClass() {
+      return `tc-switch__label--type-${this.hasOffLabel ? 'off' : 'on'}`;
+    },
     valueModel: {
       get() {
         return this.value;
@@ -110,14 +118,42 @@ export default {
 }
 
 .tc-switch--theme-dark {
-  .tc-switch__label {
+  &.is-on:not(.is-focused) {
+    .tc-switch__label--position-left.tc-switch__label--type-off {
+      color: $tc-color--grey-light-1;
+    }
+
+    .tc-switch__label--position-right {
+      color: $tc-color--white;
+    }
+  }
+
+  .tc-switch__label--position-left {
     color: $tc-color--white;
+  }
+
+  .tc-switch__label--position-right {
+    color: $tc-color--grey-light-1;
   }
 }
 
 .tc-switch--theme-light {
-  .tc-switch__label {
+  &.is-on:not(.is-focused) {
+    .tc-switch__label--position-left.tc-switch__label--type-off {
+      color: $tc-color--grey;
+    }
+
+    .tc-switch__label--position-right {
+      color: $tc-color--black;
+    }
+  }
+
+  .tc-switch__label--position-left {
     color: $tc-color--black;
+  }
+
+  .tc-switch__label--position-right {
+    color: $tc-color--grey;
   }
 }
 

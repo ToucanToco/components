@@ -1,11 +1,5 @@
 <template>
-  <TcDocsPage
-    v-model="props"
-    center-example
-    :components="components"
-    description="TODO :: Fade the label that doesn't match the value"
-    :events="events"
-  >
+  <TcDocsPage v-model="props" center-example :components="components" :events="events">
     <TcSwitch v-bind="props" @input="updateValue($event)" />
   </TcDocsPage>
 </template>
