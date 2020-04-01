@@ -51,6 +51,15 @@ export const FAMILIES = {
   SERIF: 'serif',
 };
 
+export const FORM_FIELD_TYPES = {
+  DEFAULT: 'text',
+
+  CHECKBOX: 'checkbox',
+  RADIO_GROUP: 'radioGroup',
+  SELECT: 'select',
+  SWITCH: 'switch',
+};
+
 export const SIZES = {
   DEFAULT: 'medium',
 

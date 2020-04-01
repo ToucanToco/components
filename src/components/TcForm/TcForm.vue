@@ -35,6 +35,7 @@ export default {
 }
 
 .tc-form--direction-horizontal {
+  align-items: center;
   flex-wrap: wrap;
 }
 

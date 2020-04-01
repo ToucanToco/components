@@ -1,11 +1,5 @@
 <template>
-  <TcDocsPage
-    v-model="props"
-    center-example
-    :components="components"
-    description="TODO :: Separate the form logic into a generic TcFormField component"
-    :events="events"
-  >
+  <TcDocsPage v-model="props" center-example :components="components" :events="events">
     <TcTextField v-bind="props" @input="updateValue($event)" />
   </TcDocsPage>
 </template>
@@ -30,10 +24,7 @@ export default {
         focus: 'Emitted when component is focused',
         input: 'The updated bound model',
       },
-      props: {
-        hint: 'Need help?',
-        label: 'Label',
-      },
+      props: {},
     };
   },
 

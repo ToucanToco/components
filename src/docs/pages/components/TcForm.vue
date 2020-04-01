@@ -1,26 +1,22 @@
 <template>
-  <TcDocsPage
-    v-model="props"
-    center-example
-    :components="components"
-    description="TODO :: Add a generic TcFormField component"
-    :slots="slots"
-  >
+  <TcDocsPage v-model="props" center-example :components="components" :slots="slots">
     <TcForm v-bind="props">
-      <TcTextField :dark="isDark" label="Text" />
-      <TcRadioGroup :dark="isDark" value="1">
+      <TcFormField :dark="isDark" label="Text" />
+      <TcFormField :dark="isDark" label="Select" select />
+      <TcFormField :dark="isDark" label="Switch" switch />
+      <TcFormField :dark="isDark" radio-group value="1">
         <TcRadio label="One" value="1" />
         <TcRadio label="Two" value="2" />
         <TcRadio label="Three" value="3" />
-      </TcRadioGroup>
+      </TcFormField>
     </TcForm>
   </TcDocsPage>
 </template>
 
 <script>
 import TcForm from '../../../components/TcForm';
-import { TcRadio, TcRadioGroup } from '../../../components/TcRadioGroup';
-import TcTextField from '../../../components/TcTextField';
+import TcFormField from '../../../components/TcFormField';
+import { TcRadio } from '../../../components/TcRadioGroup';
 import { THEMES } from '../../../variables';
 import TcDocsPage from '../../components/TcDocsPage';
 
@@ -30,9 +26,8 @@ export default {
   components: {
     TcDocsPage,
     TcForm,
+    TcFormField,
     TcRadio,
-    TcRadioGroup,
-    TcTextField,
   },
 
   data() {

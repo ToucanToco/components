@@ -34,6 +34,12 @@ export default {
   mixins: [focusable, themable],
 
   props: {
+    id: {
+      default() {
+        return `tc-checkbox--${this._uid}`;
+      },
+      type: String,
+    },
     label: {
       default: undefined,
       type: String,
@@ -54,9 +60,6 @@ export default {
     },
     hasLabel() {
       return this.label !== undefined;
-    },
-    id() {
-      return `tc-checkbox--${this._uid}`;
     },
     valueModel: {
       get() {

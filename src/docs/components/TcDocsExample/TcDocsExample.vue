@@ -18,13 +18,11 @@
     </div>
     <div class="tc-docs-example__options">
       <TcForm>
-        <Component
-          :is="formElement.component"
+        <TcFormField
           v-for="formElement in formElements"
           :key="formElement.key"
+          v-bind="formElement"
           :dark="dark"
-          :items="formElement.items"
-          :label="formElement.label"
           :value="formValues[formElement.key]"
           @input="update(formElement.key, $event)"
         />
@@ -36,25 +34,22 @@
 <script>
 import startCase from 'lodash/startCase';
 
-import TcClickable from '../../../components/TcClickable';
 import TcForm from '../../../components/TcForm';
+import TcFormField from '../../../components/TcFormField';
 import TcIcon from '../../../components/TcIcon';
-import TcSelect from '../../../components/TcSelect';
-import TcSwitch from '../../../components/TcSwitch';
-import TcTextField from '../../../components/TcTextField';
 import TcToolbar from '../../../components/TcToolbar';
 import themable from '../../../mixins/themable';
 import getBooleansMixin from '../../../utils/getBooleansMixin';
-import { THEMES } from '../../../variables';
+import { FORM_FIELD_TYPES, THEMES } from '../../../variables';
 
-const _getDocsExampleEditorComponent = function(editor) {
+const _getDocsExampleEditorType = function(editor) {
   switch (editor) {
     case 'boolean':
-      return TcSwitch;
+      return FORM_FIELD_TYPES.SWITCH;
     case 'select':
-      return TcSelect;
+      return FORM_FIELD_TYPES.SELECT;
     default:
-      return TcTextField;
+      return FORM_FIELD_TYPES.DEFAULT;
   }
 };
 
@@ -62,8 +57,8 @@ export default {
   name: 'TcDocsExample',
 
   components: {
-    TcClickable,
     TcForm,
+    TcFormField,
     TcIcon,
     TcToolbar,
   },
@@ -107,7 +102,7 @@ export default {
       return Object.entries(this.options)
         .filter(([key]) => key !== 'theme')
         .map(([key, options]) => ({
-          component: _getDocsExampleEditorComponent(options.editor),
+          [_getDocsExampleEditorType(options.editor)]: true,
           items:
             options.editor === 'select'
               ? [

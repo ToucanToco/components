@@ -19,6 +19,12 @@ export default {
   mixins: [themable],
 
   props: {
+    id: {
+      default() {
+        return `tc-radio-group--${this._uid}`;
+      },
+      type: String,
+    },
     value: {
       default: undefined,
       type: String,
@@ -26,9 +32,6 @@ export default {
   },
 
   computed: {
-    id() {
-      return `tc-radio-group--${this._uid}`;
-    },
     valueModel: {
       get() {
         return this.value;

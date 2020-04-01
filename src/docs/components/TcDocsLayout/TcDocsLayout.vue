@@ -34,6 +34,9 @@
         <TcNavigationButton level="2" :to="{ name: 'TcForm', params: { theme } }"
           >Form</TcNavigationButton
         >
+        <TcNavigationButton level="2" :to="{ name: 'TcFormField', params: { theme } }"
+          >Form Field</TcNavigationButton
+        >
         <TcNavigationButton level="2" :to="{ name: 'TcIcon', params: { theme } }"
           >Icon</TcNavigationButton
         >

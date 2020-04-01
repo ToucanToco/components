@@ -3,44 +3,41 @@
     v-model="props"
     center-example
     :components="components"
-    description="TODO :: Implement this component (it's only a copy of TcTextField for now)"
     :events="events"
+    :slots="slots"
   >
-    <TcSelect v-bind="props" @input="updateValue($event)" />
+    <TcFormField v-bind="props" />
   </TcDocsPage>
 </template>
 
 <script>
-import TcSelect from '../../../components/TcSelect';
+import TcFormField from '../../../components/TcFormField';
 import TcDocsPage from '../../components/TcDocsPage';
 
 export default {
-  name: 'TcDocsPageSelect',
+  name: 'TcDocsPageForm',
 
   components: {
     TcDocsPage,
-    TcSelect,
+    TcFormField,
   },
 
   data() {
     return {
-      components: TcSelect,
+      components: TcFormField,
       events: {
         blur: 'Emitted when component is blurred',
         focus: 'Emitted when component is focused',
         input: 'The updated bound model',
       },
       props: {
-        items: ['The first', 'The second', 'The third'],
-        value: 'The first',
+        hint: 'Need help?',
+        label: 'Label',
+      },
+      slots: {
+        default: 'The default Vue slot.',
       },
     };
-  },
-
-  methods: {
-    updateValue(value) {
-      this.$set(this.props, 'value', value);
-    },
   },
 };
 </script>

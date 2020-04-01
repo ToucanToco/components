@@ -62,6 +62,13 @@ export default new VueRouter({
     },
     {
       component() {
+        return import(/* webpackChunkName: 'tc-form-field' */ './pages/components/TcFormField.vue');
+      },
+      name: 'TcFormField',
+      path: '/:theme/components/tc-form-field',
+    },
+    {
+      component() {
         return import(/* webpackChunkName: 'tc-icon' */ './pages/components/TcIcon.vue');
       },
       name: 'TcIcon',

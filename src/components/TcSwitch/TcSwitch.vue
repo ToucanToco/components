@@ -34,6 +34,12 @@ export default {
   mixins: [focusable, themable],
 
   props: {
+    id: {
+      default() {
+        return `tc-switch--${this._uid}`;
+      },
+      type: String,
+    },
     label: {
       default: undefined,
       type: String,
@@ -61,9 +67,6 @@ export default {
     },
     hasOffLabel() {
       return this.offLabel !== undefined;
-    },
-    id() {
-      return `tc-switch--${this._uid}`;
     },
     leftLabel() {
       return this.hasOffLabel ? this.offLabel : this.label;
