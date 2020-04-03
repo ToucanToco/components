@@ -79,6 +79,7 @@ export default {
 .tc-navigation-button {
   box-sizing: border-box;
   cursor: pointer;
+  outline: none;
   padding-left: $tc-spacing--container;
   padding-right: $tc-spacing--container;
   text-decoration: none;

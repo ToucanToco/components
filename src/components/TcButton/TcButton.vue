@@ -123,6 +123,7 @@ export default {
   cursor: pointer;
   display: flex;
   justify-content: center;
+  outline: none;
   padding-left: $tc-spacing--button - $tc-border-width--button;
   padding-right: $tc-spacing--button - $tc-border-width--button;
   text-decoration: none;

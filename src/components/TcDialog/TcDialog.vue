@@ -212,6 +212,7 @@ export default {
 
 .tc-dialog__close {
   cursor: pointer;
+  outline: none;
   flex-shrink: 0;
 }
 
