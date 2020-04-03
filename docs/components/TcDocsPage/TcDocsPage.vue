@@ -1,6 +1,6 @@
 <template>
   <div class="tc-docs-page">
-    <TcDocsBreadcrumbs class="tc-docs-page__breadcrumb" />
+    <TcDocsBreadcrumbs class="tc-docs-page__breadcrumb" :dark="isDark" />
     <template v-if="isRaw">
       <slot />
     </template>

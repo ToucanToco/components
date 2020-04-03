@@ -1,5 +1,5 @@
 <template>
-  <nav class="tc-docs-breadcrumbs">
+  <nav class="tc-docs-breadcrumbs" :class="elementClass">
     <ul class="tc-docs-breadcrumbs__list">
       <li v-for="{ label, name } in items" :key="name" class="tc-docs-breadcrumbs__item">
         <RouterLink class="tc-docs-breadcrumbs__link" :to="{ name }">
@@ -16,6 +16,7 @@
 <script>
 import startCase from 'lodash/startCase';
 import TcText from 'tc-components/components/TcText';
+import themable from 'tc-components/mixins/themable';
 
 export default {
   name: 'TcDocsBreadcrumbs',
@@ -24,9 +25,16 @@ export default {
     TcText,
   },
 
+  mixins: [themable],
+
   computed: {
     currentViewLabel() {
       return startCase(this.$route.name);
+    },
+    elementClass() {
+      return {
+        [`tc-docs-breadcrumbs--theme-${this.theme}`]: true,
+      };
     },
     items() {
       return this.$route.name === 'Index' ? [] : [{ label: 'Index', name: 'Index' }];
@@ -40,6 +48,20 @@ export default {
 
 .tc-docs-breadcrumbs {
   display: flex;
+}
+
+.tc-docs-breadcrumbs--theme-dark {
+  .tc-docs-breadcrumbs__link:focus,
+  .tc-docs-breadcrumbs__link:hover {
+    color: $tc-color--white;
+  }
+}
+
+.tc-docs-breadcrumbs--theme-light {
+  .tc-docs-breadcrumbs__link:focus,
+  .tc-docs-breadcrumbs__link:hover {
+    color: $tc-color--black;
+  }
 }
 
 .tc-docs-breadcrumbs__item {
@@ -66,10 +88,6 @@ export default {
 .tc-docs-breadcrumbs__link {
   color: $tc-color--studio;
   text-decoration: none;
-
-  &:hover {
-    color: $tc-color--black;
-  }
 }
 
 .tc-docs-breadcrumbs__list {
