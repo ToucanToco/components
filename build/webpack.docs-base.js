@@ -2,10 +2,10 @@ const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = function() {
   const root = `${__dirname}/..`;
-  const src = `${root}/src`;
+  const src = `${root}/docs`;
 
   return {
-    entry: `${src}/docs/index.js`,
+    entry: `${src}/index.js`,
     module: {
       rules: [
         {
@@ -24,8 +24,14 @@ module.exports = function() {
     },
     plugins: [
       new HtmlPlugin({
-        template: `${src}/docs/index.html`,
+        template: `${src}/index.html`,
       }),
     ],
+    resolve: {
+      alias: {
+        '@': src,
+        'tc-components': `${root}/src`,
+      },
+    },
   };
 };
