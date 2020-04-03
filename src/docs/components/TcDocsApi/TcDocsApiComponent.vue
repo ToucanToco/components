@@ -62,7 +62,7 @@ const _getPropDescription = function(label, name, options) {
     case 'error':
       return 'Puts the input in a manual error state.';
     case 'errorMessages':
-      return 'Puts the input in an error state and pases through custom error messages.';
+      return 'Puts the input in an error state and passes through custom error messages.';
     case 'href':
       return 'Converts the component into an `<a>` HTML tag.';
     case 'icon':
@@ -74,7 +74,7 @@ const _getPropDescription = function(label, name, options) {
     case 'label':
       return 'Adds a label to the component';
     case 'level':
-      return 'Sets the components heading level. E.g. 1 will be `<h1>`.';
+      return "Sets the component's heading level. E.g. 1 will be `<h1>`.";
     case 'messages':
       return 'Displays a list of messages or message if using a string.';
     case 'offLabel':
