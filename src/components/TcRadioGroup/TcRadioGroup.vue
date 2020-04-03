@@ -27,7 +27,7 @@ export default {
     },
     value: {
       default: undefined,
-      type: String,
+      type: [Array, Date, Function, Number, Object, String],
     },
   },
 
