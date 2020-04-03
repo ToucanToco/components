@@ -2,7 +2,7 @@
   <TcForm class="tc-docs-colors-form" horizontal>
     <div v-for="(color, colorKey) in colors" :key="colorKey" class="tc-docs-colors-form__item">
       <div class="tc-docs-colors-form__color" :style="{ backgroundColor: color }" />
-      <TcTextField
+      <TcFormField
         class="tc-docs-colors-form__field"
         :dark="dark"
         :label="colorKey"
@@ -15,7 +15,7 @@
 
 <script>
 import TcForm from 'tc-components/components/TcForm';
-import TcTextField from 'tc-components/components/TcTextField';
+import TcFormField from 'tc-components/components/TcFormField';
 import themable from 'tc-components/mixins/themable';
 
 export default {
@@ -23,7 +23,7 @@ export default {
 
   components: {
     TcForm,
-    TcTextField,
+    TcFormField,
   },
 
   mixins: [themable],
