@@ -1,21 +1,19 @@
 <template>
   <div class="tc-select" :class="elementClass" :style="elementStyle" @click="triggerFocus()">
-    <TcText class="tc-select__input-container">
-      <select
-        :id="id"
-        ref="input"
-        v-model="valueModel"
-        class="tc-select__input"
-        :placeholder="placeholder"
-        @blur="blur()"
-        @focus="focus()"
-      >
-        <option v-for="option in options" :key="option.value" :value="option.value">{{
-          option.label
-        }}</option>
-      </select>
-    </TcText>
-    <TcIcon v-if="hasIcon" class="tc-select__icon" :label="icon" small />
+    <TcText class="tc-select__value" :class="valueClass">{{ label }}</TcText>
+    <TcIcon class="tc-select__icon" :label="icon" small />
+    <select
+      :id="id"
+      ref="input"
+      v-model="valueModel"
+      class="tc-select__input"
+      @blur="blur()"
+      @focus="focus()"
+    >
+      <option v-for="option in options" :key="option.value" :value="option.value">{{
+        option.label
+      }}</option>
+    </select>
   </div>
 </template>
 
@@ -48,7 +46,7 @@ export default {
       type: String,
     },
     icon: {
-      default: undefined,
+      default: 'expand',
       type: String,
     },
     items: {
@@ -79,8 +77,8 @@ export default {
         borderColor: this.error && !this.isFocused ? this.$tcComponents.colors.warning : undefined,
       };
     },
-    hasIcon() {
-      return this.icon !== undefined;
+    label() {
+      return this.selectedOption === undefined ? this.placeholder : this.selectedOption.label;
     },
     options() {
       if (this.items === undefined) {
@@ -90,6 +88,16 @@ export default {
       return this.items.map((item) =>
         typeof item === 'string' ? { label: item, value: item } : item,
       );
+    },
+    selectedOption() {
+      return this.options.find(({ value }) => value === this.value);
+    },
+    valueClass() {
+      return {
+        [`tc-select__value--type-${
+          this.selectedOption === undefined ? 'placeholder' : 'label'
+        }`]: true,
+      };
     },
     valueModel: {
       get() {
@@ -120,6 +128,7 @@ export default {
   display: flex;
   padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
   padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+  position: relative;
 
   &.is-focused {
     border-color: $tc-color--studio;
@@ -130,7 +139,7 @@ export default {
   border-color: $tc-color--grey;
 
   .tc-select__icon,
-  .tc-select__input {
+  .tc-select__value--type-label {
     color: $tc-color--white;
   }
 }
@@ -139,7 +148,7 @@ export default {
   border-color: $tc-color--grey-light-2;
 
   .tc-select__icon,
-  .tc-select__input {
+  .tc-select__value--type-label {
     color: $tc-color--black;
   }
 }
@@ -169,19 +178,26 @@ export default {
 }
 
 .tc-select__input {
-  background-color: transparent;
   border: none;
   cursor: pointer;
-  flex-grow: 1;
-  padding: 0;
-
-  &::placeholder {
-    color: $tc-color--grey;
-  }
+  height: $tc-height--input;
+  left: -$tc-border-width--input;
+  opacity: 0;
+  position: absolute;
+  top: -$tc-border-width--input;
+  width: calc(100% + #{$tc-border-width--input * 2});
 }
 
 .tc-select__input-container {
   display: flex;
   flex-grow: 1;
+}
+
+.tc-select__value {
+  flex-grow: 1;
+}
+
+.tc-select__value--type-placeholder {
+  color: $tc-color--grey;
 }
 </style>

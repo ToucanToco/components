@@ -3,7 +3,7 @@
     v-model="props"
     center-example
     :components="components"
-    description="TODO :: Implement this component (it's only a copy of TcTextField for now)"
+    description="TODO :: Add search & style options"
     :events="events"
   >
     <TcSelect v-bind="props" @input="updateValue($event)" />
