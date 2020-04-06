@@ -116,7 +116,7 @@ export default {
           : [this.errorMessages]
         ).map((message) => ({
           elementClass: 'tc-form-field__message--type-error',
-          elementStyle: this.erroMessageStyle,
+          elementStyle: this.errorMessageStyle,
           text: message,
         }));
       }
