@@ -10,7 +10,10 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-unused-vars': ['error', { args: 'after-used', argsIgnorePattern: '^_' }],
+    'no-unused-vars': [
+      'error',
+      { args: 'after-used', argsIgnorePattern: '^_' },
+    ],
     'comma-dangle': ['error', 'always-multiline'],
     quotes: ['error', 'single', {'avoidEscape': true}],
   },
