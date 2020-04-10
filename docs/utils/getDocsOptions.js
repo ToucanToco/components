@@ -23,7 +23,10 @@ const _propPairToOptionPair = function([key, options], componentName) {
     {
       editor: typesArray[0].toLowerCase(),
       types: typesArray,
-      value: typeof options.default === 'function' ? options.default() : options.default,
+      value:
+        typeof options.default === 'function'
+          ? options.default()
+          : options.default,
     },
   ];
 };
@@ -34,13 +37,14 @@ export default function(component) {
   if (component.mixins !== undefined) {
     optionsPairs = [
       ...optionsPairs,
-      ...component.mixins.flatMap((mixin) => {
+      ...component.mixins.flatMap(mixin => {
         if (mixin.props === undefined) {
           return [];
         }
 
         const mixinPropsList = Object.entries(mixin.props);
-        const mixinComputedKeys = mixin.computed === undefined ? [] : Object.keys(mixin.computed);
+        const mixinComputedKeys =
+          mixin.computed === undefined ? [] : Object.keys(mixin.computed);
 
         if (
           mixinPropsList.every(([_, { type }]) => type === Boolean) &&
@@ -66,7 +70,7 @@ export default function(component) {
   if (component.props !== undefined) {
     optionsPairs = [
       ...optionsPairs,
-      ...Object.entries(component.props).map((propPair) =>
+      ...Object.entries(component.props).map(propPair =>
         _propPairToOptionPair(propPair, component.name),
       ),
     ];

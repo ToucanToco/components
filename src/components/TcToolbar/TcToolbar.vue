@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import "../../variables";
 
 .tc-toolbar {
   align-items: center;

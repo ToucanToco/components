@@ -51,7 +51,7 @@ export default {
 }
 
 .tc-docs-code__text::after {
-  content: '';
+  content: "";
   flex-shrink: 0;
   width: $tc-spacing--container;
 }

@@ -1,5 +1,11 @@
 <template>
-  <Component :is="is" class="tc-navigation-button" :class="elementClass" :to="to" @click="click()">
+  <Component
+    :is="is"
+    class="tc-navigation-button"
+    :class="elementClass"
+    :to="to"
+    @click="click()"
+  >
     <TcText
       :bold="isLevel2"
       :serif="isLevel1"
@@ -74,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import "../../variables";
 
 .tc-navigation-button {
   box-sizing: border-box;

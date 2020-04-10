@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import "../../variables";
 
 .tc-tabs {
   display: flex;

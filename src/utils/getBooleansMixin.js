@@ -3,7 +3,7 @@ export default function(key, valuesConst) {
 
   return {
     props: Object.fromEntries(
-      propsKeys.map((propKey) => [
+      propsKeys.map(propKey => [
         propKey,
         {
           default: false,

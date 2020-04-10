@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'tc-components/variables';
+@import "../../../src/variables";
 
 .tc-docs-actions {
   display: flex;

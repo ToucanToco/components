@@ -15,7 +15,14 @@ import weightable from '../../mixins/weightable';
 export default {
   name: 'TcText',
 
-  mixins: [alignable, displayable, familiable, sizable, transformable, weightable],
+  mixins: [
+    alignable,
+    displayable,
+    familiable,
+    sizable,
+    transformable,
+    weightable,
+  ],
 
   computed: {
     elementClass() {
@@ -33,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import "../../variables";
 
 .tc-text {
   line-height: $tc-line-height--default;

@@ -6,7 +6,9 @@
     </template>
     <template v-else>
       <TcDocsLabel :dark="isDark">{{ label }}</TcDocsLabel>
-      <TcDocsDescription v-if="hasDescription" subtitle>{{ description }}</TcDocsDescription>
+      <TcDocsDescription v-if="hasDescription" subtitle>{{
+        description
+      }}</TcDocsDescription>
       <TcDocsLabel :dark="isDark" level="2">Usage</TcDocsLabel>
       <TcDocsExample
         v-model="valueModel"
@@ -18,7 +20,13 @@
         <slot />
       </TcDocsExample>
       <TcDocsLabel :dark="isDark" level="2">Api</TcDocsLabel>
-      <TcDocsApi :dark="isDark" :events="events" :label="label" :options="options" :slots="slots" />
+      <TcDocsApi
+        :dark="isDark"
+        :events="events"
+        :label="label"
+        :options="options"
+        :slots="slots"
+      />
     </template>
   </div>
 </template>
@@ -96,7 +104,9 @@ export default {
       return this.hasMultipleComponents ? this.components[0] : this.components;
     },
     mainComponentOptions() {
-      return this.hasMultipleComponents ? this.options[this.label] : this.options;
+      return this.hasMultipleComponents
+        ? this.options[this.label]
+        : this.options;
     },
     options() {
       if (this.isRaw) {
@@ -105,7 +115,10 @@ export default {
 
       return this.hasMultipleComponents
         ? Object.fromEntries(
-            this.components.map((component) => [component.name, getDocsOptions(component)]),
+            this.components.map(component => [
+              component.name,
+              getDocsOptions(component),
+            ]),
           )
         : getDocsOptions(this.components);
     },

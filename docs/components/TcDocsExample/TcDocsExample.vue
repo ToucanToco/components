@@ -106,7 +106,7 @@ export default {
             options.editor === 'select'
               ? [
                   { label: 'Default', value: undefined },
-                  ...options.values.map((value) => ({
+                  ...options.values.map(value => ({
                     label: startCase(value),
                     value,
                   })),
@@ -125,7 +125,7 @@ export default {
         Object.entries(this.options).map(([key, options]) => [
           key,
           options.types[0] === 'Booleans'
-            ? options.values.find((value) => this.value[value])
+            ? options.values.find(value => this.value[value])
             : this.value[key],
         ]),
       );
@@ -148,12 +148,16 @@ export default {
       const updatedValue = { ...this.value };
 
       if (option.types[0] === 'Booleans') {
-        option.values.forEach((o) => {
+        option.values.forEach(o => {
           updatedValue[o] = o === value;
         });
       } else {
         updatedValue[key] =
-          value === '' ? undefined : option.editor === 'array' ? value.split(',') : value;
+          value === ''
+            ? undefined
+            : option.editor === 'array'
+            ? value.split(',')
+            : value;
       }
 
       this.$emit('input', updatedValue);
@@ -170,7 +174,7 @@ export default {
   box-sizing: border-box;
   display: grid;
   grid-gap: $tc-size--separator;
-  grid-template-areas: 'toolbar' 'body' 'options';
+  grid-template-areas: "toolbar" "body" "options";
   grid-template-rows: $tc-height--toolbar 1fr 1fr;
   height: $tc-width--navigation-drawer;
   margin-top: $tc-spacing--container-small;
@@ -242,7 +246,7 @@ export default {
 }
 
 .tc-docs-example__options::after {
-  content: '';
+  content: "";
   flex-shrink: 0;
   height: $tc-spacing--container;
 }
@@ -254,10 +258,12 @@ export default {
 
 @media (min-width: $tc-width--navigation-drawer * 2) {
   .tc-docs-example {
-    grid-template-areas: 'toolbar toolbar' 'body options';
+    grid-template-areas: "toolbar toolbar" "body options";
     grid-template-columns: 2fr 1fr;
     grid-template-rows: $tc-height--toolbar 1fr;
-    max-height: calc(100vh - #{$tc-spacing--container-small + $tc-height--app-bar});
+    max-height: calc(
+      100vh - #{$tc-spacing--container-small + $tc-height--app-bar}
+    );
   }
 }
 
