@@ -21,7 +21,6 @@ export const BUTTON_COLORS = {
 
 export const BUTTON_SIZES = {
   DEFAULT: 'medium',
-
   SMALL: 'small',
   LARGE: 'large',
 };

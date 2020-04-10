@@ -1,7 +1,11 @@
 <template>
   <nav class="tc-docs-breadcrumbs" :class="elementClass">
     <ul class="tc-docs-breadcrumbs__list">
-      <li v-for="{ label, name } in items" :key="name" class="tc-docs-breadcrumbs__item">
+      <li
+        v-for="{ label, name } in items"
+        :key="name"
+        class="tc-docs-breadcrumbs__item"
+      >
         <RouterLink class="tc-docs-breadcrumbs__link" :to="{ name }">
           <TcText small>{{ label }}</TcText>
         </RouterLink>
@@ -37,7 +41,9 @@ export default {
       };
     },
     items() {
-      return this.$route.name === 'Index' ? [] : [{ label: 'Index', name: 'Index' }];
+      return this.$route.name === 'Index'
+        ? []
+        : [{ label: 'Index', name: 'Index' }];
     },
   },
 };
@@ -77,7 +83,7 @@ export default {
 
 .tc-docs-breadcrumbs__item::before {
   background-color: $tc-color--grey;
-  content: '';
+  content: "";
   height: $tc-font-size--small;
   margin-left: $tc-spacing--actions;
   margin-right: $tc-spacing--actions;

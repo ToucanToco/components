@@ -1,12 +1,20 @@
 <template>
   <div class="tc-docs-api-component" :class="elementClass">
-    <TcTabs v-model="selectedTab" class="tc-docs-api-component__tabs" :dark="dark">
+    <TcTabs
+      v-model="selectedTab"
+      class="tc-docs-api-component__tabs"
+      :dark="dark"
+    >
       <TcTab v-if="hasProps" value="props">Props</TcTab>
       <TcTab v-if="hasSlots" value="slots">Slots</TcTab>
       <TcTab v-if="hasEvents" value="events">Events</TcTab>
     </TcTabs>
     <div class="tc-docs-api-component__body">
-      <div v-for="item in items" :key="item.label" class="tc-docs-api-component__item">
+      <div
+        v-for="item in items"
+        :key="item.label"
+        class="tc-docs-api-component__item"
+      >
         <div
           v-for="prop in item.props"
           :key="prop.label"
@@ -141,7 +149,10 @@ export default {
                 elementClass: 'tc-docs-api-component__prop--type-type',
                 isMonospace: true,
                 label: 'Type',
-                value: name === 'input' ? this.options.value.types.join(' | ') : 'Event',
+                value:
+                  name === 'input'
+                    ? this.options.value.types.join(' | ')
+                    : 'Event',
               },
               {
                 elementClass: 'tc-docs-api-component__prop--type-description',
@@ -157,7 +168,7 @@ export default {
       return this.hasProps
         ? Object.entries(this.options).flatMap(([name, options]) =>
             options.types[0] === 'Booleans'
-              ? options.values.map((value) => ({
+              ? options.values.map(value => ({
                   label: value,
                   props: [
                     {
@@ -179,7 +190,8 @@ export default {
                       value: 'false',
                     },
                     {
-                      elementClass: 'tc-docs-api-component__prop--type-description',
+                      elementClass:
+                        'tc-docs-api-component__prop--type-description',
                       isMonospace: false,
                       label: 'Description',
                       value: _getPropDescription(this.label, value, {
@@ -205,13 +217,15 @@ export default {
                         value: options.types.join(' | '),
                       },
                       {
-                        elementClass: 'tc-docs-api-component__prop--type-default',
+                        elementClass:
+                          'tc-docs-api-component__prop--type-default',
                         isMonospace: true,
                         label: 'Default',
                         value: String(options.value),
                       },
                       {
-                        elementClass: 'tc-docs-api-component__prop--type-description',
+                        elementClass:
+                          'tc-docs-api-component__prop--type-description',
                         isMonospace: false,
                         label: 'Description',
                         value: _getPropDescription(this.label, name, options),
@@ -272,7 +286,12 @@ export default {
   watch: {
     hasEvents: {
       handler(hasEvents) {
-        if (hasEvents && this.selectedTab === undefined && !this.hasProps && !this.hasSlots) {
+        if (
+          hasEvents &&
+          this.selectedTab === undefined &&
+          !this.hasProps &&
+          !this.hasSlots
+        ) {
           this.selectedTab = 'events';
         } else if (!hasEvents && this.selectedTab === 'events') {
           if (this.hasProps) {
@@ -367,7 +386,10 @@ export default {
   border-top: none;
   display: grid;
   grid-gap: $tc-size--separator;
-  max-height: calc(100vh - #{$tc-height--app-bar + $tc-spacing--container-small + $tc-height--tab});
+  max-height: calc(
+    100vh - #{$tc-height--app-bar + $tc-spacing--container-small +
+      $tc-height--tab}
+  );
   overflow: auto;
 }
 

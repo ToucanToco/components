@@ -2,7 +2,9 @@
   <TcDocsPage>
     <TcDocsLabel :dark="isDark">Toucan Toco's Component Library</TcDocsLabel>
     <TcDocsActions>
-      <TcButton :dark="isDark" large studio :to="{ name: 'QuickStart' }">Get started</TcButton>
+      <TcButton :dark="isDark" large studio :to="{ name: 'QuickStart' }"
+        >Get started</TcButton
+      >
       <TcButton
         :dark="isDark"
         href="https://github.com/ToucanToco/components"

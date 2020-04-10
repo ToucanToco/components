@@ -1,5 +1,10 @@
 <template>
-  <div tabindex="0" @click="click()" @keydown.enter="click()" @keydown.space="click()">
+  <div
+    tabindex="0"
+    @click="click()"
+    @keydown.enter="click()"
+    @keydown.space="click()"
+  >
     <slot />
   </div>
 </template>

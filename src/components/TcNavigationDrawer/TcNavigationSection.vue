@@ -45,14 +45,16 @@ export default {
 
   methods: {
     toggle() {
-      this.navigationDrawer.activeSection = this.isActive ? undefined : this.value;
+      this.navigationDrawer.activeSection = this.isActive
+        ? undefined
+        : this.value;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import "../../variables";
 
 .tc-navigation-section {
   display: flex;

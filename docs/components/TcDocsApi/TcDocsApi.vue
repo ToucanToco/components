@@ -60,12 +60,17 @@ export default {
 
   computed: {
     componentsNames() {
-      return this.hasMultipleComponents ? Object.keys(this.options) : [this.label];
+      return this.hasMultipleComponents
+        ? Object.keys(this.options)
+        : [this.label];
     },
     getSelectionValue() {
       return this.hasMultipleComponents
-        ? (key) => (this[key] === undefined ? undefined : this[key][this.selectedComponentName])
-        : (key) => this[key];
+        ? key =>
+            this[key] === undefined
+              ? undefined
+              : this[key][this.selectedComponentName]
+        : key => this[key];
     },
     hasMultipleComponents() {
       if (this.options === undefined) {
@@ -74,7 +79,10 @@ export default {
 
       const optionsKeys = Object.keys(this.options);
 
-      return optionsKeys.length > 0 && optionsKeys.every((optionKey) => optionKey.startsWith('Tc'));
+      return (
+        optionsKeys.length > 0 &&
+        optionsKeys.every(optionKey => optionKey.startsWith('Tc'))
+      );
     },
     selectedEvents() {
       return this.getSelectionValue('events');

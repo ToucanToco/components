@@ -85,7 +85,7 @@ export default {
         return [];
       }
 
-      return this.items.map((item) =>
+      return this.items.map(item =>
         typeof item === 'string' ? { label: item, value: item } : item,
       );
     },
@@ -118,7 +118,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import "../../variables";
 
 .tc-select {
   align-items: center;

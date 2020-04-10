@@ -6,12 +6,18 @@
     :events="events"
     :slots="slots"
   >
-    <TcButton :dark="props.dark" @click="updateValue(true)">Open dialog</TcButton>
+    <TcButton :dark="props.dark" @click="updateValue(true)"
+      >Open dialog</TcButton
+    >
     <TcDialog v-bind="props" @input="updateValue($event)">
       <TcText>Content</TcText>
       <template #footer>
-        <TcButton :dark="props.dark" secondary @click="updateValue(false)">Cancel</TcButton>
-        <TcButton :dark="props.dark" studio @click="updateValue(false)">Submit</TcButton>
+        <TcButton :dark="props.dark" secondary @click="updateValue(false)"
+          >Cancel</TcButton
+        >
+        <TcButton :dark="props.dark" studio @click="updateValue(false)"
+          >Submit</TcButton
+        >
       </template>
     </TcDialog>
   </TcDocsPage>
