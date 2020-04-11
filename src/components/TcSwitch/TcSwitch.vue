@@ -18,11 +18,7 @@
         @focus="focus()"
       />
     </div>
-    <label
-      v-if="hasOffLabel"
-      class="tc-switch__label tc-switch__label--position-right"
-      :for="id"
-    >
+    <label v-if="hasOffLabel" class="tc-switch__label tc-switch__label--position-right" :for="id">
       <TcText>{{ label }}</TcText>
     </label>
   </div>
@@ -96,7 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import '../../variables';
 
 .tc-switch {
   align-items: center;
@@ -111,8 +107,8 @@ export default {
 
   &.is-on {
     .tc-switch__switch::before {
-      box-shadow: $tc-width--switch-track - $tc-size--switch-thumb * 0.5 0 0 0
-        $tc-color--studio inset;
+      box-shadow: $tc-width--switch-track - $tc-size--switch-thumb * 0.5 0 0 0 $tc-color--studio
+        inset;
     }
 
     .tc-switch__switch::after {
@@ -198,7 +194,7 @@ export default {
   background-color: $tc-color--grey-light-1;
   border-radius: $tc-height--switch-track * 0.5;
   box-shadow: $tc-size--switch-thumb * 0.5 0 0 0 $tc-color--studio inset;
-  content: "";
+  content: '';
   height: $tc-height--switch-track;
   order: -1;
   width: $tc-width--switch-track;
@@ -209,7 +205,7 @@ export default {
   background-color: $tc-color--white;
   border-radius: $tc-border-radius--circle;
   box-shadow: $tc-box-shadow--switch;
-  content: "";
+  content: '';
   height: $tc-size--switch-thumb;
   margin-left: -$tc-size--switch-thumb;
   order: -1;

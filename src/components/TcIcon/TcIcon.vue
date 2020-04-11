@@ -1,10 +1,6 @@
 <template>
   <div class="tc-icon" :class="elementClass">
-    <svg
-      class="tc-icon__svg"
-      :viewBox="svgViewBox"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg class="tc-icon__svg" :viewBox="svgViewBox" xmlns="http://www.w3.org/2000/svg">
       <path :d="path" />
     </svg>
   </div>
@@ -41,15 +37,14 @@ export default {
       return this.icon.path;
     },
     svgViewBox() {
-      return `0 0 ${this.icon.size || this.icon.width} ${this.icon.size ||
-        this.icon.height}`;
+      return `0 0 ${this.icon.size || this.icon.width} ${this.icon.size || this.icon.height}`;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import '../../variables';
 
 .tc-icon {
   align-items: center;

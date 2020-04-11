@@ -1,9 +1,7 @@
 export default {
   install(Vue, options) {
     const optionsColors =
-      options === undefined || options.colors === undefined
-        ? {}
-        : options.colors;
+      options === undefined || options.colors === undefined ? {} : options.colors;
 
     Vue.prototype._tcComponents = {
       colors: {
@@ -25,11 +23,7 @@ export default {
 
     Vue.mixin({
       beforeCreate() {
-        Vue.util.defineReactive(
-          this,
-          '$tcComponents',
-          Vue.prototype._tcComponents,
-        );
+        Vue.util.defineReactive(this, '$tcComponents', Vue.prototype._tcComponents);
       },
     });
   },
