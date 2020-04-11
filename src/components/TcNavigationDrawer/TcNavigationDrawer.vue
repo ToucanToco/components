@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import themable from '../../mixins/themable';
+import themable from 'tc-components/mixins/themable';
 
 export default {
   name: 'TcNavigationDrawer',
@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-navigation-drawer {
   display: flex;

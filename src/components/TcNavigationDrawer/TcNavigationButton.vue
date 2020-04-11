@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import TcClickable from '../TcClickable';
-import TcText from '../TcText';
+import TcClickable from 'tc-components/components/TcClickable';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcNavigationButton',
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-navigation-button {
   box-sizing: border-box;

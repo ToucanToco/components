@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import focusable from '../../mixins/focusable';
-import themable from '../../mixins/themable';
-import TcIcon from '../TcIcon';
-import TcText from '../TcText';
+import focusable from 'tc-components/mixins/focusable';
+import themable from 'tc-components/mixins/themable';
+import TcIcon from 'tc-components/components/TcIcon';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcCheckbox',
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-checkbox {
   align-items: center;

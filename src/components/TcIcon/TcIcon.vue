@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import sizable from '../../mixins/sizable';
+import sizable from 'tc-components/mixins/sizable';
 import ICONS from './icons';
 
 export default {
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-icon {
   align-items: center;

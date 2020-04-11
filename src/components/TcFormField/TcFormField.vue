@@ -40,17 +40,17 @@
 </template>
 
 <script>
-import focusable from '../../mixins/focusable';
-import themable from '../../mixins/themable';
-import widthable from '../../mixins/widthable';
-import getBooleansMixin from '../../utils/getBooleansMixin';
-import { FORM_FIELD_TYPES, THEMES, WIDTHS } from '../../variables';
-import TcCheckbox from '../TcCheckbox';
-import TcRadioGroup from '../TcRadioGroup';
-import TcSelect from '../TcSelect';
-import TcSwitch from '../TcSwitch';
-import TcText from '../TcText';
-import TcTextField from '../TcTextField';
+import focusable from 'tc-components/mixins/focusable';
+import themable from 'tc-components/mixins/themable';
+import widthable from 'tc-components/mixins/widthable';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { FORM_FIELD_TYPES, THEMES, WIDTHS } from 'tc-components/variables';
+import TcCheckbox from 'tc-components/components/TcCheckbox';
+import TcRadioGroup from 'tc-components/components/TcRadioGroup';
+import TcSelect from 'tc-components/components/TcSelect';
+import TcSwitch from 'tc-components/components/TcSwitch';
+import TcText from 'tc-components/components/TcText';
+import TcTextField from 'tc-components/components/TcTextField';
 
 export default {
   name: 'TcFormField',
@@ -217,7 +217,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-form-field {
   display: flex;

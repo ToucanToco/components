@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import themable from '../../mixins/themable';
-import TcClickable from '../TcClickable';
-import TcIcon from '../TcIcon';
-import TcText from '../TcText';
+import themable from 'tc-components/mixins/themable';
+import TcClickable from 'tc-components/components/TcClickable';
+import TcIcon from 'tc-components/components/TcIcon';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcDialog',
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-dialog {
   align-items: center;

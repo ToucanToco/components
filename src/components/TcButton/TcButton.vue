@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import themable from '../../mixins/themable';
-import getBooleansMixin from '../../utils/getBooleansMixin';
-import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_TYPES } from '../../variables';
-import TcClickable from '../TcClickable';
-import TcIcon from '../TcIcon';
-import TcText from '../TcText';
+import themable from 'tc-components/mixins/themable';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_TYPES } from 'tc-components/variables';
+import TcClickable from 'tc-components/components/TcClickable';
+import TcIcon from 'tc-components/components/TcIcon';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcButton',
@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-button {
   align-items: center;

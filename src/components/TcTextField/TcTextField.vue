@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import focusable from '../../mixins/focusable';
-import themable from '../../mixins/themable';
-import widthable from '../../mixins/widthable';
-import TcIcon from '../TcIcon';
-import TcText from '../TcText';
+import focusable from 'tc-components/mixins/focusable';
+import themable from 'tc-components/mixins/themable';
+import widthable from 'tc-components/mixins/widthable';
+import TcIcon from 'tc-components/components/TcIcon';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcTextField',
@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-text-field {
   align-items: center;

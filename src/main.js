@@ -19,3 +19,5 @@ export { TcTabs } from './components/TcTabs';
 export { TcText } from './components/TcText';
 export { TcTextField } from './components/TcTextField';
 export { TcToolbar } from './components/TcToolbar';
+
+export { TcComponentsVuePlugin } from './plugin';
