@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import focusable from '../../mixins/focusable';
-import TcIcon from '../TcIcon';
-import TcText from '../TcText';
+import focusable from 'tc-components/mixins/focusable';
+import TcIcon from 'tc-components/components/TcIcon';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcRadio',
@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-radio {
   align-items: center;

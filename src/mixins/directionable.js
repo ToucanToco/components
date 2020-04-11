@@ -1,4 +1,4 @@
-import getBooleansMixin from '../utils/getBooleansMixin';
-import { DIRECTIONS } from '../variables';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { DIRECTIONS } from 'tc-components/variables';
 
 export default getBooleansMixin('direction', DIRECTIONS);

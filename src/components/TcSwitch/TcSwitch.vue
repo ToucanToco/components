@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import focusable from '../../mixins/focusable';
-import themable from '../../mixins/themable';
-import TcText from '../TcText';
+import focusable from 'tc-components/mixins/focusable';
+import themable from 'tc-components/mixins/themable';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcSwitch',
@@ -92,7 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-switch {
   align-items: center;

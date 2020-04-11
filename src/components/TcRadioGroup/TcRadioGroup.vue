@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import themable from '../../mixins/themable';
+import themable from 'tc-components/mixins/themable';
 
 export default {
   name: 'TcRadioGroup',
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-radio-group {
   display: flex;

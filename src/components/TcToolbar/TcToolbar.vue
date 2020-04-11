@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import themable from '../../mixins/themable';
-import getBooleansMixin from '../../utils/getBooleansMixin';
-import { BAR_TYPES } from '../../variables';
+import themable from 'tc-components/mixins/themable';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { BAR_TYPES } from 'tc-components/variables';
 
 export default {
   name: 'TcToolbar',
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-toolbar {
   align-items: center;

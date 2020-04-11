@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import alignable from '../../mixins/alignable';
-import displayable from '../../mixins/displayable';
-import familiable from '../../mixins/familiable';
-import sizable from '../../mixins/sizable';
-import transformable from '../../mixins/transformable';
-import weightable from '../../mixins/weightable';
+import alignable from 'tc-components/mixins/alignable';
+import displayable from 'tc-components/mixins/displayable';
+import familiable from 'tc-components/mixins/familiable';
+import sizable from 'tc-components/mixins/sizable';
+import transformable from 'tc-components/mixins/transformable';
+import weightable from 'tc-components/mixins/weightable';
 
 export default {
   name: 'TcText',
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-text {
   line-height: $tc-line-height--default;

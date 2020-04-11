@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import directionable from '../../mixins/directionable';
+import directionable from 'tc-components/mixins/directionable';
 
 export default {
   name: 'TcForm',
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-form {
   display: flex;

@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import focusable from '../../mixins/focusable';
-import TcText from '../TcText';
+import focusable from 'tc-components/mixins/focusable';
+import TcText from 'tc-components/components/TcText';
 
 export default {
   name: 'TcTab',
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import 'tc-components/variables';
 
 .tc-tab {
   position: relative;
