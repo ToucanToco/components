@@ -12,7 +12,8 @@ Demo and documentation can be found on https://tc-components.edlb.dev.
 
 `node` and `yarn` are required to run the following commands.
 
-Alternatively, the `yarn` commands can be executed in a [Docker container](./Dockerfile).
+Alternatively, the `yarn` commands can be executed in a [Docker container](./Dockerfile), like `node:latest`:
+`docker run -v $PWD:/tc-components -w /tc-components -i -t node:latest yarn <command>`.
 
 ## Build
 
