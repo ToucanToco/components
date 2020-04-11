@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import '../../variables';
 
 .tc-radio {
   align-items: center;

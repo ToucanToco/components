@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import '../../variables';
 
 .tc-checkbox {
   align-items: center;

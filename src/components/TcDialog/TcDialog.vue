@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import '../../variables';
 
 .tc-dialog {
   align-items: center;
@@ -111,7 +111,7 @@ export default {
     }
 
     .tc-dialog__body::before {
-      content: "";
+      content: '';
       flex-shrink: 0;
       height: $tc-size--separator;
       margin-left: $tc-spacing--container;
@@ -187,8 +187,7 @@ export default {
   }
 
   .tc-dialog__footer {
-    padding: $tc-spacing--actions $tc-spacing--container - $tc-spacing--actions *
-      0.5;
+    padding: $tc-spacing--actions $tc-spacing--container - $tc-spacing--actions * 0.5;
   }
 
   .tc-dialog__footer /deep/ > :only-child {

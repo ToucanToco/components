@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import '../../variables';
 
 .tc-navigation-drawer {
   display: flex;

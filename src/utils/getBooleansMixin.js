@@ -1,9 +1,9 @@
-export default function(key, valuesConst) {
+export default function (key, valuesConst) {
   const propsKeys = Object.values(valuesConst).slice(1);
 
   return {
     props: Object.fromEntries(
-      propsKeys.map(propKey => [
+      propsKeys.map((propKey) => [
         propKey,
         {
           default: false,

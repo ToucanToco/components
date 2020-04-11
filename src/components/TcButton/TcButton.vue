@@ -10,12 +10,7 @@
     :to="to"
     @click="click()"
   >
-    <TcIcon
-      v-if="hasIcon"
-      class="tc-button__icon"
-      :label="icon"
-      :small="isTextSmall"
-    />
+    <TcIcon v-if="hasIcon" class="tc-button__icon" :label="icon" :small="isTextSmall" />
     <TcText bold center :small="isTextSmall" uppercase>
       <slot />
     </TcText>
@@ -76,10 +71,7 @@ export default {
           this.primary && this.type === BUTTON_TYPES.DEFAULT
             ? this.$tcComponents.colors.emphasis
             : undefined,
-        color:
-          this.primary && this.outlined
-            ? this.$tcComponents.colors.emphasis
-            : undefined,
+        color: this.primary && this.outlined ? this.$tcComponents.colors.emphasis : undefined,
       };
     },
     hasIcon() {
@@ -121,7 +113,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import '../../variables';
 
 .tc-button {
   align-items: center;
@@ -189,22 +181,18 @@ export default {
 .tc-button--size-large {
   padding-bottom: ($tc-height--button-large - $tc-font-size--medium) * 0.5 -
     $tc-border-width--button;
-  padding-top: ($tc-height--button-large - $tc-font-size--medium) * 0.5 -
-    $tc-border-width--button;
+  padding-top: ($tc-height--button-large - $tc-font-size--medium) * 0.5 - $tc-border-width--button;
 }
 
 .tc-button--size-medium {
   padding-bottom: ($tc-height--button-medium - $tc-font-size--small) * 0.5 -
     $tc-border-width--button;
-  padding-top: ($tc-height--button-medium - $tc-font-size--small) * 0.5 -
-    $tc-border-width--button;
+  padding-top: ($tc-height--button-medium - $tc-font-size--small) * 0.5 - $tc-border-width--button;
 }
 
 .tc-button--size-small {
-  padding-bottom: ($tc-height--button-small - $tc-font-size--small) * 0.5 -
-    $tc-border-width--button;
-  padding-top: ($tc-height--button-small - $tc-font-size--small) * 0.5 -
-    $tc-border-width--button;
+  padding-bottom: ($tc-height--button-small - $tc-font-size--small) * 0.5 - $tc-border-width--button;
+  padding-top: ($tc-height--button-small - $tc-font-size--small) * 0.5 - $tc-border-width--button;
 }
 
 .tc-button--type-outlined {
