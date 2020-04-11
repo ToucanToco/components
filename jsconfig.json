@@ -4,9 +4,6 @@
     "paths": {
       "tc-components/*": [
         "src/*"
-      ],
-      "@/*": [
-        "docs/"
       ]
     }
   },
