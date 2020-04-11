@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve docs/index.js",
+    "serve": "vue-cli-service serve src/docs/index.js",
     "build": "vue-cli-service build --target lib --name tc-components src/main.js",
-    "build:docs": "vue-cli-service build --dest www docs/index.js",
+    "build:docs": "vue-cli-service build --dest www src/docs/index.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "prefirebase:deploy:docs": "yarn build:docs",
