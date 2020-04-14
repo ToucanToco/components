@@ -11,13 +11,18 @@ export { TcDialog } from './components/TcDialog';
 export { TcForm } from './components/TcForm';
 export { TcFormField } from './components/TcFormField';
 export { TcIcon } from './components/TcIcon';
-export { TcNavigationDrawer } from './components/TcNavigationDrawer';
-export { TcRadioGroup } from './components/TcRadioGroup';
+export {
+  TcNavigationButton,
+  TcNavigationDrawer,
+  TcNavigationSection,
+} from './components/TcNavigationDrawer';
+export { TcRadio, TcRadioGroup } from './components/TcRadioGroup';
 export { TcSelect } from './components/TcSelect';
 export { TcSwitch } from './components/TcSwitch';
-export { TcTabs } from './components/TcTabs';
+export { TcTab, TcTabs } from './components/TcTabs';
 export { TcText } from './components/TcText';
 export { TcTextField } from './components/TcTextField';
 export { TcToolbar } from './components/TcToolbar';
 
-export { TcComponentsVuePlugin } from './plugin';
+import TcComponentsVuePlugin from './plugin';
+export default TcComponentsVuePlugin;
