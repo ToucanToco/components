@@ -1,7 +1,7 @@
 {
   "name": "tc-components",
+  "description": "Toucan Toco's Component Library",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve src/docs/index.js",
     "build": "vue-cli-service build --target lib --name tc-components src/main.js",
@@ -12,7 +12,11 @@
     "firebase:deploy:docs": "firebase deploy",
     "firebase:login": "firebase login"
   },
-  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ToucanToco/components"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "vue": "^2.6.11"
   },
