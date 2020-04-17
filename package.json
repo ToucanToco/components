@@ -7,10 +7,7 @@
     "build": "vue-cli-service build --target lib --name tc-components src/main.js",
     "build:docs": "vue-cli-service build --dest www src/docs/index.js",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
-    "prefirebase:deploy:docs": "yarn build:docs",
-    "firebase:deploy:docs": "firebase deploy",
-    "firebase:login": "firebase login"
+    "lint": "vue-cli-service lint"
   },
   "repository": {
     "type": "git",
