@@ -13,11 +13,10 @@ jobs:
         with:
           node-version: 13
           registry-url: 'https://registry.npmjs.org'
+          scope: '@toucantoco'
       - run: yarn install
       - run: yarn test:unit
       - run: yarn build
-      - run: |
-          cat /home/runner/work/_temp/.npmrc
-          npm publish --access public
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
