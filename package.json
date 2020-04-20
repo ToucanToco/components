@@ -1,7 +1,7 @@
 {
   "name": "@toucantoco/components",
   "description": "Toucan Toco's Component Library",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "scripts": {
     "serve": "vue-cli-service serve src/docs/index.js",
     "build": "vue-cli-service build --target lib --name tc-components src/main.js && rm ./dist/demo.html",
