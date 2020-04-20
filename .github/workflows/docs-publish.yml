@@ -17,4 +17,4 @@ jobs:
       - run: yarn build:docs
       - run: npx firebase deploy --token "$FIREBASE_TOKEN"
         env:
-          FIREBASE_TOKEN: ${{secrets.firebase_token}}
+          FIREBASE_TOKEN: ${{ secrets.firebase_token }}
