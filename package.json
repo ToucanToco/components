@@ -1,5 +1,5 @@
 {
-  "name": "tc-components",
+  "name": "@toucantoco/components",
   "description": "Toucan Toco's Component Library",
   "version": "0.0.0",
   "scripts": {
@@ -11,9 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ToucanToco/components"
+    "url": "https://github.com/ToucanToco/components.git"
   },
   "license": "MIT",
+  "main": "dist/tc-components.common.js",
   "peerDependencies": {
     "vue": "^2.6.11"
   },
