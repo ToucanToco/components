@@ -41,7 +41,7 @@ export default {
 
   computed: {
     installText() {
-      return 'yarn add git+ssh://git@github.com/ToucanToco/components.git#master';
+      return 'yarn add @toucantoco/components';
     },
     isDark() {
       return this.$route.params.theme === THEMES.DARK;
@@ -49,8 +49,7 @@ export default {
     usagePluginText() {
       return (
         "import Vue from 'vue';\n" +
-        '\n' +
-        "import TcComponents from 'tc-components/src/plugin'\n" +
+        "import TcComponents from '@toucantoco/components'\n" +
         '\n' +
         'Vue.use(TcComponents);\n' +
         '\n' +
@@ -67,8 +66,7 @@ export default {
     usageComponentsText() {
       return (
         "import Vue from 'vue';\n" +
-        '\n' +
-        "import TcAppBar from 'tc-components/src/components/TcAppBar';\n" +
+        "import { TcAppBar } from '@toucantoco/components';\n" +
         '\n' +
         'new Vue({\n' +
         '  components: {\n' +
