@@ -1,4 +1,4 @@
-export default function (key, valuesConst) {
+export default function (key, valuesConst, inherit) {
   const propsKeys = Object.values(valuesConst).slice(1);
 
   return {
@@ -24,8 +24,14 @@ export default function (key, valuesConst) {
             break;
           }
         }
+        if (value !== undefined) {
+          return value;
+        }
+        if (inherit && this.$parent !== undefined && this.$parent[key] !== undefined) {
+          return this.$parent[key];
+        }
 
-        return value === undefined ? valuesConst.DEFAULT : value;
+        return valuesConst.DEFAULT;
       },
     },
   };

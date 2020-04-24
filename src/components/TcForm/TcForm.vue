@@ -6,11 +6,12 @@
 
 <script>
 import directionable from 'tc-components/mixins/directionable';
+import themable from 'tc-components/mixins/themable';
 
 export default {
   name: 'TcForm',
 
-  mixins: [directionable],
+  mixins: [directionable, themable],
 
   computed: {
     elementClass() {

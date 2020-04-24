@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { THEMES } from 'tc-components/variables';
 import themable from 'tc-components/mixins/themable';
 
 export default {
@@ -45,9 +46,10 @@ export default {
   computed: {
     bodyStyle() {
       return {
-        backgroundColor: this.dark
-          ? this.$tcComponents.colors.brand
-          : this.$tcComponents.colors.brandLight,
+        backgroundColor:
+          this.theme === THEMES.DEFAULT
+            ? this.$tcComponents.colors.brandLight
+            : this.$tcComponents.colors.brand,
       };
     },
     elementClass() {

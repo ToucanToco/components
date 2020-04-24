@@ -4,7 +4,6 @@
       <div class="tc-docs-colors-form__color" :style="{ backgroundColor: color }" />
       <TcFormField
         class="tc-docs-colors-form__field"
-        :dark="dark"
         :label="colorKey"
         :value="color"
         @input="updateColor(colorKey, $event)"

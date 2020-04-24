@@ -4,11 +4,9 @@
       v-if="hasMultipleComponents"
       v-model="selectedComponentName"
       class="tc-docs-api__select"
-      :dark="dark"
       :items="componentsNames"
     />
     <TcDocsApiComponent
-      :dark="dark"
       :events="selectedEvents"
       :label="selectedComponentName"
       :options="selectedOptions"

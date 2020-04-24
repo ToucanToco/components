@@ -1,6 +1,6 @@
 <template>
   <div class="tc-docs-api-component" :class="elementClass">
-    <TcTabs v-model="selectedTab" class="tc-docs-api-component__tabs" :dark="dark">
+    <TcTabs v-model="selectedTab" class="tc-docs-api-component__tabs">
       <TcTab v-if="hasProps" value="props">Props</TcTab>
       <TcTab v-if="hasSlots" value="slots">Slots</TcTab>
       <TcTab v-if="hasEvents" value="events">Events</TcTab>

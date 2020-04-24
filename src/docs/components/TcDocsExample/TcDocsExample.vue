@@ -1,6 +1,6 @@
 <template>
   <div class="tc-docs-example" :class="elementClass">
-    <TcToolbar class="tc-docs-example__toolbar" :dark="dark" flat>
+    <TcToolbar class="tc-docs-example__toolbar" flat>
       <RouterLink class="tc-docs-example__action" :to="toOtherTheme">
         <TcIcon label="mdInvertColors" large />
       </RouterLink>
@@ -22,7 +22,6 @@
           v-for="formElement in formElements"
           :key="formElement.key"
           v-bind="formElement"
-          :dark="dark"
           :value="formValues[formElement.key]"
           @input="update(formElement.key, $event)"
         />
@@ -136,7 +135,7 @@ export default {
     toOtherTheme() {
       return {
         params: {
-          theme: this.dark ? THEMES.DEFAULT : THEMES.DARK,
+          theme: this.theme === THEMES.DEFAULT ? THEMES.DARK : THEMES.DEFAULT,
         },
       };
     },
