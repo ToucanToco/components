@@ -1,3 +1,12 @@
+export const DEFAULT_COLORS = {
+  brand: '#88b2a8',
+  brandLight: '#b9d1cb',
+  emphasis: '#f3c600',
+  neutral: '#c4c4c4',
+  positive: '#a7bd3e',
+  warning: '#ed8b49',
+};
+
 export default {
   install(Vue, options) {
     const optionsColors =
@@ -6,12 +15,7 @@ export default {
     Vue.prototype._tcComponents = function (vm) {
       const $tcComponents = {
         colors: {
-          brand: '#88b2a8',
-          brandLight: '#b9d1cb',
-          emphasis: '#f3c600',
-          neutral: '#c4c4c4',
-          positive: '#a7bd3e',
-          warning: '#ed8b49',
+          ...DEFAULT_COLORS,
           ...optionsColors,
         },
         updateColors(colors) {
