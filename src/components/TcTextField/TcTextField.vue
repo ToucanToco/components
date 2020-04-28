@@ -156,6 +156,7 @@ export default {
   border: none;
   flex-grow: 1;
   max-width: 100%;
+  outline: none;
   padding: 0;
 
   &::placeholder {
