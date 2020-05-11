@@ -96,7 +96,7 @@ describe('TcComponents plugin', () => {
           template: '<div><SubComponent /><SubComponent /></div>',
         },
       });
-      subWrappers = wrapper.findAll({ name: 'SubComponent' }).wrappers;
+      subWrappers = wrapper.findAllComponents({ name: 'SubComponent' }).wrappers;
       subWrappers[0].vm.$tcComponents.updateColors({ brand: 'purple' });
     });
 
