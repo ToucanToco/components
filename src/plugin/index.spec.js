@@ -28,7 +28,7 @@ describe('TcComponents plugin', () => {
     });
 
     it('should add $tcComponents to Vue instances', () => {
-      expect(wrapper.vm.$tcComponents).not.toBe(undefined);
+      expect(wrapper.vm.$tcComponents).not.toBeUndefined();
     });
 
     it('should pass the default colors to $tcComponents', () => {

@@ -27,7 +27,7 @@ describe('getBooleansMixin', () => {
       });
 
       it('should return undefined', () => {
-        expect(computedValue).toBe(undefined);
+        expect(computedValue).toBeUndefined();
       });
     });
   });
