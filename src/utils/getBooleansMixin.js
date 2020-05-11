@@ -1,4 +1,4 @@
-export default function (key, valuesConst, inherit) {
+export default function (key, valuesConst = {}, inherit = false) {
   const propsKeys = Object.values(valuesConst).slice(1);
 
   return {
