@@ -2,19 +2,26 @@ name: Docs publish
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use node 14.x
+        uses: actions/setup-node@v1
         with:
-          node-version: 13
-      - run: yarn install
-      - run: yarn test:unit
-      - run: yarn build:docs
-      - run: npx firebase deploy --token "$FIREBASE_TOKEN"
+          node-version: 14.x
+      - name: Install dependencies
+        run: yarn install
+      - name: Test
+        run: yarn test:unit
+      - name: Build
+        run: yarn build:docs
+      - name: Publish
+        run: npx firebase deploy --token "$FIREBASE_TOKEN"
         env:
           FIREBASE_TOKEN: ${{ secrets.firebase_token }}
