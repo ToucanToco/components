@@ -32,6 +32,15 @@ export const BUTTON_TYPES = {
   OUTLINED: 'outlined',
 };
 
+export const DEFAULT_COLORS = {
+  brand: '#88b2a8',
+  brandLight: '#b9d1cb',
+  emphasis: '#f3c600',
+  neutral: '#c4c4c4',
+  positive: '#a7bd3e',
+  warning: '#ed8b49',
+};
+
 export const DIRECTIONS = {
   DEFAULT: 'vertical',
 

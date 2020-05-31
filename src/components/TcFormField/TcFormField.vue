@@ -31,7 +31,6 @@
         :key="messageIndex"
         class="tc-form-field__message"
         :class="message.elementClass"
-        :style="message.elementStyle"
       >
         <TcText x-small>{{ message.text }}</TcText>
       </div>
@@ -116,7 +115,6 @@ export default {
           : [this.errorMessages]
         ).map((message) => ({
           elementClass: 'tc-form-field__message--type-error',
-          elementStyle: this.errorMessageStyle,
           text: message,
         }));
       }
@@ -138,11 +136,6 @@ export default {
         [`tc-form-field--width-${this.width}`]: true,
         'is-error': this.hasError,
         'is-focused': this.isFocused,
-      };
-    },
-    errorMessageStyle() {
-      return {
-        color: this.$tcComponents.colors.warning,
       };
     },
     hasError() {
@@ -269,6 +262,10 @@ export default {
 .tc-form-field__message {
   display: flex;
   margin-top: $tc-spacing--message;
+}
+
+.tc-form-field__message--type-error {
+  color: $tc-color--warning;
 }
 
 .tc-form-field__messages {

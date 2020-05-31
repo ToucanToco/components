@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-text-field" :class="elementClass" :style="elementStyle" @click="triggerFocus()">
+  <div class="tc-text-field" :class="elementClass" @click="triggerFocus()">
     <TcText class="tc-text-field__input-container">
       <input
         :id="id"
@@ -66,11 +66,6 @@ export default {
         'is-focused': this.isFocused,
       };
     },
-    elementStyle() {
-      return {
-        borderColor: this.error && !this.isFocused ? this.$tcComponents.colors.warning : undefined,
-      };
-    },
     hasIcon() {
       return this.icon !== undefined;
     },
@@ -103,6 +98,10 @@ export default {
   display: flex;
   padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
   padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+
+  &.is-error {
+    border-color: $tc-color--warning;
+  }
 
   &.is-focused {
     border-color: $tc-color--studio;

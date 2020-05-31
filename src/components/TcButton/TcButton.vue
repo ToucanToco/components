@@ -5,7 +5,6 @@
     :class="elementClass"
     :href="href"
     :rel="rel"
-    :style="elementStyle"
     :target="target"
     :to="to"
     @click="click()"
@@ -63,15 +62,6 @@ export default {
         [`tc-button--size-${this.size}`]: true,
         [`tc-button--theme-${this.theme}`]: true,
         [`tc-button--type-${this.type}`]: true,
-      };
-    },
-    elementStyle() {
-      return {
-        backgroundColor:
-          this.primary && this.type === BUTTON_TYPES.DEFAULT
-            ? this.$tcComponents.colors.emphasis
-            : undefined,
-        color: this.primary && this.outlined ? this.$tcComponents.colors.emphasis : undefined,
       };
     },
     hasIcon() {
@@ -153,6 +143,14 @@ export default {
 
 .tc-button--color-primary.tc-button--theme-light.tc-button--type-plain {
   color: $tc-color--white;
+}
+
+.tc-button--color-primary.tc-button--type-outlined {
+  color: $tc-color--emphasis;
+}
+
+.tc-button--color-primary.tc-button--type-plain {
+  background-color: $tc-color--emphasis;
 }
 
 .tc-button--color-secondary.tc-button--theme-dark.tc-button--type-plain {

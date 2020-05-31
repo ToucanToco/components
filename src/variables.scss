@@ -15,6 +15,14 @@ $tc-color--white: #fff;
 $tc-color--studio: #2a66a1;
 $tc-color--toucan: #a0d1c5;
 
+// ### Customizable
+$tc-color--brand: var(--tc-color--brand, #88b2a8);
+$tc-color--brand-light: var(--tc-color--brand-light, #b9d1cb);
+$tc-color--emphasis: var(--tc-color--emphasis, #f3c600);
+$tc-color--neutral: var(--tc-color--neutral, #c4c4c4);
+$tc-color--positive: var(--tc-color--positive, #a7bd3e);
+$tc-color--warning: var(--tc-color--warning, #ed8b49);
+
 // ## Sizes
 // ### Sizes
 $tc-size--checkbox: 24px;

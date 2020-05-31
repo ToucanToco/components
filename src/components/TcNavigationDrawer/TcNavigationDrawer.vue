@@ -5,7 +5,7 @@
       <div class="tc-navigation-drawer__header">
         <slot name="header" />
       </div>
-      <div class="tc-navigation-drawer__body" :style="bodyStyle">
+      <div class="tc-navigation-drawer__body">
         <slot />
       </div>
       <div class="tc-navigation-drawer__footer">
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { THEMES } from 'tc-components/variables';
 import themable from 'tc-components/mixins/themable';
 
 export default {
@@ -44,14 +43,6 @@ export default {
   },
 
   computed: {
-    bodyStyle() {
-      return {
-        backgroundColor:
-          this.theme === THEMES.DEFAULT
-            ? this.$tcComponents.colors.brandLight
-            : this.$tcComponents.colors.brand,
-      };
-    },
     elementClass() {
       return {
         [`tc-navigation-drawer--theme-${this.theme}`]: true,
@@ -95,6 +86,10 @@ export default {
 }
 
 .tc-navigation-drawer--theme-dark {
+  .tc-navigation-drawer__body {
+    background-color: $tc-color--brand;
+  }
+
   .tc-navigation-drawer__header {
     background-color: $tc-color--black;
   }
@@ -105,6 +100,10 @@ export default {
 }
 
 .tc-navigation-drawer--theme-light {
+  .tc-navigation-drawer__body {
+    background-color: $tc-color--brand-light;
+  }
+
   .tc-navigation-drawer__header {
     background-color: $tc-color--white;
   }

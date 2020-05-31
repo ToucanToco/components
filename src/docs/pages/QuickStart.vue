@@ -7,21 +7,17 @@
     <TcDocsLabel :dark="isDark" level="2">Customize colors</TcDocsLabel>
     <TcDocsColorsForm :dark="isDark" />
     <TcDocsLabel :dark="isDark" level="2">Usage</TcDocsLabel>
-    <TcDocsDescription>Add the plugin to Vue</TcDocsDescription>
-    <TcDocsCode language="javascript" :value="usagePluginText" />
-    <TcDocsDescription>Use the components</TcDocsDescription>
+    <TcDocsDescription>Import the components</TcDocsDescription>
     <TcDocsCode language="javascript" :value="usageComponentsText" />
-    <TcDocsDescription
-      >`$tcComponents` is passed to all components, you can use it to update colors from inside any
-      component</TcDocsDescription
-    >
-    <TcDocsCode language="javascript" :value="usageUpdateColorsText" />
+    <TcDocsDescription>Colors can be customized using CSS custom properties</TcDocsDescription>
+    <TcDocsCode language="css" :value="usageUpdateColorsText" />
   </TcDocsPage>
 </template>
 
 <script>
 import { THEMES } from 'tc-components/variables';
 
+import hyphenate from 'tc-components/docs/utils/hyphenate';
 import TcDocsCode from 'tc-components/docs/components/TcDocsCode';
 import TcDocsColorsForm from 'tc-components/docs/components/TcDocsColorsForm';
 import TcDocsDescription from 'tc-components/docs/components/TcDocsDescription';
@@ -46,23 +42,6 @@ export default {
     isDark() {
       return this.$route.params.theme === THEMES.DARK;
     },
-    usagePluginText() {
-      return (
-        "import Vue from 'vue';\n" +
-        "import TcComponents from '@toucantoco/components'\n" +
-        '\n' +
-        'Vue.use(TcComponents);\n' +
-        '\n' +
-        '// Optionally you can pass colors on init\n' +
-        'Vue.use(TcComponents, {\n' +
-        '  colors: {\n' +
-        Object.entries(this.$tcComponents.colors)
-          .map(([colorKey, color]) => `    ${colorKey}: '${color}',\n`)
-          .join('') +
-        '  },\n' +
-        '});'
-      );
-    },
     usageComponentsText() {
       return (
         "import Vue from 'vue';\n" +
@@ -76,7 +55,13 @@ export default {
       );
     },
     usageUpdateColorsText() {
-      return 'this.$tcComponents.updateColors({\n' + "  emphasis: 'purple',\n" + '});';
+      return (
+        '* {\n' +
+        Object.entries(this.$store.state.colors)
+          .map(([colorKey, color]) => `  --tc-color--${hyphenate(colorKey)}: ${color};\n`)
+          .join('') +
+        '}'
+      );
     },
   },
 };

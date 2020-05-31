@@ -1,12 +1,14 @@
-import TcComponentsVuePlugin from 'tc-components/plugin';
 import Vue from 'vue';
 
 import TcDocsLayout from './components/TcDocsLayout';
 import router from './router';
+import store from './store';
 
-Vue.use(TcComponentsVuePlugin);
-
+store.dispatch('init');
 new Vue({
+  destroyed() {
+    store.dispatch('cleanup');
+  },
   render(createElement) {
     return createElement(TcDocsLayout, {
       attrs: {
@@ -15,4 +17,5 @@ new Vue({
     });
   },
   router,
+  store,
 }).$mount('#app');

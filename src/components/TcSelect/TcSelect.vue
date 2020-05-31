@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-select" :class="elementClass" :style="elementStyle" @click="triggerFocus()">
+  <div class="tc-select" :class="elementClass" @click="triggerFocus()">
     <TcText class="tc-select__value" :class="valueClass">{{ label }}</TcText>
     <TcIcon class="tc-select__icon" :label="icon" small />
     <select
@@ -72,11 +72,6 @@ export default {
         'is-focused': this.isFocused,
       };
     },
-    elementStyle() {
-      return {
-        borderColor: this.error && !this.isFocused ? this.$tcComponents.colors.warning : undefined,
-      };
-    },
     label() {
       return this.selectedOption === undefined ? this.placeholder : this.selectedOption.label;
     },
@@ -129,6 +124,10 @@ export default {
   padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
   padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
   position: relative;
+
+  &.is-error {
+    border-color: $tc-color--warning;
+  }
 
   &.is-focused {
     border-color: $tc-color--studio;

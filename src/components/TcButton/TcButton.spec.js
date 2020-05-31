@@ -82,8 +82,8 @@ describe('TcButton', () => {
       expect(wrapper.classes('tc-button--color-primary')).toBe(true);
     });
 
-    it('should set the right styles', () => {
-      expect(wrapper.attributes('style')).toBe('background-color: green;');
+    it('should only set the class attribute', () => {
+      expect(Object.keys(wrapper.attributes())).toEqual(['class']);
     });
   });
 
@@ -182,21 +182,6 @@ describe('TcButton', () => {
 
     it('should only set the class attribute', () => {
       expect(Object.keys(wrapper.attributes())).toEqual(['class']);
-    });
-  });
-
-  describe('with a primary color and an outlined type', () => {
-    beforeEach(() => {
-      wrapper = createWrapper({
-        propsData: {
-          primary: true,
-          outlined: true,
-        },
-      });
-    });
-
-    it('should set the right styles', () => {
-      expect(wrapper.attributes('style')).toBe('color: green;');
     });
   });
 

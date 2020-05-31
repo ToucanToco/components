@@ -29,13 +29,13 @@ export default {
 
   computed: {
     colors() {
-      return this.$tcComponents.colors;
+      return this.$store.state.colors;
     },
   },
 
   methods: {
     updateColor(colorKey, color) {
-      this.$tcComponents.updateColors({
+      this.$store.commit('updateColors', {
         [colorKey]: color,
       });
     },

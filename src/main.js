@@ -23,6 +23,3 @@ export { TcTab, TcTabs } from './components/TcTabs';
 export { TcText } from './components/TcText';
 export { TcTextField } from './components/TcTextField';
 export { TcToolbar } from './components/TcToolbar';
-
-import TcComponentsVuePlugin from './plugin';
-export default TcComponentsVuePlugin;
