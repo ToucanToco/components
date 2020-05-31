@@ -67,8 +67,12 @@ const _getPropDescription = function (label, name, options) {
       return 'Converts the component into an `<a>` HTML tag.';
     case 'icon':
       return 'Adds this icon to the component.';
+    case 'itemLabel':
+      return 'The property used to display items. Defaults to `itemValue`';
     case 'items':
-      return 'Can be an array of objects or an array of strings. When using objects, will look for a label and value field.';
+      return 'Can be an array of objects or an array of strings.';
+    case 'itemValue':
+      return "The property used when returning the selected items's value. If unset, the whole item is returned";
     case 'hint':
       return 'Adds hint text.';
     case 'label':

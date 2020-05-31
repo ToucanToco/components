@@ -16,7 +16,9 @@
       v-bind="mixinsProps"
       class="tc-form-field__input"
       :error="hasError"
+      :item-label="itemLabel"
       :items="items"
+      :item-value="itemValue"
       :label="inlineLabel"
       :off-label="offLabel"
       :placeholder="placeholder"
@@ -79,9 +81,17 @@ export default {
       },
       type: String,
     },
+    itemLabel: {
+      default: undefined,
+      type: String,
+    },
     items: {
       default: undefined,
       type: Array,
+    },
+    itemValue: {
+      default: undefined,
+      type: String,
     },
     label: {
       default: undefined,

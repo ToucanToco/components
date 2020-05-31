@@ -99,21 +99,27 @@ export default {
 
       return Object.entries(this.options)
         .filter(([key]) => key !== 'theme')
-        .map(([key, options]) => ({
-          [_getDocsExampleEditorType(options.editor)]: true,
-          items:
-            options.editor === 'select'
-              ? [
-                  { label: 'Default', value: undefined },
-                  ...options.values.map((value) => ({
-                    label: startCase(value),
-                    value,
-                  })),
-                ]
-              : undefined,
-          key,
-          label: startCase(key),
-        }));
+        .map(([key, options]) => {
+          const formElement = {
+            [_getDocsExampleEditorType(options.editor)]: true,
+            key,
+            label: startCase(key),
+          };
+
+          if (options.editor === 'select') {
+            formElement.itemLabel = 'label';
+            formElement.items = [
+              { label: 'Default', value: undefined },
+              ...options.values.map((value) => ({
+                label: startCase(value),
+                value,
+              })),
+            ];
+            formElement.itemValue = 'value';
+          }
+
+          return formElement;
+        });
     },
     formValues() {
       if (this.options === undefined) {
@@ -125,6 +131,8 @@ export default {
           key,
           options.types[0] === 'Booleans'
             ? options.values.find((value) => this.value[value])
+            : options.types[0] === 'Array' && JSON.stringify(this.value[key]).includes('{')
+            ? JSON.stringify(this.value[key])
             : this.value[key],
         ]),
       );
@@ -150,9 +158,12 @@ export default {
         option.values.forEach((o) => {
           updatedValue[o] = o === value;
         });
+      } else if (value === '') {
+        updatedValue[key] = undefined;
+      } else if (option.editor === 'array') {
+        updatedValue[key] = /^\[.*\]$/.test(value) ? JSON.parse(value) : value.split(',');
       } else {
-        updatedValue[key] =
-          value === '' ? undefined : option.editor === 'array' ? value.split(',') : value;
+        updatedValue[key] = value;
       }
 
       this.$emit('input', updatedValue);
