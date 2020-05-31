@@ -15,9 +15,10 @@
 </template>
 
 <script>
+import kebabCase from 'lodash/kebabCase';
+
 import { THEMES } from 'tc-components/variables';
 
-import hyphenate from 'tc-components/docs/utils/hyphenate';
 import TcDocsCode from 'tc-components/docs/components/TcDocsCode';
 import TcDocsColorsForm from 'tc-components/docs/components/TcDocsColorsForm';
 import TcDocsDescription from 'tc-components/docs/components/TcDocsDescription';
@@ -58,7 +59,7 @@ export default {
       return (
         '* {\n' +
         Object.entries(this.$store.state.colors)
-          .map(([colorKey, color]) => `  --tc-color--${hyphenate(colorKey)}: ${color};\n`)
+          .map(([colorKey, color]) => `  --tc-color--${kebabCase(colorKey)}: ${color};\n`)
           .join('') +
         '}'
       );

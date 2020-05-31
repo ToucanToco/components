@@ -1,7 +1,7 @@
+import kebabCase from 'lodash/kebabCase';
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import hyphenate from 'tc-components/docs/utils/hyphenate';
 import { DEFAULT_COLORS } from 'tc-components/variables';
 
 Vue.use(Vuex);
@@ -33,7 +33,7 @@ export default new Vuex.Store({
       }
 
       state.styleElement.textContent = `*{${Object.entries(state.colors)
-        .map(([key, value]) => `--tc-color--${hyphenate(key)}:${value}`)
+        .map(([key, value]) => `--tc-color--${kebabCase(key)}:${value}`)
         .join(';')}}`;
     },
   },
