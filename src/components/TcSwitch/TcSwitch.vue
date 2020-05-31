@@ -107,8 +107,8 @@ export default {
 
   &.is-on {
     .tc-switch__switch::before {
-      box-shadow: $tc-width--switch-track - $tc-size--switch-thumb * 0.5 0 0 0 $tc-color--studio
-        inset;
+      box-shadow: inset $tc-width--switch-track - $tc-size--switch-thumb * 0.5 0 0 0
+        $tc-color--studio;
     }
 
     .tc-switch__switch::after {
@@ -193,7 +193,7 @@ export default {
 .tc-switch__switch::before {
   background-color: $tc-color--grey-light-1;
   border-radius: $tc-height--switch-track * 0.5;
-  box-shadow: $tc-size--switch-thumb * 0.5 0 0 0 $tc-color--studio inset;
+  box-shadow: inset $tc-size--switch-thumb * 0.5 0 0 0 $tc-color--studio;
   content: '';
   height: $tc-height--switch-track;
   order: -1;

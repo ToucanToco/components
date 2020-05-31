@@ -97,11 +97,11 @@ export default {
 }
 
 .tc-tabs--theme-dark {
-  box-shadow: 0 (-$tc-border-width--tabs) 0 0 $tc-color--grey-dark inset;
+  box-shadow: inset 0 (-$tc-border-width--tabs) 0 0 $tc-color--grey-dark;
 }
 
 .tc-tabs--theme-light {
-  box-shadow: 0 (-$tc-border-width--tabs) 0 0 $tc-color--grey-light-3 inset;
+  box-shadow: inset 0 (-$tc-border-width--tabs) 0 0 $tc-color--grey-light-3;
 }
 
 .tc-tabs /deep/ > * {
