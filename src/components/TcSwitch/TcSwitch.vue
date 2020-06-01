@@ -168,6 +168,7 @@ export default {
   position: absolute;
   top: 0;
   width: $tc-width--switch-track;
+  z-index: $tc-z-index--switch;
 }
 
 .tc-switch__label {
