@@ -28,7 +28,7 @@ export default {
     return {
       components: TcButton,
       events: {
-        click: 'Event that is emitted when the component is clicked',
+        click: 'Event that is emitted when the component is clicked.',
       },
       props: {},
       slots: {

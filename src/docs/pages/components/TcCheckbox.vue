@@ -21,9 +21,9 @@ export default {
     return {
       components: TcCheckbox,
       events: {
-        blur: 'Emitted when component is blurred',
-        focus: 'Emitted when component is focused',
-        input: 'The updated bound model',
+        blur: 'Emitted when component is blurred.',
+        focus: 'Emitted when component is focused.',
+        input: 'The updated bound model.',
       },
       props: {
         label: 'Check this',

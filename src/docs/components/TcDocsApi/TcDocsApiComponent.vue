@@ -37,6 +37,7 @@ const _getPropDescription = function (label, name, options) {
   if (name === 'value') {
     switch (label) {
       case 'TcCheckbox':
+      case 'TcFormField':
       case 'TcRadioGroup':
       case 'TcSelect':
       case 'TcSwitch':
@@ -44,39 +45,50 @@ const _getPropDescription = function (label, name, options) {
         return "The input's value.";
       case 'TcDialog':
       case 'TcNavigationDrawer':
+      case 'TcPopover':
         return 'Controls whether the component is visible.';
       case 'TcNavigationSection':
         return "The navigation drawer's value when this component is selected.";
       case 'TcRadio':
-        return "The radio group's value when this component is selected";
+        return "The radio group's value when this component is selected.";
       case 'TcTab':
-        return "The tabs' value when this component is selected";
+        return "The tabs' value when this component is selected.";
       case 'TcTabs':
-        return "The selected tab's value";
+        return "The selected tab's value.";
       default:
         return undefined;
     }
   }
 
   switch (name) {
+    case 'compact':
+      return "Applies the `flat` mode variant to the component. Defaults to its parent's mode.";
+    case 'container':
+      return "The components' template will be moved as a child of this element to prevent it from being cropped by an overflow: auto or hidden parent.";
+    case 'dark':
+      return "Applies the `dark` theme variant to the component. Defaults to its parent's theme.";
     case 'error':
       return 'Puts the input in a manual error state.';
     case 'errorMessages':
       return 'Puts the input in an error state and passes through custom error messages.';
+    case 'groupLabel':
+      return 'The property used to group items.';
+    case 'hint':
+      return 'Adds hint text.';
     case 'href':
       return 'Converts the component into an `<a>` HTML tag.';
     case 'icon':
       return 'Adds this icon to the component.';
+    case 'id':
+      return "The input's id attribute.";
     case 'itemLabel':
-      return 'The property used to display items. Defaults to `itemValue`';
+      return 'The property used to display items. Defaults to `itemValue`.';
     case 'items':
       return 'Can be an array of objects or an array of strings.';
     case 'itemValue':
-      return "The property used when returning the selected items's value. If unset, the whole item is returned";
-    case 'hint':
-      return 'Adds hint text.';
+      return "The property used when returning the selected items's value. If unset, the whole item is returned.";
     case 'label':
-      return 'Adds a label to the component';
+      return 'Adds a label to the component.';
     case 'level':
       return "Sets the component's heading level. E.g. 1 will be `<h1>`.";
     case 'messages':
@@ -224,7 +236,9 @@ export default {
                 elementClass: 'tc-docs-api-component__prop--type-default',
                 isMonospace: true,
                 label: 'Default',
-                value: String(options.value),
+                value: Array.isArray(options.value)
+                  ? JSON.stringify(options.value)
+                  : String(options.value),
               },
               {
                 elementClass: 'tc-docs-api-component__prop--type-description',
@@ -386,9 +400,10 @@ export default {
 }
 
 .tc-docs-api-component__item {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: $tc-spacing--input-narrow $tc-spacing--input;
+  padding: $tc-spacing--input-narrow $tc-spacing--input * 0.5;
 }
 
 .tc-docs-api-component__label {
@@ -396,8 +411,11 @@ export default {
 }
 
 .tc-docs-api-component__prop {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  padding-left: $tc-spacing--input * 0.5;
+  padding-right: $tc-spacing--input * 0.5;
 }
 
 .tc-docs-api-component__prop--type-default {

@@ -31,7 +31,8 @@ export default {
     return {
       components: TcClickable,
       events: {
-        click: 'Event that is emitted when the component is clicked',
+        click:
+          'Event that is emitted when the component is clicked. It is also triggered by enter and space keys.',
       },
       props: {},
       slots: {

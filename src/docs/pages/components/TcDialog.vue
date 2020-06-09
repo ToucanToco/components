@@ -38,7 +38,7 @@ export default {
     return {
       components: TcDialog,
       events: {
-        input: 'The updated bound model',
+        input: 'The updated bound model.',
       },
       props: {
         label: 'This is important',

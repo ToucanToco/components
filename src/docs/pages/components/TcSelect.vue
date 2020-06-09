@@ -3,7 +3,7 @@
     v-model="props"
     center-example
     :components="components"
-    description="TODO :: Improve search & fix docs"
+    description="TODO :: Improve search"
     :events="events"
   >
     <TcSelect v-bind="props" @input="updateValue($event)" />

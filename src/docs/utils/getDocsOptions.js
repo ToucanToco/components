@@ -23,7 +23,10 @@ const _propPairToOptionPair = function ([key, options], componentName) {
     {
       editor: typesArray[0].toLowerCase(),
       types: typesArray,
-      value: typeof options.default === 'function' ? options.default() : options.default,
+      value:
+        typeof options.default === 'function'
+          ? options.default.bind({ _uid: '<uid>' })()
+          : options.default,
     },
   ];
 };
