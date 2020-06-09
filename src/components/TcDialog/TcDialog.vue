@@ -74,17 +74,36 @@ export default {
   watch: {
     async value(value) {
       if (value) {
+        this.addEscListener();
         await this.$nextTick();
         if (this.$refs.body.offsetHeight < this.$refs.content.offsetHeight) {
           this.isScrollable = true;
         }
+      } else {
+        this.removeEscListener();
       }
     },
   },
 
+  beforeDestroy() {
+    this.removeEscListener();
+  },
+
   methods: {
+    addEscListener() {
+      window.addEventListener('keydown', this.escListener);
+    },
     close() {
       this.$emit('input', false);
+    },
+    escListener(e) {
+      if (['Esc', 'Escape'].includes(e.key)) {
+        e.preventDefault();
+        this.close();
+      }
+    },
+    removeEscListener() {
+      window.removeEventListener('keydown', this.escListener);
     },
   },
 };
