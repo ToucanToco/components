@@ -57,12 +57,12 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-button--color-${this.color}`]: true,
-        [`tc-button--size-${this.size}`]: true,
-        [`tc-button--theme-${this.theme}`]: true,
-        [`tc-button--type-${this.type}`]: true,
-      };
+      return [
+        `tc-button--color-${this.color}`,
+        `tc-button--size-${this.size}`,
+        `tc-button--theme-${this.theme}`,
+        `tc-button--type-${this.type}`,
+      ];
     },
     hasIcon() {
       return this.icon !== undefined;

@@ -15,9 +15,7 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-form--direction-${this.direction}`]: true,
-      };
+      return `tc-form--direction-${this.direction}`;
     },
   },
 };

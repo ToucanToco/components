@@ -87,10 +87,7 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-docs-example--theme-${this.theme}`]: true,
-        [`tc-docs-example--type-${this.type}`]: true,
-      };
+      return [`tc-docs-example--theme-${this.theme}`, `tc-docs-example--type-${this.type}`];
     },
     formElements() {
       if (this.options === undefined) {

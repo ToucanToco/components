@@ -101,9 +101,7 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-docs-layout--theme-${this.theme}`]: true,
-      };
+      return `tc-docs-layout--theme-${this.theme}`;
     },
     isDark() {
       return this.$route.params.theme === THEMES.DARK;

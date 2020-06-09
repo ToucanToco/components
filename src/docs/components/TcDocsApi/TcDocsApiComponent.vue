@@ -248,9 +248,7 @@ export default {
         : [];
     },
     elementClass() {
-      return {
-        [`tc-docs-api-component--theme-${this.theme}`]: true,
-      };
+      return `tc-docs-api-component--theme-${this.theme}`;
     },
     items() {
       switch (this.selectedTab) {

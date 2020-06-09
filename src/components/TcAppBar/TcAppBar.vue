@@ -16,10 +16,7 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-app-bar--theme-${this.theme}`]: true,
-        [`tc-app-bar--type-${this.type}`]: true,
-      };
+      return [`tc-app-bar--theme-${this.theme}`, `tc-app-bar--type-${this.type}`];
     },
   },
 };

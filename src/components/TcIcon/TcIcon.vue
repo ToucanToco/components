@@ -24,13 +24,11 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-icon--size-${this.size}`]: true,
-      };
+      return `tc-icon--size-${this.size}`;
     },
     icon() {
       return this.label === undefined || ICONS[this.label] === undefined
-        ? { height: 0, path: '', width: 0 }
+        ? { path: '', size: 0 }
         : ICONS[this.label];
     },
     path() {

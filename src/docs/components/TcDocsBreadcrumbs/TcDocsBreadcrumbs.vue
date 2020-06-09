@@ -32,9 +32,7 @@ export default {
       return startCase(this.$route.name);
     },
     elementClass() {
-      return {
-        [`tc-docs-breadcrumbs--theme-${this.theme}`]: true,
-      };
+      return `tc-docs-breadcrumbs--theme-${this.theme}`;
     },
     items() {
       return this.$route.name === 'Index' ? [] : [{ label: 'Index', name: 'Index' }];

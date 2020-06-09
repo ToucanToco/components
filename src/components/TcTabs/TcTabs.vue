@@ -34,9 +34,7 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-tabs--theme-${this.theme}`]: true,
-      };
+      return `tc-tabs--theme-${this.theme}`;
     },
     id() {
       return `tc-tabs--${this._uid}`;

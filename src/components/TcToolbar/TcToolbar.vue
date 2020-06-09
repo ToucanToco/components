@@ -16,10 +16,7 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-toolbar--theme-${this.theme}`]: true,
-        [`tc-toolbar--type-${this.type}`]: true,
-      };
+      return [`tc-toolbar--theme-${this.theme}`, `tc-toolbar--type-${this.type}`];
     },
   },
 };

@@ -19,14 +19,14 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-text--align-${this.align}`]: true,
-        [`tc-text--display-${this.display}`]: true,
-        [`tc-text--family-${this.family}`]: true,
-        [`tc-text--size-${this.size}`]: true,
-        [`tc-text--transform-${this.transform}`]: true,
-        [`tc-text--weight-${this.weight}`]: true,
-      };
+      return [
+        `tc-text--align-${this.align}`,
+        `tc-text--display-${this.display}`,
+        `tc-text--family-${this.family}`,
+        `tc-text--size-${this.size}`,
+        `tc-text--transform-${this.transform}`,
+        `tc-text--weight-${this.weight}`,
+      ];
     },
   },
 };

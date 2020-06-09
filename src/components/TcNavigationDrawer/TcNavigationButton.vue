@@ -39,11 +39,11 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-navigation-button--level-${this.level}`]: true,
-        [`tc-navigation-button--theme-${this.theme}`]: true,
-        [`tc-navigation-button--type-${this.type}`]: true,
-      };
+      return [
+        `tc-navigation-button--level-${this.level}`,
+        `tc-navigation-button--theme-${this.theme}`,
+        `tc-navigation-button--type-${this.type}`,
+      ];
     },
     is() {
       return this.isLink ? 'RouterLink' : 'TcClickable';

@@ -35,9 +35,7 @@ export default {
 
   computed: {
     elementClass() {
-      return {
-        [`tc-docs-label--theme-${this.theme}`]: true,
-      };
+      return `tc-docs-label--theme-${this.theme}`;
     },
     is() {
       return `h${this.level}`;
