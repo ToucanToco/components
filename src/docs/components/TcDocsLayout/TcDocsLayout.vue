@@ -42,6 +42,9 @@
         <TcNavigationButton level="2" :to="{ name: 'TcNavigationDrawer', params: { theme } }"
           >Navigation Drawer</TcNavigationButton
         >
+        <TcNavigationButton level="2" :to="{ name: 'TcPopover', params: { theme } }"
+          >Popover</TcNavigationButton
+        >
         <TcNavigationButton level="2" :to="{ name: 'TcRadioGroup', params: { theme } }"
           >Radio Group</TcNavigationButton
         >
@@ -192,5 +195,10 @@ export default {
   .tc-docs-layout__nav-toggle {
     display: none;
   }
+}
+</style>
+<style lang="scss">
+body {
+  margin: 0;
 }
 </style>

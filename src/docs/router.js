@@ -84,6 +84,13 @@ export default new VueRouter({
     },
     {
       component() {
+        return import(/* webpackChunkName: 'tc-popover' */ './pages/components/TcPopover.vue');
+      },
+      name: 'TcPopover',
+      path: '/:theme/components/tc-popover',
+    },
+    {
+      component() {
         return import(
           /* webpackChunkName: 'tc-radio-group' */ './pages/components/TcRadioGroup.vue'
         );
