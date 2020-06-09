@@ -1,5 +1,10 @@
 <template>
-  <div tabindex="0" @click="click()" @keydown.enter="click()" @keydown.space="click()">
+  <div
+    tabindex="0"
+    @click="click($event)"
+    @keydown.enter="click($event)"
+    @keydown.space="click($event)"
+  >
     <slot />
   </div>
 </template>
@@ -13,8 +18,8 @@ export default {
   mixins: [tcComponent],
 
   methods: {
-    click() {
-      this.$emit('click');
+    click(e) {
+      this.$emit('click', e);
     },
   },
 };

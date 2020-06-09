@@ -6,12 +6,12 @@ export default {
   },
 
   methods: {
-    blur() {
-      this.$emit('blur');
+    blur(e) {
+      this.$emit('blur', e);
       this.isFocused = false;
     },
-    focus() {
-      this.$emit('focus');
+    focus(e) {
+      this.$emit('focus', e);
       this.isFocused = true;
     },
   },

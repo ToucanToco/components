@@ -7,7 +7,7 @@
     :rel="rel"
     :target="target"
     :to="to"
-    @click="click()"
+    @click="click($event)"
   >
     <TcIcon v-if="hasIcon" class="tc-button__icon" :label="icon" :small="isTextSmall" />
     <TcText bold center :small="isTextSmall" uppercase>
@@ -115,8 +115,8 @@ export default {
   },
 
   methods: {
-    click() {
-      this.$emit('click');
+    click(e) {
+      this.$emit('click', e);
     },
   },
 };

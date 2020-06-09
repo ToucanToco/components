@@ -22,8 +22,8 @@
       :narrow="narrow"
       :off-label="offLabel"
       :placeholder="placeholder"
-      @blur="blur()"
-      @focus="focus()"
+      @blur="blur($event)"
+      @focus="focus($event)"
     >
       <slot />
     </Component>

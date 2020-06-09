@@ -7,8 +7,8 @@
         v-model="valueModel"
         class="tc-checkbox__input"
         type="checkbox"
-        @blur="blur()"
-        @focus="focus()"
+        @blur="blur($event)"
+        @focus="focus($event)"
       />
     </div>
     <label v-if="hasLabel" class="tc-checkbox__label" :for="id">

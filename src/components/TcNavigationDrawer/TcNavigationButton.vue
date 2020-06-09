@@ -1,5 +1,11 @@
 <template>
-  <Component :is="is" class="tc-navigation-button" :class="elementClass" :to="to" @click="click()">
+  <Component
+    :is="is"
+    class="tc-navigation-button"
+    :class="elementClass"
+    :to="to"
+    @click="click($event)"
+  >
     <TcText
       :bold="isLevel2"
       :serif="isLevel1"
@@ -66,8 +72,8 @@ export default {
   },
 
   methods: {
-    click() {
-      this.$emit('click');
+    click(e) {
+      this.$emit('click', e);
     },
   },
 };

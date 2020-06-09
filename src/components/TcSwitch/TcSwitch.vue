@@ -14,8 +14,8 @@
         v-model="valueModel"
         class="tc-switch__input"
         type="checkbox"
-        @blur="blur()"
-        @focus="focus()"
+        @blur="blur($event)"
+        @focus="focus($event)"
       />
     </div>
     <label v-if="hasOffLabel" class="tc-switch__label tc-switch__label--position-right" :for="id">

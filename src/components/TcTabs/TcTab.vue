@@ -7,8 +7,8 @@
       :name="name"
       type="radio"
       :value="value"
-      @blur="blur()"
-      @focus="focus()"
+      @blur="blur($event)"
+      @focus="focus($event)"
     />
     <label class="tc-tab__label" :for="id">
       <TcText bold uppercase>

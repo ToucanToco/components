@@ -41,7 +41,7 @@ describe('focusable', () => {
     });
 
     it('should call $emit', () => {
-      expect(vm.$emit).toHaveBeenCalledWith('blur');
+      expect(vm.$emit).toHaveBeenCalledWith('blur', undefined);
     });
 
     it('should set isFocused to false', () => {
@@ -59,7 +59,7 @@ describe('focusable', () => {
     });
 
     it('should call $emit', () => {
-      expect(vm.$emit).toHaveBeenCalledWith('focus');
+      expect(vm.$emit).toHaveBeenCalledWith('focus', undefined);
     });
 
     it('should set isFocused to true', () => {

@@ -9,8 +9,8 @@
         :name="name"
         type="radio"
         :value="value"
-        @blur="blur()"
-        @focus="focus()"
+        @blur="blur($event)"
+        @focus="focus($event)"
       />
     </div>
     <label v-if="hasLabel" class="tc-radio__label" :for="id">

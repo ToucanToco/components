@@ -7,8 +7,11 @@
         v-model="valueModel"
         class="tc-text-field__input"
         :placeholder="placeholder"
-        @blur="blur()"
-        @focus="focus()"
+        @blur="blur($event)"
+        @focus="focus($event)"
+        @keydown="keydown($event)"
+        @keypress="keypress($event)"
+        @keyup="keyup($event)"
       />
     </TcText>
     <TcIcon v-if="hasIcon" class="tc-text-field__icon" :label="icon" small />
@@ -81,6 +84,15 @@ export default {
   },
 
   methods: {
+    keydown(e) {
+      this.$emit('keydown', e);
+    },
+    keypress(e) {
+      this.$emit('keypress', e);
+    },
+    keyup(e) {
+      this.$emit('keyup', e);
+    },
     triggerFocus() {
       this.$refs.input.focus();
     },
