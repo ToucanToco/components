@@ -1,50 +1,81 @@
 <template>
-  <TcText class="tc-select" :class="elementClass">
-    <VueMultiselect
-      ref="multiselect"
-      group-label="label"
-      :group-values="groupValue"
-      :id="id"
-      label="label"
-      :options="groups"
-      placeholder=""
-      :show-no-results="false"
-      v-model="selectedOptionModel"
-    >
-      <template #caret>
-        <div class="tc-select__container">
-          <TcText class="tc-select__value" :class="valueClass">{{ label }}</TcText>
-          <TcIcon class="tc-select__icon" :label="icon" small />
+  <TcClickable
+    class="tc-select"
+    :class="elementClass"
+    :id="id"
+    @blur.native="blur($event)"
+    @click.prevent="open()"
+    @focus.native="focus($event)"
+    @keydown.native.down.prevent="selectNext()"
+    @keydown.native.up.prevent="selectPrev()"
+    @mousedown.native="preventToggle()"
+  >
+    <TcText class="tc-select__value" :class="valueClass">{{ label }}</TcText>
+    <TcIcon class="tc-select__icon" :label="icon" small />
+    <TcPopover bottom class="tc-select__popover" justify :value="isOpen">
+      <div class="tc-select__container" :class="containerClass">
+        <TcTextField
+          v-model="query"
+          class="tc-select__input"
+          icon="search"
+          narrow
+          ref="input"
+          @blur="close($event)"
+          @focus="focus($event)"
+          @keydown.down.prevent="highlightNext()"
+          @keydown.esc.prevent="close()"
+          @keydown.tab.prevent="close()"
+          @keydown.up.prevent="highlightPrev()"
+          @keypress.enter.prevent="selectHighlighted()"
+          @keypress.space="closeIfEmpty($event)"
+        />
+        <div class="tc-select__options">
+          <template v-for="(option, index) in filteredOptions">
+            <div v-if="option.isGroup" class="tc-select__group" :key="index">
+              <TcText bold>{{ option.label }}</TcText>
+            </div>
+            <div
+              v-else
+              class="tc-select__option"
+              :class="getOptionClass(index, option)"
+              :key="index"
+              @click.prevent="select(option)"
+              @mouseenter="highlight(index)"
+            >
+              <TcText>{{ option.label }}</TcText>
+            </div>
+          </template>
         </div>
-      </template>
-      <template #option="{ option }">
-        <TcText :bold="option.$isLabel" class="tc-select__option">{{
-          option.$isLabel ? option.$groupLabel : option.label
-        }}</TcText>
-      </template>
-    </VueMultiselect>
-  </TcText>
+      </div>
+    </TcPopover>
+  </TcClickable>
 </template>
 
 <script>
-import VueMultiselect from 'vue-multiselect';
-
-import focusable from 'tc-components/mixins/focusable';
-import themable from 'tc-components/mixins/themable';
-import widthable from 'tc-components/mixins/widthable';
+import TcClickable from 'tc-components/components/TcClickable';
 import TcIcon from 'tc-components/components/TcIcon';
+import TcPopover from 'tc-components/components/TcPopover';
 import TcText from 'tc-components/components/TcText';
+import TcTextField from 'tc-components/components/TcTextField';
+import focusable from 'tc-components/mixins/focusable';
+import tcComponent from 'tc-components/mixins/tcComponent';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import getSelector from 'tc-components/utils/getSelector';
+import normalize from 'tc-components/utils/normalize';
+import { FIELD_WIDTHS } from 'tc-components/variables';
 
 export default {
   name: 'TcSelect',
 
   components: {
+    TcClickable,
     TcIcon,
+    TcPopover,
     TcText,
-    VueMultiselect,
+    TcTextField,
   },
 
-  mixins: [focusable, themable, widthable],
+  mixins: [tcComponent, focusable, getBooleansMixin('width', FIELD_WIDTHS)],
 
   props: {
     error: {
@@ -53,7 +84,7 @@ export default {
     },
     groupLabel: {
       default: undefined,
-      type: String,
+      type: [Function, String],
     },
     id: {
       default() {
@@ -67,14 +98,16 @@ export default {
     },
     itemLabel: {
       default: undefined,
-      type: String,
+      type: [Function, String],
     },
     itemValue: {
       default: undefined,
-      type: String,
+      type: [Function, String],
     },
     items: {
-      default: undefined,
+      default() {
+        return [];
+      },
       type: Array,
     },
     placeholder: {
@@ -87,7 +120,22 @@ export default {
     },
   },
 
+  data() {
+    return {
+      highlightedIndex: 0,
+      isOpen: false,
+      openable: true,
+      query: '',
+    };
+  },
+
   computed: {
+    containerClass() {
+      return [
+        `tc-select__container--theme-${this.theme}`,
+        `tc-select__container--width-${this.width}`,
+      ];
+    },
     elementClass() {
       return {
         [`tc-select--theme-${this.theme}`]: true,
@@ -96,90 +144,154 @@ export default {
         'is-focused': this.isFocused,
       };
     },
-    groups() {
-      if (this.groupLabel === undefined) {
-        return this.options;
-      }
+    filteredOptions() {
+      const normalizedQuery = normalize(this.query);
 
-      return this.options.reduce((groups, { groupLabel, label, value }) => {
-        if (groups[groupLabel] === undefined) {
-          groups[groupLabel] = groups.length;
-          groups.push({
-            label: groupLabel,
-            value: [{ label, value }],
-          });
-        } else {
-          groups[groups[groupLabel]].value.push({ label, value });
-        }
+      return (normalizedQuery === ''
+        ? this.options
+        : this.options.filter(({ normalizedLabel }) => normalizedLabel.includes(normalizedQuery))
+      )
+        .slice(0, 1000)
+        .reduce((filteredOptions, option) => {
+          if (option.groupLabel !== undefined && !filteredOptions[option.groupLabel]) {
+            filteredOptions.push({
+              isGroup: true,
+              label: option.groupLabel,
+            });
 
-        return groups;
-      }, []);
-    },
-    groupValue() {
-      return this.groupLabel === undefined ? undefined : 'value';
+            filteredOptions[option.groupLabel] = true;
+          }
+          filteredOptions.push(option);
+
+          return filteredOptions;
+        }, []);
     },
     label() {
-      return this.selectedOptionModel === undefined
-        ? this.placeholder
-        : this.selectedOptionModel.label;
+      return this.selectedOption === undefined ? this.placeholder : this.selectedOption.label;
     },
     options() {
-      if (this.items === undefined) {
-        return [];
-      }
-
-      const valueSelector =
-        this.itemValue === undefined ? (item) => item : (item) => item[this.itemValue];
-      const labelSelector =
-        this.itemLabel === undefined ? valueSelector : (item) => item[this.itemLabel];
       const groupLabelSelector =
-        this.groupLabel === undefined ? () => undefined : (item) => item[this.groupLabel];
+        this.groupLabel === undefined ? () => undefined : getSelector(this.groupLabel);
+      const valueSelector = getSelector(this.itemValue);
+      const labelSelector =
+        this.itemLabel === undefined ? valueSelector : getSelector(this.itemLabel);
 
-      return this.items.map((item) => ({
-        groupLabel: groupLabelSelector(item),
-        label: labelSelector(item),
-        value: valueSelector(item),
-      }));
+      return this.items.map((item) => {
+        const label = labelSelector(item);
+
+        return {
+          groupLabel: groupLabelSelector(item),
+          label,
+          normalizedLabel: normalize(label),
+          value: valueSelector(item),
+        };
+      });
     },
-    selectedOptionModel: {
-      get() {
-        return this.options.find(({ value }) => value === this.value);
-      },
-      set(option) {
-        this.$emit('input', option.value);
-      },
+    selectedIndex() {
+      return this.options.findIndex(({ value }) => value === this.value);
+    },
+    selectedOption() {
+      return this.options.find(({ value }) => value === this.value);
     },
     valueClass() {
-      return {
-        [`tc-select__value--type-${
-          this.selectedOptionModel === undefined ? 'placeholder' : 'label'
-        }`]: true,
-      };
+      return `tc-select__value--type-${
+        this.selectedOption === undefined ? 'placeholder' : 'label'
+      }`;
+    },
+  },
+
+  watch: {
+    filteredOptions: {
+      handler(filteredOptions) {
+        const highlightedOption = filteredOptions[this.highlightedIndex];
+
+        if (highlightedOption === undefined) {
+          this.highlightedIndex = Math.max(0, filteredOptions.length - 1);
+        } else if (highlightedOption.isGroup) {
+          this.highlightedIndex = this.highlightedIndex + 1;
+        }
+      },
+      immediate: true,
     },
   },
 
   methods: {
-    triggerFocus() {
-      this.$refs.input.focus();
+    close(e) {
+      this.isOpen = false;
+      this.query = '';
+
+      this.highlight(this.filteredOptions.length > 0 && this.filteredOptions[0].isGroup ? 1 : 0);
+
+      if (e === undefined) {
+        this.$el.focus();
+      } else {
+        this.blur(e);
+      }
     },
-  },
+    closeIfEmpty(e) {
+      if (this.query === '') {
+        e.preventDefault();
+        this.close();
+      }
+    },
+    getOptionClass(index, option) {
+      return {
+        'is-highlighted': index === this.highlightedIndex,
+        'is-selected': option === this.selectedOption,
+      };
+    },
+    highlight(index) {
+      this.highlightedIndex = index;
+    },
+    highlightNext() {
+      if (this.highlightedIndex < this.filteredOptions.length - 1) {
+        this.highlightedIndex =
+          this.highlightedIndex + (this.filteredOptions[this.highlightedIndex + 1].isGroup ? 2 : 1);
+      }
+    },
+    highlightPrev() {
+      if (this.highlightedIndex > 0) {
+        if (this.filteredOptions[this.highlightedIndex - 1].isGroup) {
+          if (this.highlightedIndex > 1) {
+            this.highlightedIndex = this.highlightedIndex - 2;
+          }
+        } else {
+          this.highlightedIndex = this.highlightedIndex - 1;
+        }
+      }
+    },
+    async open() {
+      if (this.openable) {
+        this.isOpen = true;
 
-  mounted() {
-    this.contentWrapper = this.$refs.multiselect.$el.querySelector('.multiselect__content-wrapper');
-    this.input = this.$refs.multiselect.$el.querySelector('.multiselect__input');
-
-    this.contentWrapper.insertBefore(this.input, this.contentWrapper.firstChild);
-    this.inputBlurListener = () => this.blur();
-    this.inputFocusListener = () => this.focus();
-
-    this.input.addEventListener('blur', this.inputBlurListener);
-    this.input.addEventListener('focus', this.inputFocusListener);
-  },
-
-  beforeDestroy() {
-    this.input.removeEventListener('blur', this.inputBlurListener);
-    this.input.removeEventListener('focus', this.inputFocusListener);
-    this.contentWrapper.removeChild(this.input);
+        await this.$nextTick();
+        this.$refs.input.triggerFocus();
+      } else {
+        this.openable = true;
+      }
+    },
+    preventToggle() {
+      if (this.isOpen) {
+        this.openable = false;
+      }
+    },
+    select(option) {
+      this.$emit('input', option.value);
+      this.close();
+    },
+    selectNext() {
+      if (this.selectedIndex < this.options.length - 1) {
+        this.select(this.options[this.selectedIndex + 1]);
+      }
+    },
+    selectPrev() {
+      if (this.selectedIndex > 0) {
+        this.select(this.options[this.selectedIndex - 1]);
+      }
+    },
+    selectHighlighted() {
+      this.select(this.filteredOptions[this.highlightedIndex]);
+    },
   },
 };
 </script>
@@ -187,116 +299,125 @@ export default {
 <style lang="scss" scoped>
 @import 'tc-components/variables';
 
-.tc-select {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  &.is-error {
-    .tc-select__container {
-      border-color: $tc-color--warning;
-    }
+.tc-popover--position-bottom {
+  .tc-select__container--theme-dark {
+    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
+      inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey,
+      $tc-box-shadow--select-below;
   }
 
-  &.is-focused {
-    .tc-select__container {
-      border-color: $tc-color--studio;
-    }
-  }
-}
-
-.tc-select--theme-dark {
-  .tc-select__container {
-    border-color: $tc-color--grey;
-  }
-
-  .tc-select__icon,
-  .tc-select__option,
-  .tc-select__value--type-label,
-  /deep/ .multiselect__input {
-    color: $tc-color--white;
-  }
-
-  /deep/ .multiselect--above .multiselect__content-wrapper {
-    box-shadow: inset 0 0 0 $tc-border-width--input $tc-color--grey, $tc-box-shadow--select-above;
-  }
-
-  /deep/ .multiselect__content-wrapper {
-    background-color: $tc-color--black;
-    box-shadow: inset 0 0 0 $tc-border-width--input $tc-color--grey, $tc-box-shadow--select-below;
-  }
-}
-
-.tc-select--theme-light {
-  .tc-select__container {
-    border-color: $tc-color--grey-light-2;
-  }
-
-  .tc-select__icon,
-  .tc-select__option,
-  .tc-select__value--type-label,
-  /deep/ .multiselect__input {
-    color: $tc-color--black;
-  }
-
-  .multiselect__option--highlight .tc-select__option {
-    color: $tc-color--white;
-  }
-
-  /deep/ .multiselect--above .multiselect__content-wrapper {
-    box-shadow: inset 0 0 0 $tc-border-width--input $tc-color--grey-light-2,
-      $tc-box-shadow--select-above;
-  }
-
-  /deep/ .multiselect__content-wrapper {
-    background-color: $tc-color--white;
-    box-shadow: inset 0 0 0 $tc-border-width--input $tc-color--grey-light-2,
+  .tc-select__container--theme-light {
+    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
+      inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey-light-2,
       $tc-box-shadow--select-below;
   }
 }
 
-.tc-select--width-narrow {
-  .tc-select__container {
-    padding-left: $tc-spacing--input-narrow - $tc-border-width--input;
-    padding-right: $tc-spacing--input-narrow - $tc-border-width--input;
+.tc-popover--position-top {
+  .tc-select__container--theme-dark {
+    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
+      inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey,
+      $tc-box-shadow--select-above;
   }
+
+  .tc-select__container--theme-light {
+    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
+      inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey-light-2,
+      $tc-box-shadow--select-above;
+  }
+}
+
+.tc-select {
+  align-items: center;
+  border-style: solid;
+  border-width: $tc-border-width--input;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+  padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+
+  &.is-error {
+    border-color: $tc-color--warning;
+  }
+
+  &.is-focused {
+    border-color: $tc-color--studio;
+  }
+}
+
+.tc-select--theme-dark {
+  border-color: $tc-color--grey;
+
+  .tc-select__icon,
+  .tc-select__value--type-label {
+    color: $tc-color--white;
+  }
+}
+
+.tc-select--theme-light {
+  border-color: $tc-color--grey-light-2;
+
+  .tc-select__icon,
+  .tc-select__value--type-label {
+    color: $tc-color--black;
+  }
+}
+
+.tc-select--width-narrow {
+  padding-left: $tc-spacing--input-narrow - $tc-border-width--input;
+  padding-right: $tc-spacing--input-narrow - $tc-border-width--input;
 
   .tc-select__icon {
     margin-left: $tc-spacing--input-narrow;
   }
-
-  /deep/ .multiselect--active .multiselect__input,
-  /deep/ .multiselect__option {
-    padding-left: $tc-spacing--input-narrow;
-    padding-right: $tc-spacing--input-narrow;
-  }
 }
 
 .tc-select--width-wide {
-  .tc-select__container {
-    padding-left: $tc-spacing--input - $tc-border-width--input;
-    padding-right: $tc-spacing--input - $tc-border-width--input;
-  }
+  padding-left: $tc-spacing--input - $tc-border-width--input;
+  padding-right: $tc-spacing--input - $tc-border-width--input;
 
   .tc-select__icon {
     margin-left: $tc-spacing--input;
   }
-
-  /deep/ .multiselect--active .multiselect__input,
-  /deep/ .multiselect__option {
-    padding-left: $tc-spacing--input;
-    padding-right: $tc-spacing--input;
-  }
 }
 
 .tc-select__container {
-  align-items: center;
-  border-style: solid;
-  border-width: $tc-border-width--input;
-  cursor: pointer;
   display: flex;
-  padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
-  padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+  flex-direction: column;
+  z-index: $tc-z-index--select;
+}
+
+.tc-select__container--theme-dark {
+  background-color: $tc-color--black;
+
+  .tc-select__option {
+    color: $tc-color--white;
+
+    &.is-highlighted {
+      background-color: $tc-color--black;
+    }
+  }
+}
+
+.tc-select__container--theme-light {
+  background-color: $tc-color--white;
+
+  .tc-select__option {
+    color: $tc-color--black;
+
+    &.is-highlighted {
+      background-color: $tc-color--white;
+    }
+  }
+}
+
+.tc-select__group {
+  overflow: hidden;
+  padding: ($tc-height--button-small - $tc-font-size--medium) * 0.5 $tc-spacing--button-large;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tc-select__icon {
@@ -305,87 +426,42 @@ export default {
   margin-top: ($tc-font-size--medium - $tc-font-size--small) * 0.5;
 }
 
+.tc-select__input {
+  margin: $tc-spacing--button-large - $tc-spacing--input-narrow;
+}
+
+.tc-select__option {
+  cursor: pointer;
+  overflow: hidden;
+  padding: ($tc-height--button-small - $tc-font-size--medium) * 0.5 $tc-spacing--button-large;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.is-highlighted {
+    box-shadow: inset 0 $tc-height--button-small 0 0 $tc-color--studio-faded;
+    color: $tc-color--studio;
+  }
+
+  &.is-selected {
+    box-shadow: inset 0 $tc-height--button-small 0 0 $tc-color--studio;
+    color: $tc-color--white;
+  }
+}
+
+.tc-select__popover {
+  position: fixed;
+  visibility: hidden;
+
+  &.is-active {
+    visibility: visible;
+  }
+}
+
 .tc-select__value {
   flex-grow: 1;
 }
 
 .tc-select__value--type-placeholder {
   color: $tc-color--grey;
-}
-
-/deep/ .multiselect {
-  display: flex;
-  flex-direction: column;
-}
-
-/deep/ .multiselect--above.multiselect--active .multiselect__content-wrapper {
-  bottom: 100%;
-  top: auto;
-}
-
-/deep/ .multiselect--active .multiselect__content {
-  // Overwrite inline style
-  display: flex !important;
-}
-
-/deep/ .multiselect--active .multiselect__content-wrapper {
-  top: 100%;
-}
-
-/deep/ .multiselect--active .multiselect__input {
-  padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5;
-  padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5;
-}
-
-/deep/ .multiselect__content {
-  // Overwrite inline style
-  display: none !important;
-  flex-direction: column;
-  margin-bottom: 0;
-  margin-top: 0;
-  overflow: auto;
-  padding-left: 0;
-}
-
-/deep/ .multiselect__content-wrapper {
-  // Overwrite inline style
-  display: flex !important;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: $tc-z-index--select;
-}
-
-/deep/ .multiselect__element {
-  list-style: none;
-}
-
-/deep/ .multiselect__input {
-  background-color: transparent;
-  border: none;
-  box-sizing: border-box;
-  outline: none;
-  visibility: visible;
-}
-
-/deep/ .multiselect__option {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: ($tc-height--button-small - $tc-font-size--medium) * 0.5;
-  padding-top: ($tc-height--button-small - $tc-font-size--medium) * 0.5;
-}
-
-/deep/ .multiselect__option--disabled {
-  cursor: initial;
-}
-
-/deep/ .multiselect__option--highlight {
-  background-color: $tc-color--studio;
-}
-
-/deep/ .multiselect__tags {
-  display: none;
 }
 </style>

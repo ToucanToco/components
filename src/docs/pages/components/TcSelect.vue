@@ -3,7 +3,7 @@
     v-model="props"
     center-example
     :components="components"
-    description="TODO :: Improve search & handle overflow"
+    description="TODO :: Improve search & fix docs"
     :events="events"
   >
     <TcSelect v-bind="props" @input="updateValue($event)" />
@@ -45,3 +45,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import 'tc-components/variables';
+
+/deep/ .tc-select {
+  max-width: 100%;
+  width: $tc-width--dialog-action;
+}
+</style>

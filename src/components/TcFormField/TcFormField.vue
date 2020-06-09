@@ -15,6 +15,7 @@
       v-model="valueModel"
       class="tc-form-field__input"
       :error="hasError"
+      :group-label="groupLabel"
       :item-label="itemLabel"
       :items="items"
       :item-value="itemValue"
@@ -83,6 +84,10 @@ export default {
     errorMessages: {
       default: undefined,
       type: [Array, String],
+    },
+    groupLabel: {
+      default: undefined,
+      type: String,
     },
     hint: {
       default: undefined,
