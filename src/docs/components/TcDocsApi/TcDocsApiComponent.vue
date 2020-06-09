@@ -13,7 +13,7 @@
           class="tc-docs-api-component__prop"
           :class="prop.elementClass"
         >
-          <div class="tc-docs-api-component__label">
+          <div class="tc-docs-api-component__label" :style="prop.labelStyle">
             <TcText xx-small>{{ prop.label }}</TcText>
           </div>
           <div class="tc-docs-api-component__value">
@@ -131,8 +131,81 @@ export default {
 
   computed: {
     describedEvents() {
-      return this.hasEvents
-        ? Object.entries(this.events).map(([name, description]) => ({
+      if (!this.hasEvents) {
+        return [];
+      }
+
+      return Object.entries(this.events).map(([name, description]) => ({
+        label: name,
+        props: [
+          {
+            elementClass: 'tc-docs-api-component__prop--type-name',
+            isMonospace: true,
+            label: 'Name',
+            value: name,
+          },
+          {
+            elementClass: 'tc-docs-api-component__prop--type-type',
+            isMonospace: true,
+            label: 'Type',
+            value: name === 'input' ? this.options.value.types.join(' | ') : 'Event',
+          },
+          {
+            elementClass: 'tc-docs-api-component__prop--type-description',
+            isMonospace: false,
+            label: 'Description',
+            value: description,
+          },
+        ],
+      }));
+    },
+    describedProps() {
+      if (!this.hasProps) {
+        return [];
+      }
+
+      return Object.entries(this.options).flatMap(([name, options]) => {
+        if (options.types[0] === 'Booleans') {
+          return options.values.map((value) => {
+            const description = _getPropDescription(this.label, value, { group: name });
+
+            return {
+              label: value,
+              props: [
+                {
+                  elementClass: 'tc-docs-api-component__prop--type-name',
+                  isMonospace: true,
+                  label: 'Name',
+                  value,
+                },
+                {
+                  elementClass: 'tc-docs-api-component__prop--type-type',
+                  isMonospace: true,
+                  label: 'Type',
+                  value: 'Boolean',
+                },
+                {
+                  elementClass: 'tc-docs-api-component__prop--type-default',
+                  isMonospace: true,
+                  label: 'Default',
+                  value: 'false',
+                },
+                {
+                  elementClass: 'tc-docs-api-component__prop--type-description',
+                  isMonospace: false,
+                  label: 'Description',
+                  labelStyle: description === undefined ? { color: 'red' } : undefined,
+                  value: description,
+                },
+              ],
+            };
+          });
+        }
+
+        const description = _getPropDescription(this.label, name, options);
+
+        return [
+          {
             label: name,
             props: [
               {
@@ -145,86 +218,25 @@ export default {
                 elementClass: 'tc-docs-api-component__prop--type-type',
                 isMonospace: true,
                 label: 'Type',
-                value: name === 'input' ? this.options.value.types.join(' | ') : 'Event',
+                value: options.types.join(' | '),
+              },
+              {
+                elementClass: 'tc-docs-api-component__prop--type-default',
+                isMonospace: true,
+                label: 'Default',
+                value: String(options.value),
               },
               {
                 elementClass: 'tc-docs-api-component__prop--type-description',
                 isMonospace: false,
                 label: 'Description',
+                labelStyle: description === undefined ? { color: 'red' } : undefined,
                 value: description,
               },
             ],
-          }))
-        : [];
-    },
-    describedProps() {
-      return this.hasProps
-        ? Object.entries(this.options).flatMap(([name, options]) =>
-            options.types[0] === 'Booleans'
-              ? options.values.map((value) => ({
-                  label: value,
-                  props: [
-                    {
-                      elementClass: 'tc-docs-api-component__prop--type-name',
-                      isMonospace: true,
-                      label: 'Name',
-                      value,
-                    },
-                    {
-                      elementClass: 'tc-docs-api-component__prop--type-type',
-                      isMonospace: true,
-                      label: 'Type',
-                      value: 'Boolean',
-                    },
-                    {
-                      elementClass: 'tc-docs-api-component__prop--type-default',
-                      isMonospace: true,
-                      label: 'Default',
-                      value: 'false',
-                    },
-                    {
-                      elementClass: 'tc-docs-api-component__prop--type-description',
-                      isMonospace: false,
-                      label: 'Description',
-                      value: _getPropDescription(this.label, value, {
-                        group: name,
-                      }),
-                    },
-                  ],
-                }))
-              : [
-                  {
-                    label: name,
-                    props: [
-                      {
-                        elementClass: 'tc-docs-api-component__prop--type-name',
-                        isMonospace: true,
-                        label: 'Name',
-                        value: name,
-                      },
-                      {
-                        elementClass: 'tc-docs-api-component__prop--type-type',
-                        isMonospace: true,
-                        label: 'Type',
-                        value: options.types.join(' | '),
-                      },
-                      {
-                        elementClass: 'tc-docs-api-component__prop--type-default',
-                        isMonospace: true,
-                        label: 'Default',
-                        value: String(options.value),
-                      },
-                      {
-                        elementClass: 'tc-docs-api-component__prop--type-description',
-                        isMonospace: false,
-                        label: 'Description',
-                        value: _getPropDescription(this.label, name, options),
-                      },
-                    ],
-                  },
-                ],
-          )
-        : [];
+          },
+        ];
+      });
     },
     describedSlots() {
       return this.hasSlots
