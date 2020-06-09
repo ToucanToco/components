@@ -140,17 +140,13 @@ export default {
 @import 'tc-components/variables';
 
 .tc-docs-layout {
-  bottom: 0;
   color: red;
   display: grid;
   grid-template-areas: 'navigation-drawer app-bar' 'navigation-drawer body';
   grid-template-columns: 0 1fr;
   grid-template-rows: $tc-height--app-bar 1fr;
-  left: 0;
+  height: 100vh;
   overflow: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
 }
 
 .tc-docs-layout--theme-dark {
@@ -197,7 +193,7 @@ export default {
   }
 }
 </style>
-<style lang="scss">
+<style>
 body {
   margin: 0;
 }
