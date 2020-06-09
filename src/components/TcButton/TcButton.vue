@@ -134,8 +134,6 @@ export default {
   display: flex;
   justify-content: center;
   outline: none;
-  padding-left: $tc-spacing--button - $tc-border-width--button;
-  padding-right: $tc-spacing--button - $tc-border-width--button;
   text-decoration: none;
 }
 
@@ -197,20 +195,18 @@ export default {
 }
 
 .tc-button--size-large {
-  padding-bottom: ($tc-height--button-large - $tc-font-size--medium) * 0.5 -
-    $tc-border-width--button;
-  padding-top: ($tc-height--button-large - $tc-font-size--medium) * 0.5 - $tc-border-width--button;
+  padding: ($tc-height--button-large - $tc-font-size--medium) * 0.5 - $tc-border-width--button
+    $tc-spacing--button - $tc-border-width--button;
 }
 
 .tc-button--size-medium {
-  padding-bottom: ($tc-height--button-medium - $tc-font-size--small) * 0.5 -
-    $tc-border-width--button;
-  padding-top: ($tc-height--button-medium - $tc-font-size--small) * 0.5 - $tc-border-width--button;
+  padding: ($tc-height--button-medium - $tc-font-size--small) * 0.5 - $tc-border-width--button
+    $tc-spacing--button - $tc-border-width--button;
 }
 
 .tc-button--size-small {
-  padding-bottom: ($tc-height--button-small - $tc-font-size--small) * 0.5 - $tc-border-width--button;
-  padding-top: ($tc-height--button-small - $tc-font-size--small) * 0.5 - $tc-border-width--button;
+  padding: ($tc-height--button-small - $tc-font-size--small) * 0.5 - $tc-border-width--button
+    $tc-spacing--button - $tc-border-width--button;
 }
 
 .tc-button--type-outlined {
