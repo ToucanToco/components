@@ -36,3 +36,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import 'tc-components/variables';
+
+/deep/ .tc-text-field {
+  max-width: 100%;
+  width: $tc-width--dialog-action;
+}
+</style>

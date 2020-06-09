@@ -107,6 +107,7 @@ export default {
   align-items: center;
   border-style: solid;
   border-width: $tc-border-width--input;
+  box-sizing: border-box;
   cursor: text;
   display: flex;
   padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
@@ -170,6 +171,7 @@ export default {
   max-width: 100%;
   outline: none;
   padding: 0;
+  width: 0;
 
   &::placeholder {
     color: $tc-color--grey;

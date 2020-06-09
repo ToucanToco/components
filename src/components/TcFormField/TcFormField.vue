@@ -124,7 +124,7 @@ export default {
     },
     value: {
       default: undefined,
-      type: [Array, Boolean, Number, String],
+      type: [Array, Number, String, Boolean],
     },
   },
 

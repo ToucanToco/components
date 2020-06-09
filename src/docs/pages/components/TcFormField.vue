@@ -6,7 +6,7 @@
     :events="events"
     :slots="slots"
   >
-    <TcFormField v-bind="props" />
+    <TcFormField v-bind="props" @input="updateValue($event)" />
   </TcDocsPage>
 </template>
 
@@ -40,5 +40,28 @@ export default {
       },
     };
   },
+
+  watch: {
+    props(newProps, oldProps) {
+      if ((newProps.checkbox || newProps.switch) !== (oldProps.checkbox || oldProps.switch)) {
+        this.updateValue(undefined);
+      }
+    },
+  },
+
+  methods: {
+    updateValue(value) {
+      this.$set(this.props, 'value', value);
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+@import 'tc-components/variables';
+
+/deep/ .tc-form-field {
+  max-width: 100%;
+  width: $tc-width--dialog-action;
+}
+</style>

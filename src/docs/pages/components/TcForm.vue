@@ -2,7 +2,7 @@
   <TcDocsPage v-model="props" center-example :components="components" :slots="slots">
     <TcForm v-bind="props">
       <TcFormField label="Text" />
-      <TcFormField label="Select" select value="One" />
+      <TcFormField :items="['One', 'Two', 'Three']" label="Select" select value="One" />
       <TcFormField label="Switch" switch />
       <TcFormField radio-group value="1">
         <TcRadio label="One" value="1" />
@@ -41,3 +41,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import 'tc-components/variables';
+
+/deep/ .tc-form {
+  max-width: 100%;
+  width: $tc-width--dialog-action;
+}
+</style>

@@ -39,7 +39,10 @@ import TcToolbar from 'tc-components/components/TcToolbar';
 import tcComponent, { TC_COMPONENT_THEMES } from 'tc-components/mixins/tcComponent';
 import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
 
-const _getDocsExampleEditorType = function (editor) {
+const _getDocsExampleEditorType = function (key, value, editor) {
+  if (key === 'value' && (value.checkbox || value.switch)) {
+    return TC_FORM_FIELD_TYPES.SWITCH;
+  }
   switch (editor) {
     case 'boolean':
       return TC_FORM_FIELD_TYPES.SWITCH;
@@ -97,7 +100,7 @@ export default {
         .filter(([key]) => key !== 'theme')
         .map(([key, options]) => {
           const formElement = {
-            [_getDocsExampleEditorType(options.editor)]: true,
+            [_getDocsExampleEditorType(key, this.value, options.editor)]: true,
             key,
             label: startCase(key),
           };
@@ -123,14 +126,23 @@ export default {
       }
 
       return Object.fromEntries(
-        Object.entries(this.options).map(([key, options]) => [
-          key,
-          options.types[0] === 'Booleans'
-            ? options.values.find((value) => this.value[value])
-            : options.types[0] === 'Array' && JSON.stringify(this.value[key]).includes('{')
-            ? JSON.stringify(this.value[key])
-            : this.value[key],
-        ]),
+        Object.entries(this.options).map(([key, options]) => {
+          if (options.types[0] === 'Booleans') {
+            return [key, options.values.find((value) => this.value[value])];
+          }
+
+          const formValue = this.value[key];
+
+          if (Array.isArray(formValue)) {
+            const stringifiedValue = JSON.stringify(formValue);
+
+            if (stringifiedValue.includes('{')) {
+              return [key, stringifiedValue];
+            }
+          }
+
+          return [key, formValue];
+        }),
       );
     },
     githubLink() {
@@ -159,7 +171,11 @@ export default {
         });
       } else if (value === '') {
         updatedValue[key] = undefined;
-      } else if (option.editor === 'array') {
+      } else if (
+        option.editor === 'array' &&
+        typeof value === 'string' &&
+        (value.includes(',') || !option.types.includes('String'))
+      ) {
         updatedValue[key] = /^\[.*\]$/.test(value) ? JSON.parse(value) : value.split(',');
       } else {
         updatedValue[key] = value;
