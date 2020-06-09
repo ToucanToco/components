@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import focusable from 'tc-components/mixins/focusable';
-import themable from 'tc-components/mixins/themable';
 import TcText from 'tc-components/components/TcText';
+import focusable from 'tc-components/mixins/focusable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcSwitch',
@@ -36,7 +36,7 @@ export default {
     TcText,
   },
 
-  mixins: [focusable, themable],
+  mixins: [tcComponent, focusable],
 
   props: {
     id: {

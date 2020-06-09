@@ -1,6 +1,6 @@
-import { THEMES } from 'tc-components/variables';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { TC_COMPONENT_THEMES } from 'tc-components/mixins/tcComponent';
 
 Vue.use(VueRouter);
 
@@ -145,7 +145,7 @@ export default new VueRouter({
       redirect: {
         name: 'Index',
         params: {
-          theme: THEMES.DEFAULT,
+          theme: TC_COMPONENT_THEMES.DEFAULT,
         },
       },
     },

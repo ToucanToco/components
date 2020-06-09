@@ -6,6 +6,7 @@
 
 <script>
 import TcText from 'tc-components/components/TcText';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcDocsCode',
@@ -13,6 +14,8 @@ export default {
   components: {
     TcText,
   },
+
+  mixins: [tcComponent],
 
   props: {
     language: {

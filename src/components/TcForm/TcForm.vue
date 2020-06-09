@@ -5,13 +5,19 @@
 </template>
 
 <script>
-import directionable from 'tc-components/mixins/directionable';
-import themable from 'tc-components/mixins/themable';
+import tcComponent from 'tc-components/mixins/tcComponent';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+
+export const TC_FORM_DIRECTIONS = {
+  DEFAULT: 'vertical',
+
+  HORIZONTAL: 'horizontal',
+};
 
 export default {
   name: 'TcForm',
 
-  mixins: [directionable, themable],
+  mixins: [tcComponent, getBooleansMixin('direction', TC_FORM_DIRECTIONS)],
 
   computed: {
     elementClass() {

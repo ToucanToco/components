@@ -5,17 +5,56 @@
 </template>
 
 <script>
-import alignable from 'tc-components/mixins/alignable';
-import displayable from 'tc-components/mixins/displayable';
-import familiable from 'tc-components/mixins/familiable';
-import sizable from 'tc-components/mixins/sizable';
-import transformable from 'tc-components/mixins/transformable';
-import weightable from 'tc-components/mixins/weightable';
+import tcComponent from 'tc-components/mixins/tcComponent';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { FONT_SIZES } from 'tc-components/variables';
+
+export const TC_TEXT_ALIGNMENTS = {
+  DEFAULT: 'start',
+
+  CENTER: 'center',
+  END: 'end',
+};
+
+export const TC_TEXT_DISPLAYS = {
+  DEFAULT: 'block',
+
+  INLINE: 'inline',
+};
+
+export const TC_TEXT_FAMILIES = {
+  DEFAULT: 'default',
+
+  MONOSPACE: 'monospace',
+  SERIF: 'serif',
+};
+
+export const TC_TEXT_TRANSFORMS = {
+  DEFAULT: 'none',
+
+  UPPERCASE: 'uppercase',
+};
+
+export const TC_TEXT_WEIGHTS = {
+  DEFAULT: 'regular',
+
+  THIN: 'thin',
+  MEDIUM: 'medium',
+  BOLD: 'bold',
+};
 
 export default {
   name: 'TcText',
 
-  mixins: [alignable, displayable, familiable, sizable, transformable, weightable],
+  mixins: [
+    tcComponent,
+    getBooleansMixin('align', TC_TEXT_ALIGNMENTS),
+    getBooleansMixin('display', TC_TEXT_DISPLAYS),
+    getBooleansMixin('family', TC_TEXT_FAMILIES),
+    getBooleansMixin('size', FONT_SIZES),
+    getBooleansMixin('transform', TC_TEXT_TRANSFORMS),
+    getBooleansMixin('weight', TC_TEXT_WEIGHTS),
+  ],
 
   computed: {
     elementClass() {

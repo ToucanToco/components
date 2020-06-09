@@ -7,13 +7,15 @@
 </template>
 
 <script>
-import sizable from 'tc-components/mixins/sizable';
+import tcComponent from 'tc-components/mixins/tcComponent';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { FONT_SIZES } from 'tc-components/variables';
 import ICONS from './icons';
 
 export default {
   name: 'TcIcon',
 
-  mixins: [sizable],
+  mixins: [tcComponent, getBooleansMixin('size', FONT_SIZES)],
 
   props: {
     label: {

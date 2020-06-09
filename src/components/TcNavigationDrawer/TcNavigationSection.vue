@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import tcComponent from 'tc-components/mixins/tcComponent';
+
 import TcNavigationButton from './TcNavigationButton.vue';
 
 export default {
@@ -20,6 +22,8 @@ export default {
   components: {
     TcNavigationButton,
   },
+
+  mixins: [tcComponent],
 
   props: {
     value: {
@@ -37,9 +41,6 @@ export default {
     },
     isActive() {
       return this.value === this.navigationDrawer.activeSection;
-    },
-    theme() {
-      return this.navigationDrawer.theme;
     },
   },
 

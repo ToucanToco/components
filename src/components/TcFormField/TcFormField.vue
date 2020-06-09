@@ -13,13 +13,13 @@
       :id="id"
       ref="input"
       v-model="valueModel"
-      v-bind="mixinsProps"
       class="tc-form-field__input"
       :error="hasError"
       :item-label="itemLabel"
       :items="items"
       :item-value="itemValue"
       :label="inlineLabel"
+      :narrow="narrow"
       :off-label="offLabel"
       :placeholder="placeholder"
       @blur="blur()"
@@ -41,17 +41,25 @@
 </template>
 
 <script>
-import focusable from 'tc-components/mixins/focusable';
-import themable from 'tc-components/mixins/themable';
-import widthable from 'tc-components/mixins/widthable';
-import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
-import { FORM_FIELD_TYPES, THEMES, WIDTHS } from 'tc-components/variables';
 import TcCheckbox from 'tc-components/components/TcCheckbox';
 import TcRadioGroup from 'tc-components/components/TcRadioGroup';
 import TcSelect from 'tc-components/components/TcSelect';
 import TcSwitch from 'tc-components/components/TcSwitch';
 import TcText from 'tc-components/components/TcText';
 import TcTextField from 'tc-components/components/TcTextField';
+import focusable from 'tc-components/mixins/focusable';
+import tcComponent from 'tc-components/mixins/tcComponent';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { FIELD_WIDTHS } from 'tc-components/variables';
+
+export const TC_FORM_FIELD_TYPES = {
+  DEFAULT: 'text',
+
+  CHECKBOX: 'checkbox',
+  RADIO_GROUP: 'radioGroup',
+  SELECT: 'select',
+  SWITCH: 'switch',
+};
 
 export default {
   name: 'TcFormField',
@@ -60,7 +68,12 @@ export default {
     TcText,
   },
 
-  mixins: [getBooleansMixin('type', FORM_FIELD_TYPES), focusable, themable, widthable],
+  mixins: [
+    tcComponent,
+    focusable,
+    getBooleansMixin('type', TC_FORM_FIELD_TYPES),
+    getBooleansMixin('width', FIELD_WIDTHS),
+  ],
 
   props: {
     error: {
@@ -171,28 +184,22 @@ export default {
         return this.type;
       }
       switch (this.type) {
-        case FORM_FIELD_TYPES.CHECKBOX:
+        case TC_FORM_FIELD_TYPES.CHECKBOX:
           return TcCheckbox;
-        case FORM_FIELD_TYPES.RADIO_GROUP:
+        case TC_FORM_FIELD_TYPES.RADIO_GROUP:
           return TcRadioGroup;
-        case FORM_FIELD_TYPES.SELECT:
+        case TC_FORM_FIELD_TYPES.SELECT:
           return TcSelect;
-        case FORM_FIELD_TYPES.SWITCH:
+        case TC_FORM_FIELD_TYPES.SWITCH:
           return TcSwitch;
-        case FORM_FIELD_TYPES.TEXT:
+        case TC_FORM_FIELD_TYPES.TEXT:
           return TcTextField;
         default:
           return TcTextField;
       }
     },
     isLabelInline() {
-      return [FORM_FIELD_TYPES.CHECKBOX, FORM_FIELD_TYPES.SWITCH].includes(this.type);
-    },
-    mixinsProps() {
-      return {
-        ...this.getMixinProps(THEMES),
-        ...this.getMixinProps(WIDTHS),
-      };
+      return [TC_FORM_FIELD_TYPES.CHECKBOX, TC_FORM_FIELD_TYPES.SWITCH].includes(this.type);
     },
     valueModel: {
       get() {
@@ -205,13 +212,6 @@ export default {
   },
 
   methods: {
-    getMixinProps(valuesConst) {
-      return Object.fromEntries(
-        Object.values(valuesConst)
-          .slice(1)
-          .map((propKey) => [propKey, this[propKey]]),
-      );
-    },
     triggerFocus() {
       this.$refs.input.triggerFocus();
     },

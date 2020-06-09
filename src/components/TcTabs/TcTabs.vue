@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import themable from 'tc-components/mixins/themable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcTabs',
@@ -17,7 +17,7 @@ export default {
     };
   },
 
-  mixins: [themable],
+  mixins: [tcComponent],
 
   props: {
     value: {

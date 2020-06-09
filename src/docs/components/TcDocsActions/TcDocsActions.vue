@@ -5,8 +5,12 @@
 </template>
 
 <script>
+import tcComponent from 'tc-components/mixins/tcComponent';
+
 export default {
   name: 'TcDocsActions',
+
+  mixins: [tcComponent],
 };
 </script>
 

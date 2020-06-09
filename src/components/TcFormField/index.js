@@ -1,4 +1,4 @@
-import TcFormField from './TcFormField.vue';
+import TcFormField, { TC_FORM_FIELD_TYPES } from './TcFormField.vue';
 
-export { TcFormField };
+export { TcFormField, TC_FORM_FIELD_TYPES };
 export default TcFormField;

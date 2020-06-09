@@ -28,7 +28,7 @@
 <script>
 import { TcTab, TcTabs } from 'tc-components/components/TcTabs';
 import TcText from 'tc-components/components/TcText';
-import themable from 'tc-components/mixins/themable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 const _getPropDescription = function (label, name, options) {
   if (options.group !== undefined) {
@@ -101,7 +101,7 @@ export default {
     TcText,
   },
 
-  mixins: [themable],
+  mixins: [tcComponent],
 
   props: {
     events: {

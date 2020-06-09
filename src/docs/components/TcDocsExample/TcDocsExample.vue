@@ -33,21 +33,20 @@
 <script>
 import startCase from 'lodash/startCase';
 import TcForm from 'tc-components/components/TcForm';
-import TcFormField from 'tc-components/components/TcFormField';
+import TcFormField, { TC_FORM_FIELD_TYPES } from 'tc-components/components/TcFormField';
 import TcIcon from 'tc-components/components/TcIcon';
 import TcToolbar from 'tc-components/components/TcToolbar';
-import themable from 'tc-components/mixins/themable';
+import tcComponent, { TC_COMPONENT_THEMES } from 'tc-components/mixins/tcComponent';
 import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
-import { FORM_FIELD_TYPES, THEMES } from 'tc-components/variables';
 
 const _getDocsExampleEditorType = function (editor) {
   switch (editor) {
     case 'boolean':
-      return FORM_FIELD_TYPES.SWITCH;
+      return TC_FORM_FIELD_TYPES.SWITCH;
     case 'select':
-      return FORM_FIELD_TYPES.SELECT;
+      return TC_FORM_FIELD_TYPES.SELECT;
     default:
-      return FORM_FIELD_TYPES.DEFAULT;
+      return TC_FORM_FIELD_TYPES.DEFAULT;
   }
 };
 
@@ -62,12 +61,12 @@ export default {
   },
 
   mixins: [
+    tcComponent,
     getBooleansMixin('type', {
       DEFAULT: 'contain',
 
       CENTER: 'center',
     }),
-    themable,
   ],
 
   props: {
@@ -140,7 +139,10 @@ export default {
     toOtherTheme() {
       return {
         params: {
-          theme: this.theme === THEMES.DEFAULT ? THEMES.DARK : THEMES.DEFAULT,
+          theme:
+            this.theme === TC_COMPONENT_THEMES.DEFAULT
+              ? TC_COMPONENT_THEMES.DARK
+              : TC_COMPONENT_THEMES.DEFAULT,
         },
       };
     },

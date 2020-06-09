@@ -16,7 +16,7 @@
 <script>
 import startCase from 'lodash/startCase';
 import TcText from 'tc-components/components/TcText';
-import themable from 'tc-components/mixins/themable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcDocsBreadcrumbs',
@@ -25,7 +25,7 @@ export default {
     TcText,
   },
 
-  mixins: [themable],
+  mixins: [tcComponent],
 
   computed: {
     currentViewLabel() {

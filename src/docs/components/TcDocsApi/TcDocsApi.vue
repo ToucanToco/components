@@ -17,7 +17,7 @@
 
 <script>
 import TcSelect from 'tc-components/components/TcSelect';
-import themable from 'tc-components/mixins/themable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 import TcDocsApiComponent from './TcDocsApiComponent.vue';
 
@@ -29,7 +29,7 @@ export default {
     TcSelect,
   },
 
-  mixins: [themable],
+  mixins: [tcComponent],
 
   props: {
     events: {

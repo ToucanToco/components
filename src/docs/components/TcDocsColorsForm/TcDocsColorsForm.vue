@@ -15,7 +15,7 @@
 <script>
 import TcForm from 'tc-components/components/TcForm';
 import TcFormField from 'tc-components/components/TcFormField';
-import themable from 'tc-components/mixins/themable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcDocsColorsForm',
@@ -25,7 +25,7 @@ export default {
     TcFormField,
   },
 
-  mixins: [themable],
+  mixins: [tcComponent],
 
   computed: {
     colors() {

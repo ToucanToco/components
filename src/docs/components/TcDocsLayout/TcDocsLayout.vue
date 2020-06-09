@@ -1,6 +1,6 @@
 <template>
   <div class="tc-docs-layout" :class="elementClass">
-    <TcAppBar class="tc-docs-layout__app-bar" :dark="isDark">
+    <TcAppBar class="tc-docs-layout__app-bar">
       <TcClickable class="tc-docs-layout__nav-toggle" @click="openNavigationDrawer()">
         <TcText>Open navigation</TcText>
       </TcClickable>
@@ -8,7 +8,6 @@
     <TcNavigationDrawer
       v-model="isNavigationDrawerOpenedModel"
       class="tc-docs-layout__navigation-drawer"
-      :dark="isDark"
     >
       <TcNavigationButton :to="{ name: 'Index', params: { theme } }">Index</TcNavigationButton>
       <TcNavigationButton :to="{ name: 'QuickStart', params: { theme } }"
@@ -79,7 +78,7 @@ import {
   TcNavigationSection,
 } from 'tc-components/components/TcNavigationDrawer';
 import TcText from 'tc-components/components/TcText';
-import { THEMES } from 'tc-components/variables';
+import { TC_COMPONENT_THEMES } from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcDocsLayout',
@@ -103,9 +102,6 @@ export default {
     elementClass() {
       return `tc-docs-layout--theme-${this.theme}`;
     },
-    isDark() {
-      return this.$route.params.theme === THEMES.DARK;
-    },
     isNavigationDrawerOpenedModel: {
       get() {
         return this.isNavigationDrawerOpened;
@@ -115,7 +111,9 @@ export default {
       },
     },
     theme() {
-      return this.$route.params.theme === undefined ? THEMES.DEFAULT : this.$route.params.theme;
+      return this.$route.params.theme === undefined
+        ? TC_COMPONENT_THEMES.DEFAULT
+        : this.$route.params.theme;
     },
   },
 

@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import themable from 'tc-components/mixins/themable';
 import TcClickable from 'tc-components/components/TcClickable';
 import TcIcon from 'tc-components/components/TcIcon';
 import TcText from 'tc-components/components/TcText';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcDialog',
@@ -37,7 +37,7 @@ export default {
     TcText,
   },
 
-  mixins: [themable],
+  mixins: [tcComponent],
 
   props: {
     label: {

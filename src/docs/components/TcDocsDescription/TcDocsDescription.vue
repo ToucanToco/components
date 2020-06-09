@@ -8,6 +8,7 @@
 
 <script>
 import TcText from 'tc-components/components/TcText';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcDocsDescription',
@@ -15,6 +16,8 @@ export default {
   components: {
     TcText,
   },
+
+  mixins: [tcComponent],
 
   props: {
     subtitle: {

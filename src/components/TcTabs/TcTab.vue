@@ -19,19 +19,20 @@
 </template>
 
 <script>
-import focusable from 'tc-components/mixins/focusable';
 import TcText from 'tc-components/components/TcText';
+import focusable from 'tc-components/mixins/focusable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcTab',
+
+  inject: ['tabs'],
 
   components: {
     TcText,
   },
 
-  mixins: [focusable],
-
-  inject: ['tabs'],
+  mixins: [tcComponent, focusable],
 
   props: {
     value: {
@@ -64,9 +65,6 @@ export default {
       set(value) {
         this.tabs.valueModel = value;
       },
-    },
-    theme() {
-      return this.tabs.theme;
     },
   },
 };

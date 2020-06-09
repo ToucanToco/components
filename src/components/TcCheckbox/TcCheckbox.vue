@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import focusable from 'tc-components/mixins/focusable';
-import themable from 'tc-components/mixins/themable';
 import TcIcon from 'tc-components/components/TcIcon';
 import TcText from 'tc-components/components/TcText';
+import focusable from 'tc-components/mixins/focusable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcCheckbox',
@@ -31,7 +31,7 @@ export default {
     TcText,
   },
 
-  mixins: [focusable, themable],
+  mixins: [tcComponent, focusable],
 
   props: {
     id: {

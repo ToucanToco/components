@@ -20,9 +20,10 @@
 </template>
 
 <script>
-import focusable from 'tc-components/mixins/focusable';
 import TcIcon from 'tc-components/components/TcIcon';
 import TcText from 'tc-components/components/TcText';
+import focusable from 'tc-components/mixins/focusable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcRadio',
@@ -34,7 +35,7 @@ export default {
     TcText,
   },
 
-  mixins: [focusable],
+  mixins: [tcComponent, focusable],
 
   props: {
     label: {
@@ -78,9 +79,6 @@ export default {
     },
     name() {
       return this.radioGroup.id;
-    },
-    theme() {
-      return this.radioGroup.theme;
     },
   },
 };

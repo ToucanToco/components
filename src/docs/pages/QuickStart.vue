@@ -1,12 +1,12 @@
 <template>
   <TcDocsPage>
-    <TcDocsLabel :dark="isDark">Quick Start</TcDocsLabel>
+    <TcDocsLabel>Quick Start</TcDocsLabel>
     <TcDocsDescription subtitle>Get started with TcComponents.</TcDocsDescription>
-    <TcDocsLabel :dark="isDark" level="2">Insall</TcDocsLabel>
+    <TcDocsLabel level="2">Insall</TcDocsLabel>
     <TcDocsCode language="bash" :value="installText" />
-    <TcDocsLabel :dark="isDark" level="2">Customize colors</TcDocsLabel>
-    <TcDocsColorsForm :dark="isDark" />
-    <TcDocsLabel :dark="isDark" level="2">Usage</TcDocsLabel>
+    <TcDocsLabel level="2">Customize colors</TcDocsLabel>
+    <TcDocsColorsForm />
+    <TcDocsLabel level="2">Usage</TcDocsLabel>
     <TcDocsDescription>Import the components</TcDocsDescription>
     <TcDocsCode language="javascript" :value="usageComponentsText" />
     <TcDocsDescription>Colors can be customized using CSS custom properties</TcDocsDescription>
@@ -16,8 +16,6 @@
 
 <script>
 import kebabCase from 'lodash/kebabCase';
-
-import { THEMES } from 'tc-components/variables';
 
 import TcDocsCode from 'tc-components/docs/components/TcDocsCode';
 import TcDocsColorsForm from 'tc-components/docs/components/TcDocsColorsForm';
@@ -39,9 +37,6 @@ export default {
   computed: {
     installText() {
       return 'yarn add @toucantoco/components';
-    },
-    isDark() {
-      return this.$route.params.theme === THEMES.DARK;
     },
     usageComponentsText() {
       return (

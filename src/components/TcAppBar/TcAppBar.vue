@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import themable from 'tc-components/mixins/themable';
+import tcComponent from 'tc-components/mixins/tcComponent';
 import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
 import { BAR_TYPES } from 'tc-components/variables';
 
 export default {
   name: 'TcAppBar',
 
-  mixins: [getBooleansMixin('type', BAR_TYPES), themable],
+  mixins: [tcComponent, getBooleansMixin('type', BAR_TYPES)],
 
   computed: {
     elementClass() {

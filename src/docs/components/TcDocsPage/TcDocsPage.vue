@@ -1,36 +1,34 @@
 <template>
   <div class="tc-docs-page">
-    <TcDocsBreadcrumbs class="tc-docs-page__breadcrumb" :dark="isDark" />
+    <TcDocsBreadcrumbs class="tc-docs-page__breadcrumb" />
     <template v-if="isRaw">
       <slot />
     </template>
     <template v-else>
-      <TcDocsLabel :dark="isDark">{{ label }}</TcDocsLabel>
+      <TcDocsLabel>{{ label }}</TcDocsLabel>
       <TcDocsDescription v-if="hasDescription" subtitle>{{ description }}</TcDocsDescription>
-      <TcDocsLabel :dark="isDark" level="2">Usage</TcDocsLabel>
+      <TcDocsLabel level="2">Usage</TcDocsLabel>
       <TcDocsExample
         v-model="valueModel"
         :center="centerExample"
-        :dark="isDark"
         :label="label"
         :options="mainComponentOptions"
       >
         <slot />
       </TcDocsExample>
-      <TcDocsLabel :dark="isDark" level="2">Api</TcDocsLabel>
-      <TcDocsApi :dark="isDark" :events="events" :label="label" :options="options" :slots="slots" />
+      <TcDocsLabel level="2">Api</TcDocsLabel>
+      <TcDocsApi :events="events" :label="label" :options="options" :slots="slots" />
     </template>
   </div>
 </template>
 
 <script>
-import { THEMES } from 'tc-components/variables';
-
 import TcDocsApi from 'tc-components/docs/components/TcDocsApi';
 import TcDocsBreadcrumbs from 'tc-components/docs/components/TcDocsBreadcrumbs';
 import TcDocsDescription from 'tc-components/docs/components/TcDocsDescription';
 import TcDocsExample from 'tc-components/docs/components/TcDocsExample';
 import TcDocsLabel from 'tc-components/docs/components/TcDocsLabel';
+import { TC_COMPONENT_THEMES } from 'tc-components/mixins/tcComponent';
 import getDocsDefaultProps from 'tc-components/docs/utils/getDocsDefaultProps';
 import getDocsOptions from 'tc-components/docs/utils/getDocsOptions';
 
@@ -79,9 +77,6 @@ export default {
     hasMultipleComponents() {
       return !this.isRaw && Array.isArray(this.components);
     },
-    isDark() {
-      return this.$route.params.theme === THEMES.DARK;
-    },
     isRaw() {
       return this.components === undefined;
     },
@@ -109,6 +104,11 @@ export default {
           )
         : getDocsOptions(this.components);
     },
+    theme() {
+      return this.$route.params.theme === undefined
+        ? TC_COMPONENT_THEMES.DEFAULT
+        : this.$route.params.theme;
+    },
     valueModel: {
       get() {
         return this.value;
@@ -119,26 +119,12 @@ export default {
     },
   },
 
-  watch: {
-    isDark(isDark) {
-      if (this.value !== undefined && this.value.dark !== isDark) {
-        this.$set(this.valueModel, 'dark', isDark);
-      }
-    },
-  },
-
   created() {
     if (!this.isRaw) {
-      const newValue = {
+      this.valueModel = {
         ...getDocsDefaultProps(this.mainComponentOptions),
         ...(this.value === undefined ? {} : this.value),
       };
-
-      if (newValue.dark !== undefined) {
-        newValue.dark = this.$route.params.theme === THEMES.DARK;
-      }
-
-      this.valueModel = newValue;
     }
   },
 };

@@ -1,4 +1,17 @@
-import TcText from './TcText.vue';
+import TcText, {
+  TC_TEXT_ALIGNMENTS,
+  TC_TEXT_DISPLAYS,
+  TC_TEXT_FAMILIES,
+  TC_TEXT_TRANSFORMS,
+  TC_TEXT_WEIGHTS,
+} from './TcText.vue';
 
-export { TcText };
+export {
+  TcText,
+  TC_TEXT_ALIGNMENTS,
+  TC_TEXT_DISPLAYS,
+  TC_TEXT_FAMILIES,
+  TC_TEXT_TRANSFORMS,
+  TC_TEXT_WEIGHTS,
+};
 export default TcText;

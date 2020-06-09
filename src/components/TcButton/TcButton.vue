@@ -17,12 +17,32 @@
 </template>
 
 <script>
-import themable from 'tc-components/mixins/themable';
-import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
-import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_TYPES } from 'tc-components/variables';
 import TcClickable from 'tc-components/components/TcClickable';
 import TcIcon from 'tc-components/components/TcIcon';
 import TcText from 'tc-components/components/TcText';
+import tcComponent from 'tc-components/mixins/tcComponent';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+
+export const TC_BUTTON_COLORS = {
+  DEFAULT: 'default',
+
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  STUDIO: 'studio',
+};
+
+export const TC_BUTTON_SIZES = {
+  DEFAULT: 'medium',
+
+  SMALL: 'small',
+  LARGE: 'large',
+};
+
+export const TC_BUTTON_TYPES = {
+  DEFAULT: 'plain',
+
+  OUTLINED: 'outlined',
+};
 
 export default {
   name: 'TcButton',
@@ -34,10 +54,10 @@ export default {
   },
 
   mixins: [
-    getBooleansMixin('color', BUTTON_COLORS),
-    getBooleansMixin('size', BUTTON_SIZES),
-    getBooleansMixin('type', BUTTON_TYPES),
-    themable,
+    tcComponent,
+    getBooleansMixin('color', TC_BUTTON_COLORS),
+    getBooleansMixin('size', TC_BUTTON_SIZES),
+    getBooleansMixin('type', TC_BUTTON_TYPES),
   ],
 
   props: {
@@ -84,7 +104,7 @@ export default {
       return this.to !== undefined;
     },
     isTextSmall() {
-      return this.size !== BUTTON_SIZES.LARGE;
+      return this.size !== TC_BUTTON_SIZES.LARGE;
     },
     rel() {
       return this.isLink ? 'noopener noreferrer' : undefined;

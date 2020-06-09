@@ -15,6 +15,7 @@
 <script>
 import TcClickable from 'tc-components/components/TcClickable';
 import TcText from 'tc-components/components/TcText';
+import tcComponent from 'tc-components/mixins/tcComponent';
 
 export default {
   name: 'TcNavigationButton',
@@ -25,6 +26,8 @@ export default {
     TcClickable,
     TcText,
   },
+
+  mixins: [tcComponent],
 
   props: {
     level: {
@@ -56,9 +59,6 @@ export default {
     },
     isLink() {
       return this.to !== undefined;
-    },
-    theme() {
-      return this.navigationDrawer.theme;
     },
     type() {
       return this.isLink ? 'link' : 'button';

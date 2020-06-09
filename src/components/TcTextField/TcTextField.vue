@@ -16,11 +16,12 @@
 </template>
 
 <script>
-import focusable from 'tc-components/mixins/focusable';
-import themable from 'tc-components/mixins/themable';
-import widthable from 'tc-components/mixins/widthable';
 import TcIcon from 'tc-components/components/TcIcon';
 import TcText from 'tc-components/components/TcText';
+import focusable from 'tc-components/mixins/focusable';
+import tcComponent from 'tc-components/mixins/tcComponent';
+import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
+import { FIELD_WIDTHS } from 'tc-components/variables';
 
 export default {
   name: 'TcTextField',
@@ -30,7 +31,7 @@ export default {
     TcText,
   },
 
-  mixins: [focusable, themable, widthable],
+  mixins: [tcComponent, focusable, getBooleansMixin('width', FIELD_WIDTHS)],
 
   props: {
     error: {
