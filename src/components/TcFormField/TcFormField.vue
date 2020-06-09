@@ -87,7 +87,7 @@ export default {
     },
     groupLabel: {
       default: undefined,
-      type: String,
+      type: [Function, String],
     },
     hint: {
       default: undefined,
@@ -101,7 +101,7 @@ export default {
     },
     itemLabel: {
       default: undefined,
-      type: String,
+      type: [Function, String],
     },
     items: {
       default: undefined,
@@ -109,7 +109,7 @@ export default {
     },
     itemValue: {
       default: undefined,
-      type: String,
+      type: [Function, String],
     },
     label: {
       default: undefined,
@@ -129,7 +129,7 @@ export default {
     },
     value: {
       default: undefined,
-      type: [Array, Number, String, Boolean],
+      type: [Array, Date, Function, Number, Object, String, Boolean],
     },
   },
 
