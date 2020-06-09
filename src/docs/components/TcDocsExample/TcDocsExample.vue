@@ -97,7 +97,7 @@ export default {
       }
 
       return Object.entries(this.options)
-        .filter(([key]) => key !== 'theme')
+        .filter(([key]) => key !== 'dark')
         .map(([key, options]) => {
           const formElement = {
             [_getDocsExampleEditorType(key, this.value, options.editor)]: true,
