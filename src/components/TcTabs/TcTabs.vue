@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       sliderStyle: {},
+      updateSliderStylePending: false,
     };
   },
 
@@ -61,7 +62,15 @@ export default {
 
   methods: {
     updateSliderStyle() {
+      if (this.updateSliderStylePending) {
+        return;
+      }
+
+      this.updateSliderStylePending = true;
+
       requestAnimationFrame(() => {
+        this.updateSliderStylePending = false;
+
         if (this.value === undefined) {
           return;
         }
