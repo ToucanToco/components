@@ -241,11 +241,11 @@ export default {
 
       this.updatePositionPending = true;
 
-      window.requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         this.updatePositionPending = false;
 
         if (!this.value) {
-          return undefined;
+          return;
         }
 
         const containerBounds = this.containerElement.getBoundingClientRect();

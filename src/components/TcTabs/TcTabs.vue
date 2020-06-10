@@ -63,7 +63,7 @@ export default {
     updateSliderStyle() {
       requestAnimationFrame(() => {
         if (this.value === undefined) {
-          return undefined;
+          return;
         }
         if (this.$el === undefined) {
           return this.updateSliderStyle();
