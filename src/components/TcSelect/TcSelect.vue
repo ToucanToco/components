@@ -4,16 +4,16 @@
     :class="elementClass"
     :id="id"
     @blur.native="blur($event)"
-    @click.prevent="open()"
+    @click.prevent="toggle()"
     @focus.native="focus($event)"
     @keydown.native.down.prevent="selectNext()"
     @keydown.native.up.prevent="selectPrev()"
-    @mousedown.native="preventToggle()"
+    @mousedown.native.prevent="focus($event)"
   >
     <TcText class="tc-select__value" :class="valueClass">{{ label }}</TcText>
     <TcIcon class="tc-select__icon" :label="icon" small />
-    <TcPopover bottom class="tc-select__popover" justify :value="isOpen">
-      <div class="tc-select__container" :class="containerClass">
+    <TcPopover bottom class="tc-select__popover" justify :no-position="isMobile" :value="isOpen">
+      <div class="tc-select__container" :class="containerClass" @mousedown.prevent>
         <TcTextField
           v-model="query"
           class="tc-select__input"
@@ -23,11 +23,11 @@
           @blur="close($event)"
           @focus="focus($event)"
           @keydown.down.prevent="highlightNext()"
-          @keydown.esc.prevent="close()"
           @keydown.tab.prevent="close()"
           @keydown.up.prevent="highlightPrev()"
-          @keypress.enter.prevent="selectHighlighted()"
+          @keypress.enter.prevent.stop="selectHighlighted()"
           @keypress.space="closeIfEmpty($event)"
+          @keyup.esc="close()"
         />
         <div class="tc-select__options">
           <template v-for="(option, index) in filteredOptions">
@@ -61,6 +61,7 @@ import focusable from 'tc-components/mixins/focusable';
 import tcComponent from 'tc-components/mixins/tcComponent';
 import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
 import getSelector from 'tc-components/utils/getSelector';
+import isMobile from 'tc-components/utils/isMobile';
 import normalize from 'tc-components/utils/normalize';
 import { FIELD_WIDTHS } from 'tc-components/variables';
 
@@ -124,7 +125,6 @@ export default {
     return {
       highlightedIndex: 0,
       isOpen: false,
-      openable: true,
       query: '',
     };
   },
@@ -165,6 +165,9 @@ export default {
 
           return filteredOptions;
         }, []);
+    },
+    isMobile() {
+      return isMobile();
     },
     label() {
       return this.selectedOption === undefined ? this.placeholder : this.selectedOption.label;
@@ -217,6 +220,10 @@ export default {
 
   methods: {
     close(e) {
+      if (!this.isOpen) {
+        return;
+      }
+
       this.isOpen = false;
       this.query = '';
 
@@ -231,6 +238,7 @@ export default {
     closeIfEmpty(e) {
       if (this.query === '') {
         e.preventDefault();
+        e.stopPropagation();
         this.close();
       }
     },
@@ -261,18 +269,15 @@ export default {
       }
     },
     async open() {
-      if (this.openable) {
-        this.isOpen = true;
+      if (this.isOpen) {
+        return;
+      }
 
+      this.isOpen = true;
+
+      if (!this.isMobile) {
         await this.$nextTick();
         this.$refs.input.triggerFocus();
-      } else {
-        this.openable = true;
-      }
-    },
-    preventToggle() {
-      if (this.isOpen) {
-        this.openable = false;
       }
     },
     select(option) {
@@ -292,6 +297,9 @@ export default {
     selectHighlighted() {
       this.select(this.filteredOptions[this.highlightedIndex]);
     },
+    toggle() {
+      this.isOpen ? this.close() : this.open();
+    },
   },
 };
 </script>
@@ -310,6 +318,20 @@ export default {
     box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
       inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey-light-2,
       $tc-box-shadow--select-below;
+  }
+}
+
+.tc-popover--position-none {
+  background-color: rgba($tc-color--black, $tc-opacity--overlay);
+  box-sizing: border-box;
+  left: 0;
+  height: 100%;
+  padding: $tc-spacing--container;
+  top: 0;
+  width: 100%;
+
+  .tc-select__container {
+    box-shadow: $tc-box-shadow--select-below;
   }
 }
 
@@ -386,30 +408,32 @@ export default {
 .tc-select__container {
   display: flex;
   flex-direction: column;
-  z-index: $tc-z-index--select;
+  max-height: 100%;
 }
 
 .tc-select__container--theme-dark {
   background-color: $tc-color--black;
 
+  .tc-select__group,
   .tc-select__option {
     color: $tc-color--white;
+  }
 
-    &.is-highlighted {
-      background-color: $tc-color--black;
-    }
+  .tc-select__option.is-highlighted {
+    background-color: $tc-color--black;
   }
 }
 
 .tc-select__container--theme-light {
   background-color: $tc-color--white;
 
+  .tc-select__group,
   .tc-select__option {
     color: $tc-color--black;
+  }
 
-    &.is-highlighted {
-      background-color: $tc-color--white;
-    }
+  .tc-select__option.is-highlighted {
+    background-color: $tc-color--white;
   }
 }
 
@@ -427,6 +451,7 @@ export default {
 }
 
 .tc-select__input {
+  flex-shrink: 0;
   margin: $tc-spacing--button-large - $tc-spacing--input-narrow;
 }
 
@@ -448,9 +473,14 @@ export default {
   }
 }
 
+.tc-select__options {
+  overflow: auto;
+}
+
 .tc-select__popover {
   position: fixed;
   visibility: hidden;
+  z-index: $tc-z-index--select;
 
   &.is-active {
     visibility: visible;

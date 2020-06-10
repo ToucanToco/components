@@ -40,6 +40,10 @@ export default {
       },
       type: [HTMLElement, String],
     },
+    noPosition: {
+      default: false,
+      type: Boolean,
+    },
     value: {
       default: false,
       type: Boolean,
@@ -66,39 +70,44 @@ export default {
     },
     elementClass() {
       return {
-        [`tc-popover--position-${this.computedPosition}`]: true,
+        [`tc-popover--position-${this.noPosition ? 'none' : this.computedPosition}`]: true,
         'is-active': this.value,
       };
     },
   },
 
   watch: {
-    align() {
-      if (this.value) {
-        this.updatePositionThrottled();
-      }
-    },
     containerElement() {
       this.moveToContainer();
     },
-    position() {
+  },
+
+  created() {
+    if (this.noPosition) {
+      return;
+    }
+
+    this.computedPosition = this.position;
+    this.updatePositionThrottled = throttle(this.updatePosition, 16); // 60fps
+
+    this.$watch('align', () => {
       if (this.value) {
         this.updatePositionThrottled();
       }
-    },
-    value(value) {
+    });
+    this.$watch('position', () => {
+      if (this.value) {
+        this.updatePositionThrottled();
+      }
+    });
+    this.$watch('value', (value) => {
       if (value) {
         this.updatePositionThrottled();
         this.addListeners();
       } else {
         this.removeListeners();
       }
-    },
-  },
-
-  created() {
-    this.computedPosition = this.position;
-    this.updatePositionThrottled = throttle(this.updatePosition, 16); // 60fps
+    });
   },
 
   mounted() {
@@ -109,7 +118,9 @@ export default {
   },
 
   beforeDestroy() {
-    this.removeListeners();
+    if (!this.noPosition) {
+      this.removeListeners();
+    }
     if (this.$el.parentElement !== null) {
       this.$el.parentElement.removeChild(this.$el);
     }

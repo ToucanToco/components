@@ -4,11 +4,12 @@
       <input
         :id="id"
         ref="input"
-        v-model="valueModel"
         class="tc-text-field__input"
         :placeholder="placeholder"
+        :value="value"
         @blur="blur($event)"
         @focus="focus($event)"
+        @input="updateValue($event.target.value)"
         @keydown="keydown($event)"
         @keypress="keypress($event)"
         @keyup="keyup($event)"
@@ -73,14 +74,6 @@ export default {
     hasIcon() {
       return this.icon !== undefined;
     },
-    valueModel: {
-      get() {
-        return this.value;
-      },
-      set(value) {
-        this.$emit('input', value);
-      },
-    },
   },
 
   methods: {
@@ -95,6 +88,9 @@ export default {
     },
     triggerFocus() {
       this.$refs.input.focus();
+    },
+    updateValue(value) {
+      this.$emit('input', value);
     },
   },
 };
