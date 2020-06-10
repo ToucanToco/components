@@ -12,7 +12,14 @@
   >
     <TcText class="tc-select__value" :class="valueClass">{{ label }}</TcText>
     <TcIcon class="tc-select__icon" :label="icon" small />
-    <TcPopover bottom class="tc-select__popover" justify :no-position="isMobile" :value="isOpen">
+    <TcPopover
+      bottom
+      class="tc-select__popover"
+      justify
+      :no-position="isMobile"
+      :value="isOpen"
+      @click.native.self.prevent="close()"
+    >
       <div class="tc-select__container" :class="containerClass" @mousedown.prevent>
         <TcTextField
           v-model="query"
