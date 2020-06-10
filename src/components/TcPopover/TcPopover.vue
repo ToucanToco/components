@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import throttle from 'lodash/throttle';
-
 import tcComponent from 'tc-components/mixins/tcComponent';
 import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
 
@@ -54,6 +52,7 @@ export default {
     return {
       computedPosition: undefined,
       elementStyle: undefined,
+      updatePositionPending: false,
     };
   },
 
@@ -88,21 +87,20 @@ export default {
     }
 
     this.computedPosition = this.position;
-    this.updatePositionThrottled = throttle(this.updatePosition, 16); // 60fps
 
     this.$watch('align', () => {
       if (this.value) {
-        this.updatePositionThrottled();
+        this.updatePosition();
       }
     });
     this.$watch('position', () => {
       if (this.value) {
-        this.updatePositionThrottled();
+        this.updatePosition();
       }
     });
     this.$watch('value', (value) => {
       if (value) {
-        this.updatePositionThrottled();
+        this.updatePosition();
         this.addListeners();
       } else {
         this.removeListeners();
@@ -128,10 +126,10 @@ export default {
 
   methods: {
     addListeners() {
-      window.addEventListener('orientationchange', this.updatePositionListener);
-      window.addEventListener('resize', this.updatePositionListener);
+      window.addEventListener('orientationchange', this.updatePosition);
+      window.addEventListener('resize', this.updatePosition);
       this.parents.forEach((parent) => {
-        parent.addEventListener('scroll', this.updatePositionListener);
+        parent.addEventListener('scroll', this.updatePosition);
       });
     },
     alignCenter(containerBounds, parentBounds) {
@@ -226,59 +224,66 @@ export default {
 
       if (this.value) {
         this.addListeners();
-        this.updatePositionThrottled();
+        this.updatePosition();
       }
     },
     removeListeners() {
-      window.removeEventListener('orientationchange', this.updatePositionListener);
-      window.removeEventListener('resize', this.updatePositionListener);
+      window.removeEventListener('orientationchange', this.updatePosition);
+      window.removeEventListener('resize', this.updatePosition);
       this.parents.forEach((parent) => {
-        parent.removeEventListener('scroll', this.updatePositionListener);
+        parent.removeEventListener('scroll', this.updatePosition);
       });
     },
     updatePosition() {
-      if (!this.value) {
-        return undefined;
+      if (this.updatePositionPending) {
+        return;
       }
 
-      const containerBounds = this.containerElement.getBoundingClientRect();
-      const parentBounds = this.parent.getBoundingClientRect();
+      this.updatePositionPending = true;
 
-      // Set alignment
-      const elementStyle = this.alignMethod(containerBounds, parentBounds);
+      window.requestAnimationFrame(() => {
+        this.updatePositionPending = false;
 
-      const parentTop = parentBounds.top - containerBounds.top;
-      const topAbove = parentTop - this.$el.offsetHeight;
-      const topBelow = parentTop + parentBounds.height;
-      let position;
-      let top;
-
-      if (this.bottom) {
-        // Not enough space below and enough space above
-        if (topBelow + this.$el.offsetHeight > window.innerHeight && topAbove >= 0) {
-          position = TC_POPOVER_POSITIONS.DEFAULT;
-          top = topAbove;
-        } else {
-          position = TC_POPOVER_POSITIONS.BOTTOM;
-          top = topBelow;
+        if (!this.value) {
+          return undefined;
         }
-      } else {
-        // Not enough space above and enough space below
-        if (topAbove < 0 && topBelow + this.$el.offsetHeight <= window.innerHeight) {
-          position = TC_POPOVER_POSITIONS.BOTTOM;
-          top = topBelow;
-        } else {
-          position = TC_POPOVER_POSITIONS.DEFAULT;
-          top = topAbove;
-        }
-      }
 
-      elementStyle.top = `${top}px`;
-      this.elementStyle = elementStyle;
-      this.computedPosition = position;
-    },
-    updatePositionListener() {
-      this.updatePositionThrottled();
+        const containerBounds = this.containerElement.getBoundingClientRect();
+        const parentBounds = this.parent.getBoundingClientRect();
+
+        // Set alignment
+        const elementStyle = this.alignMethod(containerBounds, parentBounds);
+
+        const parentTop = parentBounds.top - containerBounds.top;
+        const topAbove = parentTop - this.$el.offsetHeight;
+        const topBelow = parentTop + parentBounds.height;
+        let position;
+        let top;
+
+        if (this.bottom) {
+          // Not enough space below and enough space above
+          if (topBelow + this.$el.offsetHeight > window.innerHeight && topAbove >= 0) {
+            position = TC_POPOVER_POSITIONS.DEFAULT;
+            top = topAbove;
+          } else {
+            position = TC_POPOVER_POSITIONS.BOTTOM;
+            top = topBelow;
+          }
+        } else {
+          // Not enough space above and enough space below
+          if (topAbove < 0 && topBelow + this.$el.offsetHeight <= window.innerHeight) {
+            position = TC_POPOVER_POSITIONS.BOTTOM;
+            top = topBelow;
+          } else {
+            position = TC_POPOVER_POSITIONS.DEFAULT;
+            top = topAbove;
+          }
+        }
+
+        elementStyle.top = `${top}px`;
+        this.elementStyle = elementStyle;
+        this.computedPosition = position;
+      });
     },
   },
 };
