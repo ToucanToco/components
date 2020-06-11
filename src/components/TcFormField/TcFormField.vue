@@ -230,26 +230,20 @@ export default {
 .tc-form-field {
   display: flex;
   flex-direction: column;
-
-  &.is-focused {
-    .tc-form-field__label {
-      color: $tc-color--studio;
-    }
-  }
 }
 
-.tc-form-field--theme-dark {
-  .tc-form-field__label,
-  .tc-form-field__message--type-info {
-    color: $tc-color--white;
-  }
+.tc-form-field.is-focused .tc-form-field__label {
+  color: $tc-color--studio;
 }
 
-.tc-form-field--theme-light {
-  .tc-form-field__label,
-  .tc-form-field__message--type-info {
-    color: $tc-color--black;
-  }
+.tc-form-field--theme-dark .tc-form-field__label,
+.tc-form-field--theme-dark .tc-form-field__message--type-info {
+  color: $tc-color--white;
+}
+
+.tc-form-field--theme-light .tc-form-field__label,
+.tc-form-field--theme-light .tc-form-field__message--type-info {
+  color: $tc-color--black;
 }
 
 .tc-form-field__header {

@@ -203,45 +203,43 @@ export default {
 
 .tc-docs-example--theme-dark {
   background-color: $tc-color--grey-dark;
+}
 
-  .tc-docs-example__action {
-    color: $tc-color--grey-light-1;
+.tc-docs-example--theme-dark .tc-docs-example__action {
+  color: $tc-color--grey-light-1;
+}
 
-    &:focus,
-    &:hover {
-      color: $tc-color--white;
-    }
-  }
+.tc-docs-example--theme-dark .tc-docs-example__action:focus,
+.tc-docs-example--theme-dark .tc-docs-example__action:hover {
+  color: $tc-color--white;
+}
 
-  .tc-docs-example__body,
-  .tc-docs-example__options {
-    background-color: $tc-color--black;
-  }
+.tc-docs-example--theme-dark .tc-docs-example__body,
+.tc-docs-example--theme-dark .tc-docs-example__options {
+  background-color: $tc-color--black;
 }
 
 .tc-docs-example--theme-light {
   background-color: $tc-color--grey-light-2;
-
-  .tc-docs-example__action {
-    color: $tc-color--grey;
-
-    &:focus,
-    &:hover {
-      color: $tc-color--black;
-    }
-  }
-
-  .tc-docs-example__body,
-  .tc-docs-example__options {
-    background-color: $tc-color--white;
-  }
 }
 
-.tc-docs-example--type-center {
-  .tc-docs-example__body {
-    align-items: center;
-    justify-content: center;
-  }
+.tc-docs-example--theme-light .tc-docs-example__action {
+  color: $tc-color--grey;
+}
+
+.tc-docs-example--theme-light .tc-docs-example__action:focus,
+.tc-docs-example--theme-light .tc-docs-example__action:hover {
+  color: $tc-color--black;
+}
+
+.tc-docs-example--theme-light .tc-docs-example__body,
+.tc-docs-example--theme-light .tc-docs-example__options {
+  background-color: $tc-color--white;
+}
+
+.tc-docs-example--type-center .tc-docs-example__body {
+  align-items: center;
+  justify-content: center;
 }
 
 .tc-docs-example__action {

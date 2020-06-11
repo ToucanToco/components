@@ -59,12 +59,10 @@ export default {
   display: flex;
   flex-direction: column;
   margin-bottom: $tc-size--separator;
+}
 
-  &.is-active {
-    .tc-navigation-section__body {
-      display: flex;
-    }
-  }
+.tc-navigation-section.is-active .tc-navigation-section__body {
+  display: flex;
 }
 
 .tc-navigation-section--theme-dark {

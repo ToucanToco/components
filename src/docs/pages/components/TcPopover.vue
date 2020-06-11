@@ -52,11 +52,11 @@ export default {
 }
 
 .tc-docs-page-popover__popover {
-  position: absolute;
+  position: fixed;
   visibility: hidden;
+}
 
-  &.is-active {
-    visibility: visible;
-  }
+.tc-docs-page-popover__popover.is-active {
+  visibility: visible;
 }
 </style>

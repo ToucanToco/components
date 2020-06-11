@@ -98,63 +98,52 @@ export default {
   align-items: center;
   display: flex;
   justify-content: space-between;
-
-  &.is-focused {
-    .tc-switch__label {
-      color: $tc-color--studio;
-    }
-  }
-
-  &.is-on {
-    .tc-switch__switch::before {
-      box-shadow: inset $tc-width--switch-track - $tc-size--switch-thumb * 0.5 0 0 0
-        $tc-color--studio;
-    }
-
-    .tc-switch__switch::after {
-      transform: translateX(0);
-    }
-  }
 }
 
-.tc-switch--theme-dark {
-  &.is-on:not(.is-focused) {
-    .tc-switch__label--position-left.tc-switch__label--type-off {
-      color: $tc-color--grey-light-1;
-    }
-
-    .tc-switch__label--position-right {
-      color: $tc-color--white;
-    }
-  }
-
-  .tc-switch__label--position-left {
-    color: $tc-color--white;
-  }
-
-  .tc-switch__label--position-right {
-    color: $tc-color--grey-light-1;
-  }
+.tc-switch.is-focused .tc-switch__label {
+  color: $tc-color--studio;
 }
 
-.tc-switch--theme-light {
-  &.is-on:not(.is-focused) {
-    .tc-switch__label--position-left.tc-switch__label--type-off {
-      color: $tc-color--grey;
-    }
+.tc-switch.is-on .tc-switch__switch::before {
+  box-shadow: inset $tc-width--switch-track - $tc-size--switch-thumb * 0.5 0 0 0 $tc-color--studio;
+}
 
-    .tc-switch__label--position-right {
-      color: $tc-color--black;
-    }
-  }
+.tc-switch.is-on .tc-switch__switch::after {
+  transform: translateX(0);
+}
 
-  .tc-switch__label--position-left {
-    color: $tc-color--black;
-  }
+.tc-switch--theme-dark.is-on:not(.is-focused)
+  .tc-switch__label--position-left.tc-switch__label--type-off {
+  color: $tc-color--grey-light-1;
+}
 
-  .tc-switch__label--position-right {
-    color: $tc-color--grey;
-  }
+.tc-switch--theme-dark.is-on:not(.is-focused) .tc-switch__label--position-right {
+  color: $tc-color--white;
+}
+
+.tc-switch--theme-dark .tc-switch__label--position-left {
+  color: $tc-color--white;
+}
+
+.tc-switch--theme-dark .tc-switch__label--position-right {
+  color: $tc-color--grey-light-1;
+}
+
+.tc-switch--theme-light.is-on:not(.is-focused)
+  .tc-switch__label--position-left.tc-switch__label--type-off {
+  color: $tc-color--grey;
+}
+
+.tc-switch--theme-light.is-on:not(.is-focused) .tc-switch__label--position-right {
+  color: $tc-color--black;
+}
+
+.tc-switch--theme-light .tc-switch__label--position-left {
+  color: $tc-color--black;
+}
+
+.tc-switch--theme-light .tc-switch__label--position-right {
+  color: $tc-color--grey;
 }
 
 .tc-switch__input {

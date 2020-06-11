@@ -75,36 +75,26 @@ export default {
 
 .tc-tab {
   position: relative;
-
-  &.is-focused {
-    .tc-tab__label {
-      color: $tc-color--studio;
-    }
-  }
 }
 
-.tc-tab--theme-dark {
-  .tc-tab__label {
-    color: $tc-color--grey-light-1;
-  }
-
-  &.is-active:not(.is-focused) {
-    .tc-tab__label {
-      color: $tc-color--white;
-    }
-  }
+.tc-tab.is-focused .tc-tab__label {
+  color: $tc-color--studio;
 }
 
-.tc-tab--theme-light {
-  .tc-tab__label {
-    color: $tc-color--grey;
-  }
+.tc-tab--theme-dark .tc-tab__label {
+  color: $tc-color--grey-light-1;
+}
 
-  &.is-active:not(.is-focused) {
-    .tc-tab__label {
-      color: $tc-color--black;
-    }
-  }
+.tc-tab--theme-dark.is-active:not(.is-focused) .tc-tab__label {
+  color: $tc-color--white;
+}
+
+.tc-tab--theme-light .tc-tab__label {
+  color: $tc-color--grey;
+}
+
+.tc-tab--theme-light.is-active:not(.is-focused) .tc-tab__label {
+  color: $tc-color--black;
 }
 
 .tc-tab__input {

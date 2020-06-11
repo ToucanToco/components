@@ -123,104 +123,94 @@ export default {
   right: 0;
   top: 0;
   z-index: $tc-z-index--dialog;
-
-  &.is-scrollable {
-    .tc-dialog__body {
-      padding-top: $tc-size--separator;
-    }
-
-    .tc-dialog__body::before {
-      content: '';
-      flex-shrink: 0;
-      height: $tc-size--separator;
-      margin-left: $tc-spacing--container;
-      margin-right: $tc-spacing--container;
-      position: sticky;
-      top: 0;
-    }
-
-    .tc-dialog__footer {
-      box-shadow: $tc-box-shadow--overflow;
-    }
-  }
 }
 
-.tc-dialog--theme-dark {
-  &.is-scrollable {
-    .tc-dialog__body::before {
-      background-color: $tc-color--grey-dark;
-    }
-  }
-
-  .tc-dialog__close {
-    color: $tc-color--white;
-    margin-bottom: $tc-spacing--container-large - $tc-spacing--container-small;
-    margin-top: $tc-spacing--container-small - $tc-spacing--container-large;
-  }
-
-  .tc-dialog__container {
-    background-color: $tc-color--black;
-  }
-
-  .tc-dialog__content {
-    padding-left: $tc-spacing--container-large;
-    padding-right: $tc-spacing--container-large;
-  }
-
-  .tc-dialog__footer {
-    padding-bottom: $tc-spacing--container-large;
-    padding-left: $tc-spacing--container-large - $tc-spacing--actions * 0.5;
-    padding-right: $tc-spacing--container-large - $tc-spacing--actions * 0.5;
-  }
-
-  .tc-dialog__header {
-    padding-left: $tc-spacing--container-large;
-    padding-right: $tc-spacing--container-small;
-    padding-top: $tc-spacing--container-large;
-  }
-
-  .tc-dialog__label {
-    color: $tc-color--white;
-  }
+.tc-dialog.is-scrollable .tc-dialog__body {
+  padding-top: $tc-size--separator;
 }
 
-.tc-dialog--theme-light {
-  &.is-scrollable {
-    .tc-dialog__body::before {
-      background-color: $tc-color--grey-light-3;
-    }
-  }
+.tc-dialog.is-scrollable .tc-dialog__body::before {
+  content: '';
+  flex-shrink: 0;
+  height: $tc-size--separator;
+  margin-left: $tc-spacing--container;
+  margin-right: $tc-spacing--container;
+  position: sticky;
+  top: 0;
+}
 
-  .tc-dialog__close {
-    color: $tc-color--black;
-  }
+.tc-dialog.is-scrollable .tc-dialog__footer {
+  box-shadow: $tc-box-shadow--overflow;
+}
 
-  .tc-dialog__container {
-    background-color: $tc-color--white;
-    border-radius: $tc-border-radius--large;
-  }
+.tc-dialog--theme-dark.is-scrollable .tc-dialog__body::before {
+  background-color: $tc-color--grey-dark;
+}
 
-  .tc-dialog__content {
-    padding-left: $tc-spacing--container;
-    padding-right: $tc-spacing--container;
-  }
+.tc-dialog--theme-dark .tc-dialog__close {
+  color: $tc-color--white;
+  margin-bottom: $tc-spacing--container-large - $tc-spacing--container-small;
+  margin-top: $tc-spacing--container-small - $tc-spacing--container-large;
+}
 
-  .tc-dialog__footer {
-    padding: $tc-spacing--actions $tc-spacing--container - $tc-spacing--actions * 0.5;
-  }
+.tc-dialog--theme-dark .tc-dialog__container {
+  background-color: $tc-color--black;
+}
 
-  .tc-dialog__footer /deep/ > :only-child {
-    margin-bottom: $tc-spacing--container - $tc-spacing--actions;
-    margin-top: $tc-spacing--container - $tc-spacing--actions;
-  }
+.tc-dialog--theme-dark .tc-dialog__content {
+  padding-left: $tc-spacing--container-large;
+  padding-right: $tc-spacing--container-large;
+}
 
-  .tc-dialog__header {
-    padding: $tc-spacing--container;
-  }
+.tc-dialog--theme-dark .tc-dialog__footer {
+  padding-bottom: $tc-spacing--container-large;
+  padding-left: $tc-spacing--container-large - $tc-spacing--actions * 0.5;
+  padding-right: $tc-spacing--container-large - $tc-spacing--actions * 0.5;
+}
 
-  .tc-dialog__label {
-    color: $tc-color--black;
-  }
+.tc-dialog--theme-dark .tc-dialog__header {
+  padding-left: $tc-spacing--container-large;
+  padding-right: $tc-spacing--container-small;
+  padding-top: $tc-spacing--container-large;
+}
+
+.tc-dialog--theme-dark .tc-dialog__label {
+  color: $tc-color--white;
+}
+
+.tc-dialog--theme-light.is-scrollable .tc-dialog__body::before {
+  background-color: $tc-color--grey-light-3;
+}
+
+.tc-dialog--theme-light .tc-dialog__close {
+  color: $tc-color--black;
+}
+
+.tc-dialog--theme-light .tc-dialog__container {
+  background-color: $tc-color--white;
+  border-radius: $tc-border-radius--large;
+}
+
+.tc-dialog--theme-light .tc-dialog__content {
+  padding-left: $tc-spacing--container;
+  padding-right: $tc-spacing--container;
+}
+
+.tc-dialog--theme-light .tc-dialog__footer {
+  padding: $tc-spacing--actions $tc-spacing--container - $tc-spacing--actions * 0.5;
+}
+
+.tc-dialog--theme-light .tc-dialog__footer /deep/ > :only-child {
+  margin-bottom: $tc-spacing--container - $tc-spacing--actions;
+  margin-top: $tc-spacing--container - $tc-spacing--actions;
+}
+
+.tc-dialog--theme-light .tc-dialog__header {
+  padding: $tc-spacing--container;
+}
+
+.tc-dialog--theme-light .tc-dialog__label {
+  color: $tc-color--black;
 }
 
 .tc-dialog__body {

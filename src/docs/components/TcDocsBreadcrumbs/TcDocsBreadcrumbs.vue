@@ -48,18 +48,14 @@ export default {
   display: flex;
 }
 
-.tc-docs-breadcrumbs--theme-dark {
-  .tc-docs-breadcrumbs__link:focus,
-  .tc-docs-breadcrumbs__link:hover {
-    color: $tc-color--white;
-  }
+.tc-docs-breadcrumbs--theme-dark .tc-docs-breadcrumbs__link:focus,
+.tc-docs-breadcrumbs--theme-dark .tc-docs-breadcrumbs__link:hover {
+  color: $tc-color--white;
 }
 
-.tc-docs-breadcrumbs--theme-light {
-  .tc-docs-breadcrumbs__link:focus,
-  .tc-docs-breadcrumbs__link:hover {
-    color: $tc-color--black;
-  }
+.tc-docs-breadcrumbs--theme-light .tc-docs-breadcrumbs__link:focus,
+.tc-docs-breadcrumbs--theme-light .tc-docs-breadcrumbs__link:hover {
+  color: $tc-color--black;
 }
 
 .tc-docs-breadcrumbs__item {

@@ -90,59 +90,47 @@ export default {
 .tc-radio {
   align-items: center;
   display: flex;
-
-  &.is-checked {
-    .tc-radio__icon {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  &.is-focused {
-    .tc-radio__box {
-      border-color: $tc-color--studio;
-    }
-
-    .tc-radio__label {
-      color: $tc-color--studio;
-    }
-  }
 }
 
-.tc-radio--theme-dark {
-  &:not(.is-focused).is-sibling-checked {
-    .tc-radio__box {
-      background-color: $tc-color--grey-light-1;
-    }
-
-    .tc-radio__label {
-      color: $tc-color--grey-light-1;
-    }
-  }
-
-  .tc-radio__box {
-    background-color: $tc-color--white;
-  }
-
-  .tc-radio__label {
-    color: $tc-color--white;
-  }
+.tc-radio.is-checked .tc-radio__icon {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.tc-radio--theme-light {
-  &:not(.is-focused).is-sibling-checked {
-    .tc-radio__box {
-      border-color: $tc-color--grey;
-    }
+.tc-radio.is-focused .tc-radio__box {
+  border-color: $tc-color--studio;
+}
 
-    .tc-radio__label {
-      color: $tc-color--grey;
-    }
-  }
+.tc-radio.is-focused .tc-radio__label {
+  color: $tc-color--studio;
+}
 
-  .tc-radio__label {
-    color: $tc-color--black;
-  }
+.tc-radio--theme-dark:not(.is-focused).is-sibling-checked .tc-radio__box {
+  background-color: $tc-color--grey-light-1;
+}
+
+.tc-radio--theme-dark:not(.is-focused).is-sibling-checked .tc-radio__label {
+  color: $tc-color--grey-light-1;
+}
+
+.tc-radio--theme-dark .tc-radio__box {
+  background-color: $tc-color--white;
+}
+
+.tc-radio--theme-dark .tc-radio__label {
+  color: $tc-color--white;
+}
+
+.tc-radio--theme-light:not(.is-focused).is-sibling-checked .tc-radio__box {
+  border-color: $tc-color--grey;
+}
+
+.tc-radio--theme-light:not(.is-focused).is-sibling-checked .tc-radio__label {
+  color: $tc-color--grey;
+}
+
+.tc-radio--theme-light .tc-radio__label {
+  color: $tc-color--black;
 }
 
 .tc-radio__box {

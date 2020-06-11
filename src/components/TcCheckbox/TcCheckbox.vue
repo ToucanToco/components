@@ -79,39 +79,31 @@ export default {
 .tc-checkbox {
   align-items: center;
   display: flex;
-
-  &.is-checked {
-    .tc-checkbox__icon {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  &.is-focused {
-    .tc-checkbox__box {
-      border-color: $tc-color--studio;
-    }
-
-    .tc-checkbox__label {
-      color: $tc-color--studio;
-    }
-  }
 }
 
-.tc-checkbox--theme-dark {
-  .tc-checkbox__box {
-    background-color: $tc-color--white;
-  }
-
-  .tc-checkbox__label {
-    color: $tc-color--white;
-  }
+.tc-checkbox.is-checked .tc-checkbox__icon {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.tc-checkbox--theme-light {
-  .tc-checkbox__label {
-    color: $tc-color--black;
-  }
+.tc-checkbox.is-focused .tc-checkbox__box {
+  border-color: $tc-color--studio;
+}
+
+.tc-checkbox.is-focused .tc-checkbox__label {
+  color: $tc-color--studio;
+}
+
+.tc-checkbox--theme-dark .tc-checkbox__box {
+  background-color: $tc-color--white;
+}
+
+.tc-checkbox--theme-dark .tc-checkbox__label {
+  color: $tc-color--white;
+}
+
+.tc-checkbox--theme-light .tc-checkbox__label {
+  color: $tc-color--black;
 }
 
 .tc-checkbox__box {

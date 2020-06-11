@@ -358,36 +358,32 @@ export default {
   flex-direction: column;
 }
 
-.tc-docs-api-component--theme-dark {
-  .tc-docs-api-component__body {
-    background-color: $tc-color--grey-dark;
-  }
-
-  .tc-docs-api-component__item {
-    background-color: $tc-color--black;
-  }
-
-  .tc-docs-api-component__prop--type-default,
-  .tc-docs-api-component__prop--type-description,
-  .tc-docs-api-component__prop--type-type {
-    color: $tc-color--white;
-  }
+.tc-docs-api-component--theme-dark .tc-docs-api-component__body {
+  background-color: $tc-color--grey-dark;
 }
 
-.tc-docs-api-component--theme-light {
-  .tc-docs-api-component__body {
-    background-color: $tc-color--grey-light-2;
-  }
+.tc-docs-api-component--theme-dark .tc-docs-api-component__item {
+  background-color: $tc-color--black;
+}
 
-  .tc-docs-api-component__item {
-    background-color: $tc-color--white;
-  }
+.tc-docs-api-component--theme-dark .tc-docs-api-component__prop--type-default,
+.tc-docs-api-component--theme-dark .tc-docs-api-component__prop--type-description,
+.tc-docs-api-component--theme-dark .tc-docs-api-component__prop--type-type {
+  color: $tc-color--white;
+}
 
-  .tc-docs-api-component__prop--type-default,
-  .tc-docs-api-component__prop--type-description,
-  .tc-docs-api-component__prop--type-type {
-    color: $tc-color--black;
-  }
+.tc-docs-api-component--theme-light .tc-docs-api-component__body {
+  background-color: $tc-color--grey-light-2;
+}
+
+.tc-docs-api-component--theme-light .tc-docs-api-component__item {
+  background-color: $tc-color--white;
+}
+
+.tc-docs-api-component--theme-light .tc-docs-api-component__prop--type-default,
+.tc-docs-api-component--theme-light .tc-docs-api-component__prop--type-description,
+.tc-docs-api-component--theme-light .tc-docs-api-component__prop--type-type {
+  color: $tc-color--black;
 }
 
 .tc-docs-api-component__body {

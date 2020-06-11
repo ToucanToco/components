@@ -351,18 +351,16 @@ export default {
 <style lang="scss" scoped>
 @import 'tc-components/variables';
 
-.tc-popover--position-bottom {
-  .tc-select__container--theme-dark {
-    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
-      inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey,
-      $tc-box-shadow--select-below;
-  }
+.tc-popover--position-bottom .tc-select__container--theme-dark {
+  box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
+    inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey,
+    $tc-box-shadow--select-below;
+}
 
-  .tc-select__container--theme-light {
-    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
-      inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey-light-2,
-      $tc-box-shadow--select-below;
-  }
+.tc-popover--position-bottom .tc-select__container--theme-light {
+  box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
+    inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey-light-2,
+    $tc-box-shadow--select-below;
 }
 
 .tc-popover--position-none {
@@ -373,24 +371,22 @@ export default {
   padding: $tc-spacing--container;
   top: 0;
   width: 100%;
-
-  .tc-select__container {
-    box-shadow: $tc-box-shadow--select-below;
-  }
 }
 
-.tc-popover--position-top {
-  .tc-select__container--theme-dark {
-    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
-      inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey,
-      $tc-box-shadow--select-above;
-  }
+.tc-popover--position-none .tc-select__container {
+  box-shadow: $tc-box-shadow--select-below;
+}
 
-  .tc-select__container--theme-light {
-    box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
-      inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey-light-2,
-      $tc-box-shadow--select-above;
-  }
+.tc-popover--position-top .tc-select__container--theme-dark {
+  box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
+    inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey,
+    $tc-box-shadow--select-above;
+}
+
+.tc-popover--position-top .tc-select__container--theme-light {
+  box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
+    inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey-light-2,
+    $tc-box-shadow--select-above;
 }
 
 .tc-select {
@@ -400,10 +396,10 @@ export default {
   cursor: pointer;
   display: flex;
   outline: none;
+}
 
-  &.is-error {
-    border-color: $tc-color--warning;
-  }
+.tc-select.is-error {
+  border-color: $tc-color--warning;
 }
 
 .tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined,
@@ -411,15 +407,28 @@ export default {
 .tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined,
 .tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined {
   border-color: $tc-color--white;
+}
 
-  &.is-focused {
-    border-color: $tc-color--emphasis;
-  }
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined.is-focused,
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-underlined.is-focused,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined.is-focused,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined.is-focused {
+  border-color: $tc-color--emphasis;
+}
 
-  .tc-select__icon,
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined .tc-select__icon,
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined
+  .tc-select__value--type-label,
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-underlined .tc-select__icon,
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-underlined
+  .tc-select__value--type-label,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined .tc-select__icon,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined
+  .tc-select__value--type-label,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined .tc-select__icon,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined
   .tc-select__value--type-label {
-    color: $tc-color--white;
-  }
+  color: $tc-color--white;
 }
 
 .tc-select--color-default.tc-select--theme-light.tc-select--type-outlined,
@@ -427,15 +436,28 @@ export default {
 .tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined,
 .tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined {
   border-color: $tc-color--black;
+}
 
-  &.is-focused {
-    border-color: $tc-color--emphasis;
-  }
+.tc-select--color-default.tc-select--theme-light.tc-select--type-outlined.is-focused,
+.tc-select--color-default.tc-select--theme-light.tc-select--type-underlined.is-focused,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined.is-focused,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined.is-focused {
+  border-color: $tc-color--emphasis;
+}
 
-  .tc-select__icon,
+.tc-select--color-default.tc-select--theme-light.tc-select--type-outlined .tc-select__icon,
+.tc-select--color-default.tc-select--theme-light.tc-select--type-outlined
+  .tc-select__value--type-label,
+.tc-select--color-default.tc-select--theme-light.tc-select--type-underlined .tc-select__icon,
+.tc-select--color-default.tc-select--theme-light.tc-select--type-underlined
+  .tc-select__value--type-label,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined .tc-select__icon,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined
+  .tc-select__value--type-label,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined .tc-select__icon,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined
   .tc-select__value--type-label {
-    color: $tc-color--black;
-  }
+  color: $tc-color--black;
 }
 
 .tc-select--size-large.tc-select--type-outlined {
@@ -452,58 +474,58 @@ export default {
 
 .tc-select--theme-dark.tc-select--type-input {
   border-color: $tc-color--grey;
+}
 
-  .tc-select__icon,
-  .tc-select__value--type-label {
-    color: $tc-color--white;
-  }
+.tc-select--theme-dark.tc-select--type-input .tc-select__icon,
+.tc-select--theme-dark.tc-select--type-input .tc-select__value--type-label {
+  color: $tc-color--white;
 }
 
 .tc-select--theme-light.tc-select--type-input {
   border-color: $tc-color--grey-light-2;
+}
 
-  .tc-select__icon,
-  .tc-select__value--type-label {
-    color: $tc-color--black;
-  }
+.tc-select--theme-light.tc-select--type-input .tc-select__icon,
+.tc-select--theme-light.tc-select--type-input .tc-select__value--type-label {
+  color: $tc-color--black;
 }
 
 .tc-select--type-input {
   border-width: $tc-border-width--input;
   padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
   padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+}
 
-  &.is-focused {
-    border-color: $tc-color--studio;
-  }
+.tc-select--type-input.is-focused {
+  border-color: $tc-color--studio;
 }
 
 .tc-select--type-input.tc-select--width-narrow {
   padding-left: $tc-spacing--input-narrow - $tc-border-width--input;
   padding-right: $tc-spacing--input-narrow - $tc-border-width--input;
+}
 
-  .tc-select__icon {
-    margin-left: $tc-spacing--input-narrow;
-  }
+.tc-select--type-input.tc-select--width-narrow .tc-select__icon {
+  margin-left: $tc-spacing--input-narrow;
 }
 
 .tc-select--type-input.tc-select--width-wide {
   padding-left: $tc-spacing--input - $tc-border-width--input;
   padding-right: $tc-spacing--input - $tc-border-width--input;
+}
 
-  .tc-select__icon {
-    margin-left: $tc-spacing--input;
-  }
+.tc-select--type-input.tc-select--width-wide .tc-select__icon {
+  margin-left: $tc-spacing--input;
 }
 
 .tc-select--type-outlined {
   border-width: $tc-border-width--button;
   padding-left: $tc-spacing--button - $tc-border-width--button;
   padding-right: $tc-spacing--button - $tc-border-width--button;
+}
 
-  .tc-select__icon {
-    margin-left: $tc-spacing--button;
-  }
+.tc-select--type-outlined .tc-select__icon {
+  margin-left: $tc-spacing--button;
 }
 
 .tc-select--type-underlined {
@@ -511,10 +533,10 @@ export default {
   padding-bottom: ($tc-height--button-small - $tc-font-size--medium) * 0.5 -
     $tc-border-width--underline;
   padding-top: ($tc-height--button-small - $tc-font-size--medium) * 0.5;
+}
 
-  .tc-select__icon {
-    margin-left: $tc-spacing--button;
-  }
+.tc-select--type-underlined .tc-select__icon {
+  margin-left: $tc-spacing--button;
 }
 
 .tc-select__container {
@@ -525,82 +547,73 @@ export default {
 
 .tc-select__container--theme-dark {
   background-color: $tc-color--black;
+}
 
-  .tc-select__group,
-  .tc-select__option {
-    color: $tc-color--white;
-  }
+.tc-select__container--theme-dark .tc-select__group,
+.tc-select__container--theme-dark .tc-select__option {
+  color: $tc-color--white;
+}
 
-  .tc-select__option.is-highlighted {
-    background-color: $tc-color--black;
-  }
+.tc-select__container--theme-dark .tc-select__option.is-highlighted {
+  background-color: $tc-color--black;
 }
 
 .tc-select__container--theme-light {
   background-color: $tc-color--white;
-
-  .tc-select__group,
-  .tc-select__option {
-    color: $tc-color--black;
-  }
-
-  .tc-select__option.is-highlighted {
-    background-color: $tc-color--white;
-  }
 }
 
-.tc-select__container--type-input {
-  .tc-select__option {
-    &.is-highlighted {
-      color: $tc-color--studio;
-    }
-
-    &.is-highlighted::before,
-    &.is-selected::before {
-      background-color: $tc-color--studio;
-    }
-
-    &.is-selected {
-      color: $tc-color--white;
-    }
-  }
+.tc-select__container--theme-light .tc-select__group,
+.tc-select__container--theme-light .tc-select__option {
+  color: $tc-color--black;
 }
 
-.tc-select__container--type-input,
-.tc-select__container--type-underlined {
-  .tc-select__group,
-  .tc-select__option {
-    padding-bottom: ($tc-height--select-option - $tc-font-size--medium) * 0.5;
-    padding-top: ($tc-height--select-option - $tc-font-size--medium) * 0.5;
-  }
+.tc-select__container--theme-light .tc-select__option.is-highlighted {
+  background-color: $tc-color--white;
 }
 
-.tc-select__container--type-outlined,
-.tc-select__container--type-underlined {
-  .tc-select__option {
-    &.is-highlighted::before,
-    &.is-selected::before {
-      background-color: $tc-color--emphasis;
-    }
-
-    &.is-selected {
-      color: $tc-color--white;
-    }
-  }
+.tc-select__container--type-input .tc-select__option.is-highlighted {
+  color: $tc-color--studio;
 }
 
-.tc-select__container--type-outlined {
-  .tc-select__group,
-  .tc-select__option {
-    padding-bottom: ($tc-height--select-option - $tc-font-size--small) * 0.5;
-    padding-top: ($tc-height--select-option - $tc-font-size--small) * 0.5;
-  }
+.tc-select__container--type-input .tc-select__option.is-highlighted::before,
+.tc-select__container--type-input .tc-select__option.is-selected::before {
+  background-color: $tc-color--studio;
+}
+
+.tc-select__container--type-input .tc-select__option.is-selected {
+  color: $tc-color--white;
+}
+
+.tc-select__container--type-input .tc-select__group,
+.tc-select__container--type-input .tc-select__option,
+.tc-select__container--type-underlined .tc-select__group,
+.tc-select__container--type-underlined .tc-select__option {
+  padding-bottom: ($tc-height--select-option - $tc-font-size--medium) * 0.5;
+  padding-top: ($tc-height--select-option - $tc-font-size--medium) * 0.5;
+}
+
+.tc-select__container--type-outlined .tc-select__option.is-highlighted::before,
+.tc-select__container--type-outlined .tc-select__option.is-selected::before,
+.tc-select__container--type-underlined .tc-select__option.is-highlighted::before,
+.tc-select__container--type-underlined .tc-select__option.is-selected::before {
+  background-color: $tc-color--emphasis;
+}
+
+.tc-select__container--type-outlined .tc-select__option.is-selected,
+.tc-select__container--type-underlined .tc-select__option.is-selected {
+  color: $tc-color--white;
+}
+
+.tc-select__container--type-outlined .tc-select__group,
+.tc-select__container--type-outlined .tc-select__option {
+  padding-bottom: ($tc-height--select-option - $tc-font-size--small) * 0.5;
+  padding-top: ($tc-height--select-option - $tc-font-size--small) * 0.5;
 }
 
 .tc-select__group {
   overflow: hidden;
-  padding-left: $tc-spacing--button-large;
-  padding-right: $tc-spacing--button-large;
+  padding-left: $tc-spacing--select-option;
+  padding-right: $tc-spacing--select-option;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -613,7 +626,7 @@ export default {
 
 .tc-select__input {
   flex-shrink: 0;
-  margin: $tc-spacing--button-large - $tc-spacing--input-narrow;
+  margin: $tc-spacing--select-option - $tc-spacing--input-narrow;
 }
 
 .tc-select__label {
@@ -623,15 +636,15 @@ export default {
 .tc-select__option {
   cursor: pointer;
   overflow: hidden;
-  padding-left: $tc-spacing--button-large;
-  padding-right: $tc-spacing--button-large;
+  padding-left: $tc-spacing--select-option;
+  padding-right: $tc-spacing--select-option;
   position: relative;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
 
-  &.is-highlighted:not(.is-selected)::before {
-    opacity: $tc-opacity--faded;
-  }
+.tc-select__option.is-highlighted:not(.is-selected)::before {
+  opacity: $tc-opacity--faded;
 }
 
 .tc-select__option::before {
@@ -651,10 +664,10 @@ export default {
   position: fixed;
   visibility: hidden;
   z-index: $tc-z-index--select;
+}
 
-  &.is-active {
-    visibility: visible;
-  }
+.tc-select__popover.is-active {
+  visibility: visible;
 }
 
 .tc-select__value {

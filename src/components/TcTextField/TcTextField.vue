@@ -120,58 +120,54 @@ export default {
   display: flex;
   padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
   padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
-
-  &.is-error {
-    border-color: $tc-color--warning;
-  }
 }
 
-.tc-text-field--color-primary {
-  &.is-focused {
-    border-color: $tc-color--emphasis;
-  }
+.tc-text-field.is-error {
+  border-color: $tc-color--warning;
 }
 
-.tc-text-field--color-studio {
-  &.is-focused {
-    border-color: $tc-color--studio;
-  }
+.tc-text-field--color-primary.is-focused {
+  border-color: $tc-color--emphasis;
+}
+
+.tc-text-field--color-studio.is-focused {
+  border-color: $tc-color--studio;
 }
 
 .tc-text-field--theme-dark {
   border-color: $tc-color--grey;
+}
 
-  .tc-text-field__icon,
-  .tc-text-field__input {
-    color: $tc-color--white;
-  }
+.tc-text-field--theme-dark .tc-text-field__icon,
+.tc-text-field--theme-dark .tc-text-field__input {
+  color: $tc-color--white;
 }
 
 .tc-text-field--theme-light {
   border-color: $tc-color--grey-light-2;
+}
 
-  .tc-text-field__icon,
-  .tc-text-field__input {
-    color: $tc-color--black;
-  }
+.tc-text-field--theme-light .tc-text-field__icon,
+.tc-text-field--theme-light .tc-text-field__input {
+  color: $tc-color--black;
 }
 
 .tc-text-field--width-narrow {
   padding-left: $tc-spacing--input-narrow - $tc-border-width--input;
   padding-right: $tc-spacing--input-narrow - $tc-border-width--input;
+}
 
-  .tc-text-field__icon {
-    margin-left: $tc-spacing--input-narrow;
-  }
+.tc-text-field--width-narrow .tc-text-field__icon {
+  margin-left: $tc-spacing--input-narrow;
 }
 
 .tc-text-field--width-wide {
   padding-left: $tc-spacing--input - $tc-border-width--input;
   padding-right: $tc-spacing--input - $tc-border-width--input;
+}
 
-  .tc-text-field__icon {
-    margin-left: $tc-spacing--input;
-  }
+.tc-text-field--width-wide .tc-text-field__icon {
+  margin-left: $tc-spacing--input;
 }
 
 .tc-text-field__icon {
@@ -188,10 +184,10 @@ export default {
   outline: none;
   padding: 0;
   width: 0;
+}
 
-  &::placeholder {
-    color: $tc-color--grey;
-  }
+.tc-text-field__input::placeholder {
+  color: $tc-color--grey;
 }
 
 .tc-text-field__input-container {
