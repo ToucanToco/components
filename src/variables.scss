@@ -13,7 +13,6 @@ $tc-color--white: #fff;
 
 // ### Brands
 $tc-color--studio: #2a66a1;
-$tc-color--studio-faded: rgba($tc-color--studio, 0.15);
 $tc-color--toucan: #a0d1c5;
 
 // ### Customizable
@@ -32,10 +31,11 @@ $tc-size--switch-thumb: 18px;
 
 // ### Heights
 $tc-height--app-bar: 60px;
-$tc-height--button-small: 36px;
+$tc-height--button-small: 38px;
 $tc-height--button-medium: 42px;
 $tc-height--button-large: 44px;
 $tc-height--input: 40px;
+$tc-height--select-option: 36px;
 $tc-height--switch-track: 10px;
 $tc-height--tab: 38px;
 $tc-height--toolbar: 36px;
@@ -71,6 +71,7 @@ $tc-border-width--button: 3px;
 $tc-border-width--checkbox: 2px;
 $tc-border-width--input: 1px;
 $tc-border-width--tabs: 2px;
+$tc-border-width--underline: 1px;
 
 // ### Box shadows
 $tc-box-shadow--select-above: 6px -6px 0 0 rgba($tc-color--black, 0.15);
@@ -139,6 +140,7 @@ $tc-letter-spacings: (
 $tc-line-height--default: 1.5;
 
 // ### Opacities
+$tc-opacity--faded: 0.15;
 $tc-opacity--overlay: 0.25;
 
 // ### Text aligns

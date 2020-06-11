@@ -1,4 +1,4 @@
-import TcSelect from './TcSelect.vue';
+import TcSelect, { TC_SELECT_COLORS, TC_SELECT_SIZES, TC_SELECT_TYPES } from './TcSelect.vue';
 
-export { TcSelect };
+export { TcSelect, TC_SELECT_COLORS, TC_SELECT_SIZES, TC_SELECT_TYPES };
 export default TcSelect;

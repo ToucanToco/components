@@ -10,7 +10,9 @@
     @keydown.native.up.prevent="selectPrev()"
     @mousedown.native.prevent="focus($event)"
   >
-    <TcText class="tc-select__value" :class="valueClass">{{ label }}</TcText>
+    <TcText :bold="outlined" class="tc-select__value" :class="valueClass" :uppercase="outlined">{{
+      label
+    }}</TcText>
     <TcIcon class="tc-select__icon" :label="icon" small />
     <TcPopover
       bottom
@@ -26,6 +28,7 @@
           class="tc-select__input"
           icon="search"
           narrow
+          :primary="outlined || underlined"
           ref="input"
           @blur="close($event)"
           @focus="focus($event)"
@@ -39,7 +42,7 @@
         <div class="tc-select__options">
           <template v-for="(option, index) in filteredOptions">
             <div v-if="option.isGroup" class="tc-select__group" :key="index">
-              <TcText bold>{{ option.label }}</TcText>
+              <TcText bold :small="outlined" :uppercase="outlined">{{ option.label }}</TcText>
             </div>
             <div
               v-else
@@ -49,7 +52,9 @@
               @click.prevent="select(option)"
               @mouseenter="highlight(index)"
             >
-              <TcText>{{ option.label }}</TcText>
+              <TcText class="tc-select__label" :small="outlined" :uppercase="outlined">{{
+                option.label
+              }}</TcText>
             </div>
           </template>
         </div>
@@ -72,6 +77,25 @@ import isMobile from 'tc-components/utils/isMobile';
 import normalize from 'tc-components/utils/normalize';
 import { FIELD_WIDTHS } from 'tc-components/variables';
 
+export const TC_SELECT_COLORS = {
+  DEFAULT: 'default',
+
+  REVERSED: 'reversed',
+};
+
+export const TC_SELECT_SIZES = {
+  DEFAULT: 'medium',
+
+  LARGE: 'large',
+};
+
+export const TC_SELECT_TYPES = {
+  DEFAULT: 'input',
+
+  OUTLINED: 'outlined',
+  UNDERLINED: 'underlined',
+};
+
 export default {
   name: 'TcSelect',
 
@@ -83,7 +107,14 @@ export default {
     TcTextField,
   },
 
-  mixins: [tcComponent, focusable, getBooleansMixin('width', FIELD_WIDTHS)],
+  mixins: [
+    tcComponent,
+    focusable,
+    getBooleansMixin('color', TC_SELECT_COLORS),
+    getBooleansMixin('size', TC_SELECT_SIZES),
+    getBooleansMixin('type', TC_SELECT_TYPES),
+    getBooleansMixin('width', FIELD_WIDTHS),
+  ],
 
   props: {
     error: {
@@ -139,13 +170,19 @@ export default {
   computed: {
     containerClass() {
       return [
+        `tc-select__container--color-${this.color}`,
+        `tc-select__container--size-${this.size}`,
         `tc-select__container--theme-${this.theme}`,
+        `tc-select__container--type-${this.type}`,
         `tc-select__container--width-${this.width}`,
       ];
     },
     elementClass() {
       return {
+        [`tc-select--color-${this.color}`]: true,
+        [`tc-select--size-${this.size}`]: true,
         [`tc-select--theme-${this.theme}`]: true,
+        [`tc-select--type-${this.type}`]: true,
         [`tc-select--width-${this.width}`]: true,
         'is-error': this.error,
         'is-focused': this.isFocused,
@@ -359,24 +396,61 @@ export default {
 .tc-select {
   align-items: center;
   border-style: solid;
-  border-width: $tc-border-width--input;
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
   outline: none;
-  padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
-  padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
 
   &.is-error {
     border-color: $tc-color--warning;
   }
+}
+
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined,
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-underlined,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined {
+  border-color: $tc-color--white;
 
   &.is-focused {
-    border-color: $tc-color--studio;
+    border-color: $tc-color--emphasis;
+  }
+
+  .tc-select__icon,
+  .tc-select__value--type-label {
+    color: $tc-color--white;
   }
 }
 
-.tc-select--theme-dark {
+.tc-select--color-default.tc-select--theme-light.tc-select--type-outlined,
+.tc-select--color-default.tc-select--theme-light.tc-select--type-underlined,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined {
+  border-color: $tc-color--black;
+
+  &.is-focused {
+    border-color: $tc-color--emphasis;
+  }
+
+  .tc-select__icon,
+  .tc-select__value--type-label {
+    color: $tc-color--black;
+  }
+}
+
+.tc-select--size-large.tc-select--type-outlined {
+  padding-bottom: ($tc-height--button-large - $tc-font-size--medium) * 0.5 -
+    $tc-border-width--button;
+  padding-top: ($tc-height--button-large - $tc-font-size--medium) * 0.5 - $tc-border-width--button;
+}
+
+.tc-select--size-medium.tc-select--type-outlined {
+  padding-bottom: ($tc-height--button-small - $tc-font-size--medium) * 0.5 -
+    $tc-border-width--button;
+  padding-top: ($tc-height--button-small - $tc-font-size--medium) * 0.5 - $tc-border-width--button;
+}
+
+.tc-select--theme-dark.tc-select--type-input {
   border-color: $tc-color--grey;
 
   .tc-select__icon,
@@ -385,7 +459,7 @@ export default {
   }
 }
 
-.tc-select--theme-light {
+.tc-select--theme-light.tc-select--type-input {
   border-color: $tc-color--grey-light-2;
 
   .tc-select__icon,
@@ -394,7 +468,17 @@ export default {
   }
 }
 
-.tc-select--width-narrow {
+.tc-select--type-input {
+  border-width: $tc-border-width--input;
+  padding-bottom: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+  padding-top: ($tc-height--input - $tc-font-size--medium) * 0.5 - $tc-border-width--input;
+
+  &.is-focused {
+    border-color: $tc-color--studio;
+  }
+}
+
+.tc-select--type-input.tc-select--width-narrow {
   padding-left: $tc-spacing--input-narrow - $tc-border-width--input;
   padding-right: $tc-spacing--input-narrow - $tc-border-width--input;
 
@@ -403,12 +487,33 @@ export default {
   }
 }
 
-.tc-select--width-wide {
+.tc-select--type-input.tc-select--width-wide {
   padding-left: $tc-spacing--input - $tc-border-width--input;
   padding-right: $tc-spacing--input - $tc-border-width--input;
 
   .tc-select__icon {
     margin-left: $tc-spacing--input;
+  }
+}
+
+.tc-select--type-outlined {
+  border-width: $tc-border-width--button;
+  padding-left: $tc-spacing--button - $tc-border-width--button;
+  padding-right: $tc-spacing--button - $tc-border-width--button;
+
+  .tc-select__icon {
+    margin-left: $tc-spacing--button;
+  }
+}
+
+.tc-select--type-underlined {
+  border-width: 0 0 $tc-border-width--underline;
+  padding-bottom: ($tc-height--button-small - $tc-font-size--medium) * 0.5 -
+    $tc-border-width--underline;
+  padding-top: ($tc-height--button-small - $tc-font-size--medium) * 0.5;
+
+  .tc-select__icon {
+    margin-left: $tc-spacing--button;
   }
 }
 
@@ -444,9 +549,58 @@ export default {
   }
 }
 
+.tc-select__container--type-input {
+  .tc-select__option {
+    &.is-highlighted {
+      color: $tc-color--studio;
+    }
+
+    &.is-highlighted::before,
+    &.is-selected::before {
+      background-color: $tc-color--studio;
+    }
+
+    &.is-selected {
+      color: $tc-color--white;
+    }
+  }
+}
+
+.tc-select__container--type-input,
+.tc-select__container--type-underlined {
+  .tc-select__group,
+  .tc-select__option {
+    padding-bottom: ($tc-height--select-option - $tc-font-size--medium) * 0.5;
+    padding-top: ($tc-height--select-option - $tc-font-size--medium) * 0.5;
+  }
+}
+
+.tc-select__container--type-outlined,
+.tc-select__container--type-underlined {
+  .tc-select__option {
+    &.is-highlighted::before,
+    &.is-selected::before {
+      background-color: $tc-color--emphasis;
+    }
+
+    &.is-selected {
+      color: $tc-color--white;
+    }
+  }
+}
+
+.tc-select__container--type-outlined {
+  .tc-select__group,
+  .tc-select__option {
+    padding-bottom: ($tc-height--select-option - $tc-font-size--small) * 0.5;
+    padding-top: ($tc-height--select-option - $tc-font-size--small) * 0.5;
+  }
+}
+
 .tc-select__group {
   overflow: hidden;
-  padding: ($tc-height--button-small - $tc-font-size--medium) * 0.5 $tc-spacing--button-large;
+  padding-left: $tc-spacing--button-large;
+  padding-right: $tc-spacing--button-large;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -462,22 +616,31 @@ export default {
   margin: $tc-spacing--button-large - $tc-spacing--input-narrow;
 }
 
+.tc-select__label {
+  position: relative;
+}
+
 .tc-select__option {
   cursor: pointer;
   overflow: hidden;
-  padding: ($tc-height--button-small - $tc-font-size--medium) * 0.5 $tc-spacing--button-large;
+  padding-left: $tc-spacing--button-large;
+  padding-right: $tc-spacing--button-large;
+  position: relative;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  &.is-highlighted {
-    box-shadow: inset 0 $tc-height--button-small 0 0 $tc-color--studio-faded;
-    color: $tc-color--studio;
+  &.is-highlighted:not(.is-selected)::before {
+    opacity: $tc-opacity--faded;
   }
+}
 
-  &.is-selected {
-    box-shadow: inset 0 $tc-height--button-small 0 0 $tc-color--studio;
-    color: $tc-color--white;
-  }
+.tc-select__option::before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .tc-select__options {

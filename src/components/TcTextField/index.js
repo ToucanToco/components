@@ -1,4 +1,4 @@
-import TcTextField from './TcTextField.vue';
+import TcTextField, { TC_TEXT_FIELD_COLORS } from './TcTextField.vue';
 
-export { TcTextField };
+export { TcTextField, TC_TEXT_FIELD_COLORS };
 export default TcTextField;

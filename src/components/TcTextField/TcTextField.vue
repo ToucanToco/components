@@ -27,6 +27,12 @@ import tcComponent from 'tc-components/mixins/tcComponent';
 import getBooleansMixin from 'tc-components/utils/getBooleansMixin';
 import { FIELD_WIDTHS } from 'tc-components/variables';
 
+export const TC_TEXT_FIELD_COLORS = {
+  DEFAULT: 'studio',
+
+  PRIMARY: 'primary',
+};
+
 export default {
   name: 'TcTextField',
 
@@ -35,7 +41,12 @@ export default {
     TcText,
   },
 
-  mixins: [tcComponent, focusable, getBooleansMixin('width', FIELD_WIDTHS)],
+  mixins: [
+    tcComponent,
+    focusable,
+    getBooleansMixin('color', TC_TEXT_FIELD_COLORS),
+    getBooleansMixin('width', FIELD_WIDTHS),
+  ],
 
   props: {
     error: {
@@ -65,6 +76,7 @@ export default {
   computed: {
     elementClass() {
       return {
+        [`tc-text-field--color-${this.color}`]: true,
         [`tc-text-field--theme-${this.theme}`]: true,
         [`tc-text-field--width-${this.width}`]: true,
         'is-error': this.error,
@@ -112,7 +124,15 @@ export default {
   &.is-error {
     border-color: $tc-color--warning;
   }
+}
 
+.tc-text-field--color-primary {
+  &.is-focused {
+    border-color: $tc-color--emphasis;
+  }
+}
+
+.tc-text-field--color-studio {
   &.is-focused {
     border-color: $tc-color--studio;
   }
