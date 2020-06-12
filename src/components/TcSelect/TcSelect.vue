@@ -24,8 +24,8 @@
       :container="container"
       justify
       :no-position="isMobile"
-      :value="isOpen"
-      @click.native.self.prevent="close()"
+      :value="active"
+      @click.native.self.prevent="deactivate()"
     >
       <div class="tc-select__container" :class="containerClass" @mousedown.prevent>
         <TcTextField
@@ -175,8 +175,8 @@ export default {
 
   data() {
     return {
+      active: false,
       highlightedIndex: 0,
-      isOpen: false,
       query: '',
     };
   },
@@ -198,6 +198,7 @@ export default {
         [`tc-select--theme-${this.theme}`]: true,
         [`tc-select--type-${this.type}`]: true,
         [`tc-select--width-${this.width}`]: true,
+        'is-active': this.active,
         'is-error': this.error,
         'is-focused': this.isFocused,
       };
@@ -277,12 +278,24 @@ export default {
   },
 
   methods: {
-    close(e) {
-      if (!this.isOpen) {
+    async activate() {
+      if (this.active) {
         return;
       }
 
-      this.isOpen = false;
+      this.active = true;
+
+      if (!this.isMobile) {
+        await this.$nextTick();
+        this.$refs.input.triggerFocus();
+      }
+    },
+    deactivate(e) {
+      if (!this.active) {
+        return;
+      }
+
+      this.active = false;
       this.query = '';
 
       this.highlight(this.filteredOptions.length > 0 && this.filteredOptions[0].isGroup ? 1 : 0);
@@ -293,11 +306,11 @@ export default {
         this.blur(e);
       }
     },
-    closeIfEmpty(e) {
+    deactivateIfEmpty(e) {
       if (this.query === '') {
         e.preventDefault();
         e.stopPropagation();
-        this.close();
+        this.deactivate();
       }
     },
     getOptionClass(index, option) {
@@ -326,21 +339,9 @@ export default {
         }
       }
     },
-    async open() {
-      if (this.isOpen) {
-        return;
-      }
-
-      this.isOpen = true;
-
-      if (!this.isMobile) {
-        await this.$nextTick();
-        this.$refs.input.triggerFocus();
-      }
-    },
     select(option) {
       this.$emit('input', option.value);
-      this.close();
+      this.deactivate();
     },
     selectNext() {
       if (this.selectedIndex < this.options.length - 1) {
@@ -356,7 +357,7 @@ export default {
       this.select(this.filteredOptions[this.highlightedIndex]);
     },
     toggle() {
-      this.isOpen ? this.close() : this.open();
+      this.active ? this.deactivate() : this.activate();
     },
   },
 };
@@ -436,6 +437,10 @@ export default {
   cursor: pointer;
   display: flex;
   outline: none;
+}
+
+.tc-select.is-active .tc-icon--label-expand {
+  transform: rotate(180deg);
 }
 
 .tc-select.is-error {

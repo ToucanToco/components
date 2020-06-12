@@ -26,7 +26,7 @@ export default {
 
   computed: {
     elementClass() {
-      return `tc-icon--size-${this.size}`;
+      return [`tc-icon--label-${this.label}`, `tc-icon--size-${this.size}`];
     },
     icon() {
       return this.label === undefined || ICONS[this.label] === undefined
