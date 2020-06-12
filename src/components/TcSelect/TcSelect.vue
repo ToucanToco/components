@@ -17,6 +17,7 @@
     <TcPopover
       bottom
       class="tc-select__popover"
+      :container="container"
       justify
       :no-position="isMobile"
       :value="isOpen"
@@ -117,6 +118,10 @@ export default {
   ],
 
   props: {
+    container: {
+      default: undefined,
+      type: [HTMLElement, String],
+    },
     error: {
       default: false,
       type: Boolean,
@@ -351,6 +356,11 @@ export default {
 <style lang="scss" scoped>
 @import 'tc-components/variables';
 
+.tc-popover--position-bottom,
+.tc-popover--position-top {
+  position: absolute;
+}
+
 .tc-popover--position-bottom .tc-select__container--theme-dark {
   box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
     inset $tc-border-width--input (-$tc-border-width--input) 0 0 $tc-color--grey,
@@ -365,11 +375,9 @@ export default {
 
 .tc-popover--position-none {
   background-color: rgba($tc-color--black, $tc-opacity--overlay);
-  box-sizing: border-box;
-  left: 0;
   height: 100%;
   padding: $tc-spacing--container;
-  top: 0;
+  position: fixed;
   width: 100%;
 }
 
@@ -661,7 +669,11 @@ export default {
 }
 
 .tc-select__popover {
-  position: fixed;
+  box-sizing: border-box;
+  left: 0;
+  max-height: 100%;
+  max-width: 100%;
+  top: 0;
   visibility: hidden;
   z-index: $tc-z-index--select;
 }

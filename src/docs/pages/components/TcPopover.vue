@@ -47,12 +47,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tc-docs-page-popover__container {
-  position: relative;
-}
-
 .tc-docs-page-popover__popover {
-  position: fixed;
+  left: 0;
+  position: absolute;
+  top: 0;
   visibility: hidden;
 }
 
