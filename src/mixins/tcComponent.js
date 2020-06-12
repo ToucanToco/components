@@ -17,6 +17,10 @@ const _themable = getBooleansMixin('theme', TC_COMPONENT_THEMES, true);
 
 export default {
   props: {
+    overrides: {
+      default: undefined,
+      type: Object,
+    },
     ..._modable.props,
     ..._themable.props,
   },

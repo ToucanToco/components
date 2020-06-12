@@ -97,6 +97,8 @@ const _getPropDescription = function (label, name, options) {
       return 'Adds a label to the `false` value of the component.';
     case 'placeholder':
       return "Sets the input's placeholder text.";
+    case 'overrides':
+      return 'Overrides specified variants.';
     case 'to':
       return 'Converts the component to a `ViewLink`.';
     default:

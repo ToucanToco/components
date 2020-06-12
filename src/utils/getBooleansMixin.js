@@ -14,6 +14,10 @@ export default function (key, valuesConst = {}, inherit = false) {
 
     computed: {
       [key]() {
+        if (this.overrides !== undefined && this.overrides[key] !== undefined) {
+          return this.overrides[key];
+        }
+
         let value = undefined;
 
         for (let i = 0, ii = propsKeys.length; i < ii; i++) {
