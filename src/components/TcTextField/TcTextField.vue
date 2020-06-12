@@ -172,8 +172,6 @@ export default {
 
 .tc-text-field__icon {
   flex-shrink: 0;
-  margin-bottom: ($tc-font-size--medium - $tc-font-size--small) * 0.5;
-  margin-top: ($tc-font-size--medium - $tc-font-size--small) * 0.5;
 }
 
 .tc-text-field__input {

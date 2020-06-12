@@ -666,8 +666,6 @@ export default {
 
 .tc-select__icon {
   flex-shrink: 0;
-  margin-bottom: ($tc-font-size--medium - $tc-font-size--small) * 0.5;
-  margin-top: ($tc-font-size--medium - $tc-font-size--small) * 0.5;
 }
 
 .tc-select__input {
