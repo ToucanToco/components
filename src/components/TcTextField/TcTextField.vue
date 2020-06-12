@@ -15,7 +15,7 @@
         @keyup="keyup($event)"
       />
     </TcText>
-    <TcIcon v-if="hasIcon" class="tc-text-field__icon" :label="icon" small />
+    <TcIcon v-if="hasIcon" class="tc-text-field__icon" :label="icon" />
   </div>
 </template>
 

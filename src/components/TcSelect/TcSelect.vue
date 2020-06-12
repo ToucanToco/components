@@ -10,10 +10,14 @@
     @keydown.native.up.prevent="selectPrev()"
     @mousedown.native.prevent="focus($event)"
   >
-    <TcText :bold="outlined" class="tc-select__value" :class="valueClass" :uppercase="outlined">{{
-      label
-    }}</TcText>
-    <TcIcon class="tc-select__icon" :label="icon" small />
+    <TcText
+      :bold="outlined || underlined"
+      class="tc-select__value"
+      :class="valueClass"
+      :uppercase="outlined || underlined"
+      >{{ label }}</TcText
+    >
+    <TcIcon class="tc-select__icon" :label="icon" />
     <TcPopover
       bottom
       class="tc-select__popover"
@@ -31,19 +35,21 @@
           narrow
           :primary="outlined || underlined"
           ref="input"
-          @blur="close($event)"
+          @blur="deactivate($event)"
           @focus="focus($event)"
           @keydown.down.prevent="highlightNext()"
-          @keydown.tab.prevent="close()"
+          @keydown.tab.prevent="deactivate()"
           @keydown.up.prevent="highlightPrev()"
           @keypress.enter.prevent.stop="selectHighlighted()"
-          @keypress.space="closeIfEmpty($event)"
-          @keyup.esc="close()"
+          @keypress.space="deactivateIfEmpty($event)"
+          @keyup.esc="deactivate()"
         />
         <div class="tc-select__options">
           <template v-for="(option, index) in filteredOptions">
             <div v-if="option.isGroup" class="tc-select__group" :key="index">
-              <TcText bold :small="outlined" :uppercase="outlined">{{ option.label }}</TcText>
+              <TcText bold :small="outlined" :uppercase="outlined || underlined">{{
+                option.label
+              }}</TcText>
             </div>
             <div
               v-else
@@ -53,9 +59,12 @@
               @click.prevent="select(option)"
               @mouseenter="highlight(index)"
             >
-              <TcText class="tc-select__label" :small="outlined" :uppercase="outlined">{{
-                option.label
-              }}</TcText>
+              <TcText
+                class="tc-select__label"
+                :small="outlined || underlined"
+                :uppercase="outlined || underlined"
+                >{{ option.label }}</TcText
+              >
             </div>
           </template>
         </div>
@@ -356,9 +365,12 @@ export default {
 <style lang="scss" scoped>
 @import 'tc-components/variables';
 
-.tc-popover--position-bottom,
-.tc-popover--position-top {
+.tc-popover--position-bottom {
   position: absolute;
+}
+
+.tc-popover--position-bottom .tc-select__container {
+  max-height: 30vh;
 }
 
 .tc-popover--position-bottom .tc-select__container--theme-dark {
@@ -383,17 +395,37 @@ export default {
 
 .tc-popover--position-none .tc-select__container {
   box-shadow: $tc-box-shadow--select-below;
+  max-height: 100%;
 }
 
-.tc-popover--position-top .tc-select__container--theme-dark {
+.tc-popover--position-top {
+  position: absolute;
+}
+
+.tc-popover--position-top .tc-select__container {
+  max-height: 30vh;
+}
+
+.tc-popover--position-top .tc-select__container--theme-dark.tc-select__container--type-input,
+.tc-popover--position-top .tc-select__container--theme-dark.tc-select__container--type-outlined {
   box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey,
     inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey,
     $tc-box-shadow--select-above;
 }
 
-.tc-popover--position-top .tc-select__container--theme-light {
+.tc-popover--position-top .tc-select__container--theme-dark.tc-select__container--type-underlined {
+  box-shadow: inset 0 0 0 $tc-border-width--input $tc-color--grey, $tc-box-shadow--select-above;
+}
+
+.tc-popover--position-top .tc-select__container--theme-light.tc-select__container--type-input,
+.tc-popover--position-top .tc-select__container--theme-light.tc-select__container--type-outlined {
   box-shadow: inset (-$tc-border-width--input) 0 0 0 $tc-color--grey-light-2,
     inset $tc-border-width--input $tc-border-width--input 0 0 $tc-color--grey-light-2,
+    $tc-box-shadow--select-above;
+}
+
+.tc-popover--position-top .tc-select__container--theme-light.tc-select__container--type-underlined {
+  box-shadow: inset 0 0 0 $tc-border-width--input $tc-color--grey-light-2,
     $tc-box-shadow--select-above;
 }
 
@@ -411,9 +443,7 @@ export default {
 }
 
 .tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined,
-.tc-select--color-default.tc-select--theme-dark.tc-select--type-underlined,
-.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined,
-.tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined {
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined {
   border-color: $tc-color--white;
 }
 
@@ -425,14 +455,12 @@ export default {
 }
 
 .tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined .tc-select__icon,
-.tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined
-  .tc-select__value--type-label,
+.tc-select--color-default.tc-select--theme-dark.tc-select--type-outlined .tc-select__value,
 .tc-select--color-default.tc-select--theme-dark.tc-select--type-underlined .tc-select__icon,
 .tc-select--color-default.tc-select--theme-dark.tc-select--type-underlined
   .tc-select__value--type-label,
 .tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined .tc-select__icon,
-.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined
-  .tc-select__value--type-label,
+.tc-select--color-reversed.tc-select--theme-light.tc-select--type-outlined .tc-select__value,
 .tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined .tc-select__icon,
 .tc-select--color-reversed.tc-select--theme-light.tc-select--type-underlined
   .tc-select__value--type-label {
@@ -440,9 +468,7 @@ export default {
 }
 
 .tc-select--color-default.tc-select--theme-light.tc-select--type-outlined,
-.tc-select--color-default.tc-select--theme-light.tc-select--type-underlined,
-.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined,
-.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined {
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined {
   border-color: $tc-color--black;
 }
 
@@ -454,14 +480,12 @@ export default {
 }
 
 .tc-select--color-default.tc-select--theme-light.tc-select--type-outlined .tc-select__icon,
-.tc-select--color-default.tc-select--theme-light.tc-select--type-outlined
-  .tc-select__value--type-label,
+.tc-select--color-default.tc-select--theme-light.tc-select--type-outlined .tc-select__value,
 .tc-select--color-default.tc-select--theme-light.tc-select--type-underlined .tc-select__icon,
 .tc-select--color-default.tc-select--theme-light.tc-select--type-underlined
   .tc-select__value--type-label,
 .tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined .tc-select__icon,
-.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined
-  .tc-select__value--type-label,
+.tc-select--color-reversed.tc-select--theme-dark.tc-select--type-outlined .tc-select__value,
 .tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined .tc-select__icon,
 .tc-select--color-reversed.tc-select--theme-dark.tc-select--type-underlined
   .tc-select__value--type-label {
@@ -480,7 +504,8 @@ export default {
   padding-top: ($tc-height--button-small - $tc-font-size--medium) * 0.5 - $tc-border-width--button;
 }
 
-.tc-select--theme-dark.tc-select--type-input {
+.tc-select--theme-dark.tc-select--type-input,
+.tc-select--theme-dark.tc-select--type-underlined {
   border-color: $tc-color--grey;
 }
 
@@ -489,7 +514,8 @@ export default {
   color: $tc-color--white;
 }
 
-.tc-select--theme-light.tc-select--type-input {
+.tc-select--theme-light.tc-select--type-input,
+.tc-select--theme-light.tc-select--type-underlined {
   border-color: $tc-color--grey-light-2;
 }
 
@@ -526,6 +552,10 @@ export default {
   margin-left: $tc-spacing--input;
 }
 
+.tc-select--type-input .tc-select__value--type-placeholder {
+  color: $tc-color--grey;
+}
+
 .tc-select--type-outlined {
   border-width: $tc-border-width--button;
   padding-left: $tc-spacing--button - $tc-border-width--button;
@@ -538,19 +568,22 @@ export default {
 
 .tc-select--type-underlined {
   border-width: 0 0 $tc-border-width--underline;
-  padding-bottom: ($tc-height--button-small - $tc-font-size--medium) * 0.5 -
+  padding: ($tc-height--button-small - $tc-font-size--medium) * 0.5 $tc-spacing--button -
+    $tc-border-width--button ($tc-height--button-small - $tc-font-size--medium) * 0.5 -
     $tc-border-width--underline;
-  padding-top: ($tc-height--button-small - $tc-font-size--medium) * 0.5;
 }
 
 .tc-select--type-underlined .tc-select__icon {
   margin-left: $tc-spacing--button;
 }
 
+.tc-select--type-underlined .tc-select__value--type-placeholder {
+  color: $tc-color--grey;
+}
+
 .tc-select__container {
   display: flex;
   flex-direction: column;
-  max-height: 100%;
 }
 
 .tc-select__container--theme-dark {
@@ -684,9 +717,5 @@ export default {
 
 .tc-select__value {
   flex-grow: 1;
-}
-
-.tc-select__value--type-placeholder {
-  color: $tc-color--grey;
 }
 </style>
