@@ -73,6 +73,8 @@ const _getPropDescription = function (label, name, options) {
       return 'Puts the input in an error state and passes through custom error messages.';
     case 'groupLabel':
       return 'The property used to group items.';
+    case 'hideSelected':
+      return 'Do not display in the options list the item that is selected.';
     case 'hint':
       return 'Adds hint text.';
     case 'href':

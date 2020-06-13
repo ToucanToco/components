@@ -139,6 +139,10 @@ export default {
       default: undefined,
       type: [Function, String],
     },
+    hideSelected: {
+      default: false,
+      type: Boolean,
+    },
     id: {
       default() {
         return `tc-select--${this._uid}`;
@@ -204,26 +208,37 @@ export default {
       };
     },
     filteredOptions() {
+      let filteredOptions = this.options;
+
+      if (this.hideSelected && this.selectedOption !== undefined) {
+        filteredOptions = [
+          ...filteredOptions.slice(0, this.selectedIndex),
+          ...filteredOptions.slice(this.selectedIndex + 1),
+        ];
+      }
+
       const normalizedQuery = normalize(this.query);
 
-      return (normalizedQuery === ''
-        ? this.options
-        : this.options.filter(({ normalizedLabel }) => normalizedLabel.includes(normalizedQuery))
-      )
-        .slice(0, 1000)
-        .reduce((filteredOptions, option) => {
-          if (option.groupLabel !== undefined && !filteredOptions[option.groupLabel]) {
-            filteredOptions.push({
-              isGroup: true,
-              label: option.groupLabel,
-            });
+      if (normalizedQuery !== '') {
+        filteredOptions = filteredOptions.filter(({ normalizedLabel }) =>
+          normalizedLabel.includes(normalizedQuery),
+        );
+      }
 
-            filteredOptions[option.groupLabel] = true;
-          }
-          filteredOptions.push(option);
+      return filteredOptions.slice(0, 1000).reduce((filteredOptionsWithGroups, option) => {
+        if (option.groupLabel !== undefined && !filteredOptionsWithGroups[option.groupLabel]) {
+          filteredOptionsWithGroups.push({
+            isGroup: true,
+            label: option.groupLabel,
+          });
 
-          return filteredOptions;
-        }, []);
+          filteredOptionsWithGroups[option.groupLabel] = true;
+        }
+
+        filteredOptionsWithGroups.push(option);
+
+        return filteredOptionsWithGroups;
+      }, []);
     },
     isMobile() {
       return isMobile();
@@ -253,7 +268,7 @@ export default {
       return this.options.findIndex(({ value }) => value === this.value);
     },
     selectedOption() {
-      return this.options.find(({ value }) => value === this.value);
+      return this.options[this.selectedIndex];
     },
     valueClass() {
       return `tc-select__value--type-${
