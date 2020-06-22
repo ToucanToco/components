@@ -85,6 +85,49 @@ describe('getBooleansMixin', () => {
         expect(computedValue).toBe('second');
       });
     });
+
+    describe('when calling the computed with overrides on other keys', () => {
+      beforeEach(() => {
+        computedValue = mixin.computed.myKey.bind({
+          overrides: {
+            anotherKey: 'anotherValue',
+          },
+        })();
+      });
+
+      it('should return the default value', () => {
+        expect(computedValue).toBe('first');
+      });
+    });
+
+    describe('when calling the computed with overrides on its key', () => {
+      beforeEach(() => {
+        computedValue = mixin.computed.myKey.bind({
+          overrides: {
+            myKey: 'myValue',
+          },
+        })();
+      });
+
+      it('should return the override value', () => {
+        expect(computedValue).toBe('myValue');
+      });
+    });
+
+    describe('when calling the computed with a prop set to true and overrides on its key', () => {
+      beforeEach(() => {
+        computedValue = mixin.computed.myKey.bind({
+          overrides: {
+            myKey: 'third',
+          },
+          second: true,
+        })();
+      });
+
+      it('should return the override value', () => {
+        expect(computedValue).toBe('third');
+      });
+    });
   });
 
   describe('with a key, valuesConst and inherit', () => {

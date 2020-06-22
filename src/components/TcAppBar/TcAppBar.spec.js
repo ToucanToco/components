@@ -11,6 +11,10 @@ describe('TcAppBar', () => {
       wrapper = createWrapper();
     });
 
+    it('should use the tcComponent mixin', () => {
+      expect(Object.keys(wrapper.props())).toContain('overrides');
+    });
+
     it('should set the default classes', () => {
       expect(wrapper.classes()).toEqual([
         'tc-app-bar',
